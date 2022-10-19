@@ -18,6 +18,12 @@
 		6433E41A28FFAC3400952950 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41928FFAC3400952950 /* FirebaseFirestore */; };
 		6433E41C28FFAC3400952950 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41B28FFAC3400952950 /* FirebaseFirestoreSwift */; };
 		6433E41E28FFAC3400952950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41D28FFAC3400952950 /* FirebaseStorage */; };
+		6433E42028FFADE900952950 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E41F28FFADE900952950 /* UserService.swift */; };
+		6433E42428FFAE5E00952950 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42328FFAE5E00952950 /* CustomInputField.swift */; };
+		6433E42728FFAEA800952950 /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42628FFAEA800952950 /* AuthHeaderView.swift */; };
+		6433E42A28FFAEFD00952950 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42928FFAEFD00952950 /* MainTabView.swift */; };
+		6433E43028FFAF4900952950 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42F28FFAF4900952950 /* SideMenuView.swift */; };
+		6433E43228FFB0E700952950 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6433E43128FFB0E700952950 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +35,12 @@
 		6433E41028FFAB9500952950 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6433E41228FFABA100952950 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		6433E41428FFABBC00952950 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		6433E41F28FFADE900952950 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		6433E42328FFAE5E00952950 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
+		6433E42628FFAEA800952950 /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
+		6433E42928FFAEFD00952950 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		6433E42F28FFAF4900952950 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		6433E43128FFB0E700952950 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +82,7 @@
 				6433E40828FFA7A400952950 /* Extensions */,
 				6433E40B28FFA7BB00952950 /* Core */,
 				6433E3FA28FFA61000952950 /* JacketStash_PRODApp.swift */,
+				6433E43128FFB0E700952950 /* GoogleService-Info.plist */,
 				6433E3FC28FFA61000952950 /* ContentView.swift */,
 				6433E3FE28FFA61100952950 /* Assets.xcassets */,
 				6433E40028FFA61100952950 /* Preview Content */,
@@ -95,6 +108,7 @@
 		6433E40928FFA7AC00952950 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				6433E41F28FFADE900952950 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -109,8 +123,10 @@
 		6433E40B28FFA7BB00952950 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6433E40D28FFAB6E00952950 /* Authentication */,
+				6433E42B28FFAF2400952950 /* SideMenu */,
 				6433E40C28FFAA8C00952950 /* Components */,
+				6433E42828FFAEF300952950 /* Main Tab */,
+				6433E40D28FFAB6E00952950 /* Authentication */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -118,6 +134,8 @@
 		6433E40C28FFAA8C00952950 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6433E42528FFAE9700952950 /* Authentication */,
+				6433E42328FFAE5E00952950 /* CustomInputField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -146,6 +164,46 @@
 				6433E41428FFABBC00952950 /* AuthViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6433E42528FFAE9700952950 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				6433E42628FFAEA800952950 /* AuthHeaderView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		6433E42828FFAEF300952950 /* Main Tab */ = {
+			isa = PBXGroup;
+			children = (
+				6433E42928FFAEFD00952950 /* MainTabView.swift */,
+			);
+			path = "Main Tab";
+			sourceTree = "<group>";
+		};
+		6433E42B28FFAF2400952950 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				6433E42E28FFAF3B00952950 /* Views */,
+				6433E42D28FFAF3200952950 /* ViewModel */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		6433E42D28FFAF3200952950 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6433E42E28FFAF3B00952950 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6433E42F28FFAF4900952950 /* SideMenuView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +275,7 @@
 			files = (
 				6433E40228FFA61100952950 /* Preview Assets.xcassets in Resources */,
 				6433E3FF28FFA61100952950 /* Assets.xcassets in Resources */,
+				6433E43228FFB0E700952950 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +288,12 @@
 			files = (
 				6433E41528FFABBC00952950 /* AuthViewModel.swift in Sources */,
 				6433E41128FFAB9500952950 /* LoginView.swift in Sources */,
+				6433E43028FFAF4900952950 /* SideMenuView.swift in Sources */,
+				6433E42A28FFAEFD00952950 /* MainTabView.swift in Sources */,
+				6433E42028FFADE900952950 /* UserService.swift in Sources */,
 				6433E3FD28FFA61000952950 /* ContentView.swift in Sources */,
+				6433E42428FFAE5E00952950 /* CustomInputField.swift in Sources */,
+				6433E42728FFAEA800952950 /* AuthHeaderView.swift in Sources */,
 				6433E3FB28FFA61000952950 /* JacketStash_PRODApp.swift in Sources */,
 				6433E41328FFABA100952950 /* RegistrationView.swift in Sources */,
 			);
