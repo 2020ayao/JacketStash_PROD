@@ -18,6 +18,7 @@ struct CheckInView: View {
     @State var show = false
     
     @State private var isPressed = false
+    @State private var isPressed1 = false
     
     
     var body: some View {
@@ -26,39 +27,57 @@ struct CheckInView: View {
             
             Spacer()
             
-            Button(action: {
-                print("hello")
-            }, label: {
-                Text("Check In")
-                    .foregroundColor(Color.white)
-            })
-            .onLongPressGesture(perform: {
-                print("hello")
-            })
             
-            .foregroundColor(.white)
-            .frame(width: 80, height: 80)
-            .background(Color(.systemBlue))
-            .mask(Circle())
-            .scaleEffect(isPressed ? 2 : 1)
-            .pressEvents {
-                withAnimation(.easeInOut(duration: 2.75)) {
-                    isPressed = true
-                    
-                    
-                }
-            } onRelease: {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    isPressed = false
-                }
-            }
-            .gesture(
-                LongPressGesture(minimumDuration: 0.5)
-                    .onEnded { value in
-                        print("done pressing")
+            
+            ZStack {
+                
+                Circle()
+                    .fill(Color.black)
+                    .frame(width: 100, height: 100)
+                    .scaleEffect(isPressed1 ? 2 : 1)
+                    .pressEvents {
+                        withAnimation(.easeInOut(duration: 1)){
+                            isPressed = true
+                        }
+                    } onRelease: {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isPressed = false
+                        }
                     }
-
-            )
+                
+                
+                Button(action: {
+                    print("hello")
+                }, label: {
+//                    Text("Check In")
+//                        .foregroundColor(Color.white)
+                })
+                .onLongPressGesture(perform: {
+                    print("hello")
+                })
+                
+                //.foregroundColor(.white)
+                .frame(width: 100, height: 100)
+                .background(Color(.systemBlue))
+                .mask(Circle())
+                .scaleEffect(isPressed ? 2 : 1)
+                .pressEvents {
+                    withAnimation(.easeInOut(duration: 2.75)) {
+                        isPressed = true
+                        isPressed1 = true
+                        
+                        
+                    }
+                } onRelease: {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        isPressed = false
+                        isPressed1 = false
+                    }
+                }
+                Text("Check In")
+                    .foregroundColor(.white)
+            }
+            
             .padding(.bottom, 60)
             
             
