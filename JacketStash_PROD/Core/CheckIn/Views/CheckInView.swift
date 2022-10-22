@@ -78,9 +78,11 @@ extension CheckInView {
             }
             Text("Check In")
                 .foregroundColor(.white)
+                .fontWeight(.semibold)
+                .font(.headline)
         }
         
-        .padding(.bottom, 120)
+        .padding(.bottom, 150)
         
         
     }
