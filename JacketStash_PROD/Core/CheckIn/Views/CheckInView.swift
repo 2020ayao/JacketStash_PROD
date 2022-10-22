@@ -72,6 +72,11 @@ extension CheckInView {
             }
             Text("Check In")
                 .foregroundColor(.white)
+<<<<<<< HEAD
+=======
+                .fontWeight(.semibold)
+                .font(.headline)
+>>>>>>> parent of 1a0a42c (Button action changes)
         }
         
         .padding(.bottom, 120)
