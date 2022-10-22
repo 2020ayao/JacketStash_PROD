@@ -17,9 +17,6 @@ struct RegistrationView: View {
     @State private var password = ""
     
     var body: some View {
-//        NavigationStack {
-            
-//            NavigationLink(isActive: <#T##Binding<Bool>#>, destination: <#T##() -> _#>, label: <#T##() -> _#>)
             
             VStack {
                 AuthHeaderView(title1: "Get Started.", title2: "Create your account")
