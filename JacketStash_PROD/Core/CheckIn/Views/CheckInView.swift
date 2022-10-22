@@ -35,15 +35,7 @@ struct CheckInView: View {
                     .fill(Color.black)
                     .frame(width: 100, height: 100)
                     .scaleEffect(isPressed1 ? 2 : 1)
-                    .pressEvents {
-                        withAnimation(.easeInOut(duration: 1)){
-                            isPressed = true
-                        }
-                    } onRelease: {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            isPressed = false
-                        }
-                    }
+                    .animation(.easeInOut(duration: 2))
                 
                 
                 Button(action: {
