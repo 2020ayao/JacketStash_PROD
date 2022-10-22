@@ -9,7 +9,12 @@ import SwiftUI
 
 struct CheckOutView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            AuthHeaderView(title1: "Sucess!", title2: "Let's get checked in...")
+            
+            Spacer()
+        }
+        .ignoresSafeArea()
     }
 }
 
