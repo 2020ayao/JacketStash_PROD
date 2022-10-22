@@ -24,12 +24,7 @@ struct CheckInView: View {
         VStack {
             AuthHeaderView(title1: "Hey Adam!", title2: "Let's get checked in...")
             
-            //            ZStack {
-            //                VStack {
-            //                    Text("Hold to")
-            //                    Text("confirm")
-            //                }
-            //            }
+            Spacer()
             
             Button(action: {
                 print("hello")
@@ -42,12 +37,12 @@ struct CheckInView: View {
             })
             
             .foregroundColor(.white)
-            .frame(width: 60, height: 60)
+            .frame(width: 80, height: 80)
             .background(Color(.systemBlue))
             .mask(Circle())
-            .scaleEffect(isPressed ? 3.5 : 1)
+            .scaleEffect(isPressed ? 2 : 1)
             .pressEvents {
-                withAnimation(.easeInOut(duration: 2)) {
+                withAnimation(.easeInOut(duration: 2.75)) {
                     isPressed = true
                     
                     
@@ -57,18 +52,16 @@ struct CheckInView: View {
                     isPressed = false
                 }
             }
-//            .gesture(
-//                LongPressGesture(minimumDuration: 0.5)
-//                    .updating($press) { currentState, gestureState, transaction in
-//                        gestureState = currentState
-//                    }
-//                    .onEnded { value in
-//                        print("done pressing")
-//                    }
-//
-//            )
+            .gesture(
+                LongPressGesture(minimumDuration: 0.5)
+                    .onEnded { value in
+                        print("done pressing")
+                    }
+
+            )
+            .padding(.bottom, 60)
             
-            Spacer()
+            
         }
         .ignoresSafeArea()
     }
