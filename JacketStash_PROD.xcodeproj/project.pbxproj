@@ -14,10 +14,6 @@
 		6433E41128FFAB9500952950 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E41028FFAB9500952950 /* LoginView.swift */; };
 		6433E41328FFABA100952950 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E41228FFABA100952950 /* RegistrationView.swift */; };
 		6433E41528FFABBC00952950 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E41428FFABBC00952950 /* AuthViewModel.swift */; };
-		6433E41828FFAC3400952950 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41728FFAC3400952950 /* FirebaseAuth */; };
-		6433E41A28FFAC3400952950 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41928FFAC3400952950 /* FirebaseFirestore */; };
-		6433E41C28FFAC3400952950 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41B28FFAC3400952950 /* FirebaseFirestoreSwift */; };
-		6433E41E28FFAC3400952950 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6433E41D28FFAC3400952950 /* FirebaseStorage */; };
 		6433E42028FFADE900952950 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E41F28FFADE900952950 /* UserService.swift */; };
 		6433E42428FFAE5E00952950 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42328FFAE5E00952950 /* CustomInputField.swift */; };
 		6433E42728FFAEA800952950 /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42628FFAEA800952950 /* AuthHeaderView.swift */; };
@@ -37,6 +33,11 @@
 		646F2FC32900DC5500EAF837 /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 646F2FC22900DC5500EAF837 /* Stripe */; };
 		646F2FC52900DC5500EAF837 /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 646F2FC42900DC5500EAF837 /* StripeApplePay */; };
 		64B6114829036BF500396586 /* ButtonPressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6114729036BF500396586 /* ButtonPressActions.swift */; };
+		64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B61149290399B300396586 /* CheckInOutButton.swift */; };
+		64B611562903A1A800396586 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 64B611552903A1A800396586 /* FirebaseAuth */; };
+		64B611582903A1A800396586 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 64B611572903A1A800396586 /* FirebaseFirestore */; };
+		64B6115A2903A1A800396586 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 64B611592903A1A800396586 /* FirebaseFirestoreSwift */; };
+		64B6115C2903A1A800396586 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 64B6115B2903A1A800396586 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		646F2FBD2900868E00EAF837 /* CheckInOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInOutViewModel.swift; sourceTree = "<group>"; };
 		646F2FBF2900878600EAF837 /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
 		64B6114729036BF500396586 /* ButtonPressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPressActions.swift; sourceTree = "<group>"; };
+		64B61149290399B300396586 /* CheckInOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInOutButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +74,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64B6115A2903A1A800396586 /* FirebaseFirestoreSwift in Frameworks */,
 				646F2FC32900DC5500EAF837 /* Stripe in Frameworks */,
-				6433E41828FFAC3400952950 /* FirebaseAuth in Frameworks */,
-				6433E41E28FFAC3400952950 /* FirebaseStorage in Frameworks */,
+				64B611582903A1A800396586 /* FirebaseFirestore in Frameworks */,
+				64B611562903A1A800396586 /* FirebaseAuth in Frameworks */,
 				646F2FC52900DC5500EAF837 /* StripeApplePay in Frameworks */,
-				6433E41A28FFAC3400952950 /* FirebaseFirestore in Frameworks */,
-				6433E41C28FFAC3400952950 /* FirebaseFirestoreSwift in Frameworks */,
+				64B6115C2903A1A800396586 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +172,7 @@
 				6433E42328FFAE5E00952950 /* CustomInputField.swift */,
 				646F2FBF2900878600EAF837 /* RoundedShape.swift */,
 				64B6114729036BF500396586 /* ButtonPressActions.swift */,
+				64B61149290399B300396586 /* CheckInOutButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -364,12 +367,12 @@
 			);
 			name = JacketStash_PROD;
 			packageProductDependencies = (
-				6433E41728FFAC3400952950 /* FirebaseAuth */,
-				6433E41928FFAC3400952950 /* FirebaseFirestore */,
-				6433E41B28FFAC3400952950 /* FirebaseFirestoreSwift */,
-				6433E41D28FFAC3400952950 /* FirebaseStorage */,
 				646F2FC22900DC5500EAF837 /* Stripe */,
 				646F2FC42900DC5500EAF837 /* StripeApplePay */,
+				64B611552903A1A800396586 /* FirebaseAuth */,
+				64B611572903A1A800396586 /* FirebaseFirestore */,
+				64B611592903A1A800396586 /* FirebaseFirestoreSwift */,
+				64B6115B2903A1A800396586 /* FirebaseStorage */,
 			);
 			productName = JacketStash_PROD;
 			productReference = 6433E3F728FFA61000952950 /* JacketStash_PROD.app */;
@@ -400,8 +403,8 @@
 			);
 			mainGroup = 6433E3EE28FFA61000952950;
 			packageReferences = (
-				6433E41628FFAC3400952950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				646F2FC12900DC5500EAF837 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
+				64B611542903A1A800396586 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 6433E3F828FFA61000952950 /* Products */;
 			projectDirPath = "";
@@ -448,6 +451,7 @@
 				646F2F9F290078A700EAF837 /* SideMenuOptionRowView.swift in Sources */,
 				646F2FC02900878600EAF837 /* RoundedShape.swift in Sources */,
 				646F2FBC29007D1000EAF837 /* User.swift in Sources */,
+				64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */,
 				6433E42728FFAEA800952950 /* AuthHeaderView.swift in Sources */,
 				6433E3FB28FFA61000952950 /* JacketStash_PRODApp.swift in Sources */,
 				6433E41328FFABA100952950 /* RegistrationView.swift in Sources */,
@@ -653,14 +657,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6433E41628FFAC3400952950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 		646F2FC12900DC5500EAF837 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
@@ -669,29 +665,17 @@
 				minimumVersion = 22.0.0;
 			};
 		};
+		64B611542903A1A800396586 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6433E41728FFAC3400952950 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6433E41628FFAC3400952950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		6433E41928FFAC3400952950 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6433E41628FFAC3400952950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		6433E41B28FFAC3400952950 /* FirebaseFirestoreSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6433E41628FFAC3400952950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestoreSwift;
-		};
-		6433E41D28FFAC3400952950 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6433E41628FFAC3400952950 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
 		646F2FC22900DC5500EAF837 /* Stripe */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 646F2FC12900DC5500EAF837 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
@@ -701,6 +685,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 646F2FC12900DC5500EAF837 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
 			productName = StripeApplePay;
+		};
+		64B611552903A1A800396586 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64B611542903A1A800396586 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		64B611572903A1A800396586 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64B611542903A1A800396586 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		64B611592903A1A800396586 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64B611542903A1A800396586 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		64B6115B2903A1A800396586 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64B611542903A1A800396586 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

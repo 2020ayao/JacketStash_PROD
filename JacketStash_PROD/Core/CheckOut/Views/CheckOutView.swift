@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct CheckOutView: View {
+    @State var isCheckedIn = true
     var body: some View {
         VStack {
-            AuthHeaderView(title1: "Sucess!", title2: "Let's get checked in...")
+            if isCheckedIn {
+                AuthHeaderView(title1: "Sucess!", title2: "Check out when you're ready...")
+                Spacer()
+                
+                Button {
+                    isCheckedIn.toggle()
+                } label: {
+                    Text("Press to toggle")
+                }
+
+                
+                CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check Out")
+            }
+            else {
+                AuthHeaderView(title1: "Oops...", title2: "looks like nothing has been checked in")
+                Button {
+                    isCheckedIn.toggle()
+                } label: {
+                    Text("Press to toggle")
+                }
+                Spacer()
+            }
             
-            Spacer()
+            
         }
         .ignoresSafeArea()
     }
