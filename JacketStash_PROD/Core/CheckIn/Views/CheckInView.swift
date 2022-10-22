@@ -48,7 +48,7 @@ extension CheckInView {
                 .frame(width: 100, height: 100)
                 .scaleEffect(isPressed ? 2 : 0.99)
                 .animation(.easeIn(duration: 1.5), value: isPressed)
-                //.animation(.easeOut(duration: 0.5), value: isPressed)
+            //.animation(.easeOut(duration: 0.5), value: isPressed)
             
             Circle()
                 .fill(Color(.white))
@@ -56,12 +56,19 @@ extension CheckInView {
                 .scaleEffect(isPressed ? 1.99 : 0.5)
                 .animation(.easeOut(duration: 3), value: isPressed)
             
-            Button(action: {
-                print("hello")
-            }, label: {})
-            .onLongPressGesture(perform: {
-                print("hello")
-            })
+            //            Button {
+            //                <#code#>
+            //            } label: {
+            //                <#code#>
+            //            }
+            
+            
+            
+            Button {
+                //Do nothing because we only want to check in after animation is completed.
+            } label: {
+                Text("")
+            }
             .frame(width: 100, height: 100)
             .background(Color(.systemBlue))
             .mask(Circle())
@@ -76,10 +83,12 @@ extension CheckInView {
                     isPressed = false
                 }
             }
+            
             Text("Check In")
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
                 .font(.headline)
+            
         }
         
         .padding(.bottom, 150)
