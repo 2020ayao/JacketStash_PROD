@@ -23,6 +23,8 @@ struct CheckOutView: View {
 
                 
                 CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check Out")
+                
+                
             }
             else {
                 AuthHeaderView(title1: "Oops...", title2: "looks like nothing has been checked in")

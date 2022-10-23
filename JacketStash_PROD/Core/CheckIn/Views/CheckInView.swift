@@ -14,18 +14,20 @@ struct CheckInView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        VStack {
-            AuthHeaderView(title1: "Hey Adam!", title2: "Let's get started...")
-            
-            Spacer()
-            
-            CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check In")
-                .sheet(isPresented: $authViewModel.isCheckedIn) { // 3
-                    
-                    checkInConfirmation
-                }
+        if let user = authViewModel.currentUser {
+            VStack {
+                AuthHeaderView(title1: "Hey \(user.fullname)!", title2: "Let's get started...")
+                
+                Spacer()
+                
+                CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check In")
+                    .sheet(isPresented: $authViewModel.isCheckedIn) { // 3
+                        
+                        checkInConfirmation
+                    }
+            }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 
