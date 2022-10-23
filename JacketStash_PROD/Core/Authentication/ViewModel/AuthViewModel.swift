@@ -34,7 +34,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func register(withEmail email: String, password: String, fullname: String, username: String) {
+    func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool) {
         print("DEBUG: Register with email \(email)")
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -53,7 +53,8 @@ class AuthViewModel: ObservableObject {
                 "email": email,
                 "username": username.lowercased(),
                 "fullname": fullname,
-                "uid": user.uid
+                "uid": user.uid,
+                "isCheckedIn": isCheckedIn
             ]
             
             Firestore.firestore().collection("users")

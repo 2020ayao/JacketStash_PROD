@@ -52,7 +52,8 @@ struct RegistrationView: View {
                     viewModel.register(withEmail: email,
                                        password: password,
                                        fullname: fullname,
-                                       username: username)
+                                       username: username,
+                                       isCheckedIn: false)
                     isPresentedImageView.toggle()
                 } label: {
                     Text("Sign Up")
