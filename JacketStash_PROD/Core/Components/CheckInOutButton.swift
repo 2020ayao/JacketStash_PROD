@@ -25,7 +25,7 @@ struct CheckInOutButton: View {
                     .frame(width: 100, height: 100)
                     .scaleEffect(isPressed ? 1.99 : 0.5)
                     .animation(.easeOut(duration: 3), value: isPressed)
-                    .gesture(longPress)
+                    
                 
                 
                 Button {
@@ -38,6 +38,7 @@ struct CheckInOutButton: View {
                 .frame(width: 100, height: 100)
                 .background(Color(.systemBlue))
                 .mask(Circle())
+                .gesture(longPress)
                 
                 .pressEvents {
                     withAnimation(.easeIn(duration: 2.75)) {

@@ -77,4 +77,8 @@ class AuthViewModel: ObservableObject {
             self.currentUser = user
         }
     }
+    
+//    func checkIn() {
+//        Auth.auth().
+//    }
 }

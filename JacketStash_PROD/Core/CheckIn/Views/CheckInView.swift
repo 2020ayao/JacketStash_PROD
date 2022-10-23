@@ -8,16 +8,40 @@
 import SwiftUI
 
 struct CheckInView: View {
-    @State var isCheckedIn = false
+//    var cb: CheckInOutButton
     @State private var isPressed = false
+    @State var showingPopup = false
     
     var body: some View {
         VStack {
             AuthHeaderView(title1: "Hey Adam!", title2: "Let's get checked in...")
             
+            ZStack {
+                
+                RoundedRectangle(cornerRadius: 50, style: .continuous)
+                    .opacity(0.25)
+                    .padding()
+                
+                Button("Push me") {
+                    showingPopup = true // 2
+                }
+            }
+//            .popover(isPresented: cb.$isCheckedIn) { // 3
+//                ZStack { // 4
+//                    Color.blue.frame(width: 200, height: 100)
+//                    Text("Popup!")
+//                }
+//            }
+            
             Spacer()
             
             CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check In")
+//                .popover(isPresented: cb.$isCheckedIn) { // 3
+//                    ZStack { // 4
+//                        Color.blue.frame(width: 200, height: 100)
+//                        Text("Popup!")
+//                    }
+//                }
         }
         .ignoresSafeArea()
     }
