@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>790868712723-cdfg9dpadreea2ut1tom417ngroabj3i.apps.googleusercontent.com</string>
+	<string>8206146477-celhu9sb68m5jin39p6p2gntmk770gje.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.790868712723-cdfg9dpadreea2ut1tom417ngroabj3i</string>
+	<string>com.googleusercontent.apps.8206146477-celhu9sb68m5jin39p6p2gntmk770gje</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDVJPJaDkwb83aQENdwSlgHxYEp7g9x5y8</string>
+	<string>AIzaSyCg9Lwao0gl_b0afzMwxhI_QZfMioM-mDk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>790868712723</string>
+	<string>8206146477</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>aly3ye-virginia.edu.JacketStash-PROD</string>
 	<key>PROJECT_ID</key>
-	<string>jacketstash-prod</string>
+	<string>jacketstash-bb91d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>jacketstash-prod.appspot.com</string>
+	<string>jacketstash-bb91d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:790868712723:ios:384c98976426a68bcc0ee6</string>
+	<string>1:8206146477:ios:0a82224eec6c5cf0795f24</string>
 </dict>
 </plist>

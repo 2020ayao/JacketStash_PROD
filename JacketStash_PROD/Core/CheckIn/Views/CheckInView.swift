@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import StripeApplePay
 
 struct CheckInView: View {
     @State var isCheckedIn = false
+    @State private var isPressed = false
     
     var body: some View {
         VStack {
@@ -30,9 +30,6 @@ struct CheckInView_Previews: PreviewProvider {
     }
 }
 
-<<<<<<< HEAD
-
-=======
 extension CheckInView {
     
     var checkInButton : some View {
@@ -43,13 +40,13 @@ extension CheckInView {
                 .scaleEffect(isPressed ? 2 : 0.99)
                 .animation(.easeIn(duration: 1.5), value: isPressed)
                 //.animation(.easeOut(duration: 0.5), value: isPressed)
-            
+
             Circle()
                 .fill(Color(.white))
                 .frame(width: 100, height: 100)
                 .scaleEffect(isPressed ? 1.99 : 0.5)
                 .animation(.easeOut(duration: 3), value: isPressed)
-            
+
             Button(action: {
                 print("hello")
             }, label: {})
@@ -59,12 +56,12 @@ extension CheckInView {
             .frame(width: 100, height: 100)
             .background(Color(.systemBlue))
             .mask(Circle())
-            
+
             .pressEvents {
                 withAnimation(.easeIn(duration: 2.75)) {
                     isPressed = true
                 }
-            
+
             } onRelease: {
                 withAnimation(.easeOut(duration: 0.5)) {
                     isPressed = false
@@ -78,11 +75,9 @@ extension CheckInView {
                 .font(.headline)
 >>>>>>> parent of 1a0a42c (Button action changes)
         }
-        
+
         .padding(.bottom, 120)
-        
-        
+
+
     }
 }
->>>>>>> parent of d408034 (Position and text font edits)
-

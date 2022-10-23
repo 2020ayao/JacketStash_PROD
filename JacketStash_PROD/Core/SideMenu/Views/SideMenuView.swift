@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SideMenuView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
         
         if let user = authViewModel.currentUser {
+            let _ = print(user.fullname)
             VStack(alignment: .leading, spacing: 32) {
                 VStack(alignment: .leading){
                     Circle()
