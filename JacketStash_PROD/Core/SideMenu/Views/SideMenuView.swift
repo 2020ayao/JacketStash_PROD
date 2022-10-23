@@ -37,7 +37,7 @@ struct SideMenuView: View {
                 ForEach(SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
                     if viewModel == .profile {
                         NavigationLink {
-//                            ProfileView(user: user)
+                            //                            ProfileView(user: user)
                         } label: {
                             SideMenuOptionRowView(viewModel: viewModel)
                         }
@@ -54,7 +54,6 @@ struct SideMenuView: View {
                 Spacer()
             }
         }
-        
     }
 }
 
