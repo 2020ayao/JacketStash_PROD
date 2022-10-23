@@ -12,6 +12,7 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
     @Published var currentUser: User?
+    @Published var isCheckedIn = false
     
     private let service = UserService()
     
@@ -69,6 +70,14 @@ class AuthViewModel: ObservableObject {
     func signOut() {
         userSession = nil
         try? Auth.auth().signOut()
+    }
+    
+    func checkIn() {
+        isCheckedIn = true
+    }
+    
+    func checkOut() {
+        isCheckedIn = false
     }
     
     func fetchUser() {

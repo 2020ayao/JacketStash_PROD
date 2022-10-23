@@ -11,6 +11,7 @@ struct CheckInOutButton: View {
     @State private var isPressed = false
     @GestureState var isDetectingLongPress = false
     @State var isCheckedIn = false
+    @EnvironmentObject var authViewModel: AuthViewModel
     let title: String
     
     var body: some View {
@@ -79,6 +80,7 @@ extension CheckInOutButton {
             .onEnded { finished in
                 self.isCheckedIn = true
                 print("DEBUG: Checked In")
+                authViewModel.checkIn()
             }
     }
     

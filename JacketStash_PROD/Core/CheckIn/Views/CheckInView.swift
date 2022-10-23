@@ -11,6 +11,7 @@ struct CheckInView: View {
 //    var cb: CheckInOutButton
     @State private var isPressed = false
     @State var showingPopup = false
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         VStack {
@@ -36,12 +37,12 @@ struct CheckInView: View {
             Spacer()
             
             CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check In")
-//                .popover(isPresented: cb.$isCheckedIn) { // 3
-//                    ZStack { // 4
-//                        Color.blue.frame(width: 200, height: 100)
-//                        Text("Popup!")
-//                    }
-//                }
+                .popover(isPresented: $authViewModel.isCheckedIn) { // 3
+                    ZStack { // 4
+                        Color.blue.frame(width: 200, height: 100)
+                        Text("Popup!")
+                    }
+                }
         }
         .ignoresSafeArea()
     }
