@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
-        Text("Home View")
         
-        
+        VStack {
+            Text("Home View")
+            
+            Button {
+                authViewModel.signOut()
+            } label: {
+                Text("Sign Out")
+            }
+            
+        }
     }
 }
 

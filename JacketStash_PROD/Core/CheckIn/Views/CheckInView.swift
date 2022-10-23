@@ -8,40 +8,21 @@
 import SwiftUI
 
 struct CheckInView: View {
-//    var cb: CheckInOutButton
+    //    var cb: CheckInOutButton
     @State private var isPressed = false
     @State var showingPopup = false
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         VStack {
-            AuthHeaderView(title1: "Hey Adam!", title2: "Let's get checked in...")
-            
-            ZStack {
-                
-                RoundedRectangle(cornerRadius: 50, style: .continuous)
-                    .opacity(0.25)
-                    .padding()
-                
-                Button("Push me") {
-                    showingPopup = true // 2
-                }
-            }
-//            .popover(isPresented: cb.$isCheckedIn) { // 3
-//                ZStack { // 4
-//                    Color.blue.frame(width: 200, height: 100)
-//                    Text("Popup!")
-//                }
-//            }
+            AuthHeaderView(title1: "Hey Adam!", title2: "Let's get started...")
             
             Spacer()
             
             CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check In")
-                .popover(isPresented: $authViewModel.isCheckedIn) { // 3
-                    ZStack { // 4
-                        Color.blue.frame(width: 200, height: 100)
-                        Text("Popup!")
-                    }
+                .sheet(isPresented: $authViewModel.isCheckedIn) { // 3
+                    
+                    checkInConfirmation
                 }
         }
         .ignoresSafeArea()
@@ -52,54 +33,46 @@ struct CheckInView: View {
 struct CheckInView_Previews: PreviewProvider {
     static var previews: some View {
         CheckInView()
+            .environmentObject(AuthViewModel())
     }
 }
 
 extension CheckInView {
     
-    var checkInButton : some View {
+    var checkInConfirmation : some View {
         ZStack {
-            Circle()
-                .fill(Color(.systemBlue))
-                .frame(width: 100, height: 100)
-                .scaleEffect(isPressed ? 2 : 0.99)
-                .animation(.easeIn(duration: 1.5), value: isPressed)
-                //.animation(.easeOut(duration: 0.5), value: isPressed)
-
-            Circle()
-                .fill(Color(.white))
-                .frame(width: 100, height: 100)
-                .scaleEffect(isPressed ? 1.99 : 0.5)
-                .animation(.easeOut(duration: 3), value: isPressed)
-
-            Button(action: {
-                print("hello")
-            }, label: {})
-            .onLongPressGesture(perform: {
-                print("hello")
-            })
-            .frame(width: 100, height: 100)
-            .background(Color(.systemBlue))
-            .mask(Circle())
-
-            .pressEvents {
-                withAnimation(.easeIn(duration: 2.75)) {
-                    isPressed = true
-                }
-
-            } onRelease: {
-                withAnimation(.easeOut(duration: 0.5)) {
-                    isPressed = false
-                }
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                .padding()
+                .padding(.top, 30)
+                .foregroundColor(Color.mint)
+            //.frame(width: 200, height: 150)
+            VStack {
+            ZStack {
+                Circle()
+                    .foregroundColor(Color.white)
+                    .frame(width: 50, height: 50)
+                Circle()
+                    .foregroundColor(Color.mint)
+                    .frame(width: 45, height: 45)
+                Image(systemName: "checkmark")
             }
-            Text("Check In")
-                .foregroundColor(.white)
-                .fontWeight(.semibold)
-                .font(.headline)
+            .offset(y:20)
+            
+            VStack(spacing:10) {
+                Text("Thank you for checking in! ")
+                    .fontWeight(.semibold)
+                    .font(.title)
+                    .offset(y:20)
+                Text("Your coat ID for the night is #273")
+                    .fontWeight(.semibold)
+                    .font(.headline)
+                    .offset(y:20)
+            }
+            Spacer()
         }
-
-        .padding(.bottom, 120)
-
-
+        
+        
+    }
+    .presentationDetents([.fraction(0.35)])
     }
 }

@@ -20,16 +20,6 @@ class CheckedInViewModel: ObservableObject {
         self.fetchUser()
     }
     
-    
-    
-//    func checkIn() {
-//        Firestore.firestore().collection("users")
-//            .document(user.uid).updateData({"isCheckedIn" : true}) { _ in
-//                self.didAuthenticateUser = true
-//                print("DEBUG: Did update checkedIn ...")
-//            }
-//    }
-    
     func fetchUser() {
         guard let uid = self.userSession?.uid else {return}
         service.fetchUser(withUid: uid) { user in

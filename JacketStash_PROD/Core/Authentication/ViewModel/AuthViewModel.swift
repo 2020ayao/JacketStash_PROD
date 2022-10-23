@@ -72,12 +72,8 @@ class AuthViewModel: ObservableObject {
         try? Auth.auth().signOut()
     }
     
-    func checkIn() {
-        isCheckedIn = true
-    }
-    
-    func checkOut() {
-        isCheckedIn = false
+    func checkInOut() {
+        isCheckedIn.toggle()
     }
     
     func fetchUser() {
@@ -87,7 +83,4 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-//    func checkIn() {
-//        Auth.auth().
-//    }
 }
