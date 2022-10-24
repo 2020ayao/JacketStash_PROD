@@ -11,7 +11,7 @@ import Firebase
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
-    @Published var currentUser: User?
+    @Published var currentUser: User? = nil
     @Published var isCheckedIn = false
     @Published var isCheckedOut = false
     //@Published var coat_id: Int
@@ -32,6 +32,7 @@ class AuthViewModel: ObservableObject {
             }
             guard let user = result?.user else {return}
             self.userSession = user
+            self.fetchUser()
             print("DEBUG: Logged User in successfully")
             print("DEBUG: User is \(String(describing: self.userSession?.uid))")
         }
@@ -48,6 +49,8 @@ class AuthViewModel: ObservableObject {
             }
             guard let user  = result?.user else {return}
             self.userSession = user
+            self.fetchUser()
+            
             
             print("DEBUG: Registered User successfully")
             print("DEBUG: User is \(self.userSession?.uid)")
@@ -64,6 +67,8 @@ class AuthViewModel: ObservableObject {
             Firestore.firestore().collection("users")
                 .document(user.uid).setData(data) { _ in
                     self.didAuthenticateUser = true
+                    
+                    //self.currentUser = user
                     print("DEBUG: Did upload user data...")
                 }
             
@@ -87,7 +92,7 @@ class AuthViewModel: ObservableObject {
                     
                     let data: [String:Any] = [
                         "coat_id": self.currentUser?.coat_id,
-                        "uid": Auth.auth().currentUser?.uid
+                        "fullname": self.currentUser?.fullname
                     ]
                     
                     print("currentUser.coat_id: \(currentUser?.coat_id)")
