@@ -94,9 +94,9 @@ class AuthViewModel: ObservableObject {
                     
 //
                     
-                    Firestore.firestore().collection("taken_COAT_IDS")
+                    Firestore.firestore().collection("TAKEN_COAT_IDS")
                         .document(String(self.currentUser!.coat_id)).setData(data) { _ in
-                            print("DEBUG: Did check coat id back into available coat ids")
+                            print("DEBUG: Did check coat id back into taken coat ids")
                         }
                     
                     print("final check")
@@ -137,7 +137,7 @@ class AuthViewModel: ObservableObject {
                     print("DEBUG: Did check coat id back into available coat ids")
                 }
             
-            Firestore.firestore().collection("taken_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
+            Firestore.firestore().collection("TAKEN_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
                 if let err = err {
                     print("Error removing document: \(err)")
                 } else {

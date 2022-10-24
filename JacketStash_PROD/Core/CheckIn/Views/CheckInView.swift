@@ -16,6 +16,7 @@ struct CheckInView: View {
     var body: some View {
         if let user = authViewModel.currentUser {
             VStack {
+                let _ = print(user.fullname)
                 AuthHeaderView(title1: "Hey \(user.fullname)!", title2: "Let's get started...")
                 
                 Spacer()
