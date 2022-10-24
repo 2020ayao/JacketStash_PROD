@@ -13,6 +13,7 @@ class AuthViewModel: ObservableObject {
     @Published var didAuthenticateUser = false
     @Published var currentUser: User?
     @Published var isCheckedIn = false
+    @Published var isCheckedOut = false
     
     private let service = UserService()
     
@@ -72,8 +73,12 @@ class AuthViewModel: ObservableObject {
         try? Auth.auth().signOut()
     }
     
-    func checkInOut() {
+    func checkIn() {
         isCheckedIn.toggle()
+    }
+    
+    func checkOut() {
+        isCheckedOut.toggle()
     }
     
     func fetchUser() {

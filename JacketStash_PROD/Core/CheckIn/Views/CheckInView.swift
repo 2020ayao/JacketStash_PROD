@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CheckInView: View {
     //    var cb: CheckInOutButton
-    @State private var isPressed = false
+//    @State private var isPressed = false
     @State var showingPopup = false
     @EnvironmentObject var authViewModel: AuthViewModel
     
@@ -20,9 +20,10 @@ struct CheckInView: View {
                 
                 Spacer()
                 
-                CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check In")
+                
+                
+                CheckInOutButton(checkingIn: true, title: "Check In")
                     .sheet(isPresented: $authViewModel.isCheckedIn) { // 3
-                        
                         checkInConfirmation
                     }
             }

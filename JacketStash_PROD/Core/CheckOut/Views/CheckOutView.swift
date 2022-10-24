@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CheckOutView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State var isCheckedIn = true
     var body: some View {
         VStack {
@@ -22,7 +23,12 @@ struct CheckOutView: View {
                 }
 
                 
-                CheckInOutButton(isDetectingLongPress: false, isCheckedIn: false, title: "Check Out")
+                CheckInOutButton(checkingIn: false, title: "Check Out")
+                
+                    .sheet(isPresented: $authViewModel.isCheckedOut) { // 3
+                        checkOutConfirmation
+                    }
+                    
                 
                 
             }
@@ -45,5 +51,45 @@ struct CheckOutView: View {
 struct CheckOutView_Previews: PreviewProvider {
     static var previews: some View {
         CheckOutView()
+            .environmentObject(AuthViewModel())
+    }
+}
+
+extension CheckOutView {
+    var checkOutConfirmation : some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                .padding()
+                .padding(.top, 30)
+                .foregroundColor(Color.mint)
+            //.frame(width: 200, height: 150)
+            VStack {
+                ZStack {
+                    Circle()
+                        .foregroundColor(Color.white)
+                        .frame(width: 50, height: 50)
+                    Circle()
+                        .foregroundColor(Color.mint)
+                        .frame(width: 45, height: 45)
+                    Image(systemName: "checkmark")
+                }
+                .offset(y:20)
+                
+                VStack(spacing:10) {
+                    Text("Thank you for using JacketStash!")
+                        .fontWeight(.semibold)
+                        .font(.system(size: 20))
+                        .offset(y:20)
+                    Text("Coat ID: #273")
+                        .fontWeight(.semibold)
+                        .font(.headline)
+                        .offset(y:20)
+                }
+                Spacer()
+            }
+            
+            
+        }
+        .presentationDetents([.fraction(0.35)])
     }
 }
