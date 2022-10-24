@@ -64,7 +64,7 @@ extension CheckInView {
                     .fontWeight(.semibold)
                     .font(.title)
                     .offset(y:20)
-                Text("Your coat ID for the night is #273")
+                Text("Your coat ID for the night is # \( String(authViewModel.currentUser!.coat_id) ?? "-1" )")
                     .fontWeight(.semibold)
                     .font(.headline)
                     .offset(y:20)

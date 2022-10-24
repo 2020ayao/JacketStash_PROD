@@ -14,6 +14,7 @@ class AuthViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var isCheckedIn = false
     @Published var isCheckedOut = false
+    //@Published var coat_id: Int
     
     private let service = UserService()
     
@@ -78,22 +79,29 @@ class AuthViewModel: ObservableObject {
         print("DEBUG: checkIn function called")
         
         if let user = Auth.auth().currentUser {
-            
-            let docRef = Firestore.firestore().collection("AVAILABLE_COAT_IDS").document("ids")
-
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
-                    //currentUser?.coat_id
-                } else {
-                    print("Document does not exist")
+            let docRef = Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
+                .getDocuments { qsnapshot, error in
+                if let qsnapshot = qsnapshot {
+                    self.currentUser?.coat_id = Int(qsnapshot.documents[0].documentID)!
+                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document().delete()
+                    
                 }
             }
             
+            let data: [String:Any] = [
+                "coat_id": currentUser?.coat_id,
+                "uid": user.uid
+            ]
             
-            isCheckedIn.toggle()
+            print("currentUser.coat_id: \(currentUser?.coat_id)")
+            
+            Firestore.firestore().collection("taken_COAT_IDS")
+                .document(String(self.currentUser!.coat_id)).setData(data) { _ in
+                    print("DEBUG: Did check coat id back into available coat ids")
+                }
+            
         }
+        isCheckedIn.toggle()
     }
     
     func checkOut() {
