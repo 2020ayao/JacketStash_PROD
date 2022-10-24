@@ -81,11 +81,11 @@ extension CheckInOutButton {
             .onEnded { finished in
                 if checkingIn {
                     authViewModel.checkIn()
-                    print("Check in")
+                    print("DEBUG: Check in")
                 }
                 else {
                     authViewModel.checkOut()
-                    print("Check out")
+                    print("DEBUG: Check out")
                 }
             }
     }

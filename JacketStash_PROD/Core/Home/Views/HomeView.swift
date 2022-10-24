@@ -14,11 +14,7 @@ struct HomeView: View {
         VStack {
             Text("Home View")
             
-            Button {
-                authViewModel.signOut()
-            } label: {
-                Text("Sign Out")
-            }
+            
             
         }
     }

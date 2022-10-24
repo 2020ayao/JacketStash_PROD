@@ -15,29 +15,21 @@ struct MainTabView: View {
     
         
         TabView(selection: $selectedIndex) {
-            HomeView()
+            CheckInView()
                 .onTapGesture {
                     self.selectedIndex = 0
                 }
                 .tabItem {
-                    Image(systemName: "house")
+                    Image(systemName: "lock")
                 }.tag(0)
             
-            CheckInView()
+            CheckOutView()
                 .onTapGesture {
                     self.selectedIndex = 1
                 }
                 .tabItem {
-                    Image(systemName: "lock")
-                }.tag(1)
-            
-            CheckOutView()
-                .onTapGesture {
-                    self.selectedIndex = 2
-                }
-                .tabItem {
                     Image(systemName: "lock.open")
-                }.tag(2)
+                }.tag(1)
             
         }
     }

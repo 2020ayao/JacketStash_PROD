@@ -19,9 +19,7 @@ struct CheckInView: View {
                 AuthHeaderView(title1: "Hey \(user.fullname)!", title2: "Let's get started...")
                 
                 Spacer()
-                
-                
-                
+            
                 CheckInOutButton(checkingIn: true, title: "Check In")
                     .sheet(isPresented: $authViewModel.isCheckedIn) { // 3
                         checkInConfirmation
@@ -59,7 +57,7 @@ extension CheckInView {
                     .frame(width: 45, height: 45)
                 Image(systemName: "checkmark")
             }
-            .offset(y:20)
+            .offset(y:25)
             
             VStack(spacing:10) {
                 Text("Thank you for checking in! ")

@@ -21,6 +21,12 @@ struct CheckOutView: View {
                 } label: {
                     Text("Press to toggle")
                 }
+                
+                Button {
+                    authViewModel.signOut()
+                } label: {
+                    Text("Sign Out")
+                }
 
                 
                 CheckInOutButton(checkingIn: false, title: "Check Out")
@@ -28,6 +34,8 @@ struct CheckOutView: View {
                     .sheet(isPresented: $authViewModel.isCheckedOut) { // 3
                         checkOutConfirmation
                     }
+                
+                
                     
                 
                 
@@ -73,7 +81,7 @@ extension CheckOutView {
                         .frame(width: 45, height: 45)
                     Image(systemName: "checkmark")
                 }
-                .offset(y:20)
+                .offset(y:25)
                 
                 VStack(spacing:10) {
                     Text("Thank you for using JacketStash!")
@@ -85,6 +93,8 @@ extension CheckOutView {
                         .font(.headline)
                         .offset(y:20)
                 }
+                
+                
                 Spacer()
             }
             

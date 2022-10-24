@@ -74,10 +74,27 @@ class AuthViewModel: ObservableObject {
     }
     
     func checkIn() {
+        
         isCheckedIn.toggle()
+        
     }
     
     func checkOut() {
+        print("DEBUG: checkOut function called")
+        
+        
+        if let user = Auth.auth().currentUser {
+            
+            let data: [String:Any] = [
+                "user_uid": user.uid,
+                "coat_id": 3
+            ]
+            
+            Firestore.firestore().collection("AVAILABLE_COAT_IDS")
+                .document(user.uid).setData(data) { _ in
+                    print("DEBUG: Did check coat id back into available coat ids")
+                }
+        }
         isCheckedOut.toggle()
     }
     
