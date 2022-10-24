@@ -78,29 +78,45 @@ class AuthViewModel: ObservableObject {
     func checkIn() {
         print("DEBUG: checkIn function called")
         
-        if let user = Auth.auth().currentUser {
-            let docRef = Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
-                .getDocuments { qsnapshot, error in
+        Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
+            .getDocuments { [self] qsnapshot, error in
                 if let qsnapshot = qsnapshot {
-                    self.currentUser?.coat_id = Int(qsnapshot.documents[0].documentID)!
-                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document().delete()
+                    print("qsnapshot: ")
+                    print(qsnapshot.documents[0].documentID)
+                    self.currentUser?.coat_id = Int(qsnapshot.documents[0].documentID) ?? -1
+                    
+                    let data: [String:Any] = [
+                        "coat_id": self.currentUser?.coat_id,
+                        "uid": Auth.auth().currentUser?.uid
+                    ]
+                    
+                    print("currentUser.coat_id: \(currentUser?.coat_id)")
+                    
+//
+                    
+                    Firestore.firestore().collection("taken_COAT_IDS")
+                        .document(String(self.currentUser!.coat_id)).setData(data) { _ in
+                            print("DEBUG: Did check coat id back into available coat ids")
+                        }
+                    
+                    print("final check")
+                    print(currentUser?.coat_id)
+                    
+                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                        }
+                    }
+                    
                     
                 }
             }
-            
-            let data: [String:Any] = [
-                "coat_id": currentUser?.coat_id,
-                "uid": user.uid
-            ]
-            
-            print("currentUser.coat_id: \(currentUser?.coat_id)")
-            
-            Firestore.firestore().collection("taken_COAT_IDS")
-                .document(String(self.currentUser!.coat_id)).setData(data) { _ in
-                    print("DEBUG: Did check coat id back into available coat ids")
-                }
-            
-        }
+        
+        
+        
+        //Firestore.firestore().collection("AVAILABLE_COAT_IDS").document().delete()
         isCheckedIn.toggle()
     }
     
@@ -120,6 +136,14 @@ class AuthViewModel: ObservableObject {
                 .document(String(currentUser!.coat_id)).setData(coat_id) { _ in
                     print("DEBUG: Did check coat id back into available coat ids")
                 }
+            
+            Firestore.firestore().collection("taken_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
         }
         isCheckedOut.toggle()
     }

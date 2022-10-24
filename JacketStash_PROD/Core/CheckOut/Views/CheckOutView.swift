@@ -88,7 +88,7 @@ extension CheckOutView {
                         .fontWeight(.semibold)
                         .font(.system(size: 20))
                         .offset(y:20)
-                    Text("Coat ID: #273")
+                    Text("Coat ID: #\( String(authViewModel.currentUser!.coat_id) ?? "-1" )")
                         .fontWeight(.semibold)
                         .font(.headline)
                         .offset(y:20)
