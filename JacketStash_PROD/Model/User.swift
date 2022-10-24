@@ -14,7 +14,7 @@ struct User: Identifiable, Decodable{
 //    let profileImageUrl: String
     let email: String
     var isCheckedIn: Bool
-    //var coat_id: Int
+    var coat_id: Int
     
 }
 

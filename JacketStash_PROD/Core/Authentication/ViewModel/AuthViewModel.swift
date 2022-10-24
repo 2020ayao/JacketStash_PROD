@@ -56,7 +56,8 @@ class AuthViewModel: ObservableObject {
                 "username": username.lowercased(),
                 "fullname": fullname,
                 "uid": user.uid,
-                "isCheckedIn": isCheckedIn
+                "isCheckedIn": isCheckedIn,
+                "coat_id": -1
             ]
             
             Firestore.firestore().collection("users")
@@ -74,9 +75,25 @@ class AuthViewModel: ObservableObject {
     }
     
     func checkIn() {
+        print("DEBUG: checkIn function called")
         
-        isCheckedIn.toggle()
-        
+        if let user = Auth.auth().currentUser {
+            
+            let docRef = Firestore.firestore().collection("AVAILABLE_COAT_IDS").document("ids")
+
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    //currentUser?.coat_id
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+            
+            isCheckedIn.toggle()
+        }
     }
     
     func checkOut() {
@@ -85,13 +102,14 @@ class AuthViewModel: ObservableObject {
         
         if let user = Auth.auth().currentUser {
             
-            let data: [String:Any] = [
-                "user_uid": user.uid,
-                "coat_id": 3
+            let coat_id: [String:Any] = [
+                "coat_id": currentUser?.coat_id
             ]
             
+            print("CURRENT USER COAT ID PUSHED INTO AVAILABLE: \(currentUser?.coat_id)")
+            
             Firestore.firestore().collection("AVAILABLE_COAT_IDS")
-                .document(user.uid).setData(data) { _ in
+                .document(String(currentUser!.coat_id)).setData(coat_id) { _ in
                     print("DEBUG: Did check coat id back into available coat ids")
                 }
         }
