@@ -79,13 +79,19 @@ extension CheckInOutButton {
                 transaction.animation = Animation.easeIn(duration: 2.0)
             }
             .onEnded { finished in
+//                if checkingIn {
+//                    authViewModel.checkIn()
+//                    print("DEBUG: Check in")
+//                }
+//                else {
+//                    authViewModel.checkOut()
+//                    print("DEBUG: Check out")
+//                }
                 if checkingIn {
                     authViewModel.checkIn()
-                    print("DEBUG: Check in")
                 }
                 else {
                     authViewModel.checkOut()
-                    print("DEBUG: Check out")
                 }
             }
     }

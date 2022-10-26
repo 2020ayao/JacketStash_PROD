@@ -11,28 +11,10 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedIndex = 0
-    
+    @EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
-    
+        CheckInView()
         
-        TabView(selection: $selectedIndex) {
-            CheckInView()
-                .onTapGesture {
-                    self.selectedIndex = 0
-                }
-                .tabItem {
-                    Image(systemName: "lock")
-                }.tag(0)
-            
-            CheckOutView()
-                .onTapGesture {
-                    self.selectedIndex = 1
-                }
-                .tabItem {
-                    Image(systemName: "lock.open")
-                }.tag(1)
-            
-        }
     }
 }
 
@@ -41,3 +23,4 @@ struct MainTabView_Previews: PreviewProvider {
         MainTabView()
     }
 }
+

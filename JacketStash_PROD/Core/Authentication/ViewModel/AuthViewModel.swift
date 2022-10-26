@@ -123,6 +123,7 @@ class AuthViewModel: ObservableObject {
         
         //Firestore.firestore().collection("AVAILABLE_COAT_IDS").document().delete()
         isCheckedIn.toggle()
+        isCheckedOut.toggle()
     }
     
     func checkOut() {
@@ -151,6 +152,7 @@ class AuthViewModel: ObservableObject {
             }
         }
         isCheckedOut.toggle()
+        isCheckedIn.toggle()
     }
     
     func fetchUser() {
