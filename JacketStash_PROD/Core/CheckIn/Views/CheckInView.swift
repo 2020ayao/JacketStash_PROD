@@ -12,27 +12,20 @@ struct CheckInView: View {
 //    @State private var isPressed = false
     //@State var showingPopup = false
     @EnvironmentObject var authViewModel: AuthViewModel
+    @ObservedObject var viewModel = CheckedInViewModel()
     
     var body: some View {
         if let user = authViewModel.currentUser {
             ZStack(alignment: .bottom){
-//                guard let user = authViewModel.currentUser else {return}
-                
                 let _ = print(user.fullname)
-//                AuthHeaderView(title1: "Hey \(user.fullname)!", title2: "Let's get started...")           Spacer()
-                
-               
                 ScrollView {
                     LazyVStack {
-                        ForEach(0 ... 20, id: \.self) { _ in
-                            CheckInNotifView()
+                        ForEach(viewModel.feed) { feed in
+                            CheckInNotifView(feed: feed)
                                 .padding()
                         }
                     }
                 }
-                
-                
-            
                 if authViewModel.isCheckedIn == false {
                     CheckInOutButton(checkingIn: true, title: "Check In")
                         .popover(isPresented: $authViewModel.isCheckedOut, content: {
@@ -47,10 +40,19 @@ struct CheckInView: View {
                             checkInConfirmation
                         })
                         .offset(y:100)
-                        
+                    
                 }
             }
         }
+        else {
+            
+            Button {
+                try! authViewModel.signOut()
+            } label: {
+                Text("Sign Out")
+            }
+        }
+
     }
 }
 

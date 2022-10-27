@@ -9,22 +9,26 @@ import SwiftUI
 import Firebase
 
 class CheckedInViewModel: ObservableObject {
-    @Published var userSession: FirebaseAuth.User?
-    @Published var didAuthenticateUser = false
-    @Published var currentUser: User?
     
-    private let service = UserService()
+    @Published var feed = [Feed]()
+    
+    let feedservice = FeedService()
+    let userService = UserService()
     
     init() {
-        self.userSession = Auth.auth().currentUser
-        self.fetchUser()
+        fetchFeed()
     }
     
-    func fetchUser() {
-        guard let uid = self.userSession?.uid else {return}
-        service.fetchUser(withUid: uid) { user in
-            self.currentUser = user
+    func fetchFeed() {
+        feedservice.fetchFeed { feed in
+            self.feed = feed
+            for i in 0 ..< feed.count {
+                let uid = feed[i].uid
+                self.userService.fetchUser(withUid: uid) { user in
+                    self.feed[i].user = user
+                }
+            }
+            print("DEBUG: \(self.feed)")
         }
     }
-    
 }

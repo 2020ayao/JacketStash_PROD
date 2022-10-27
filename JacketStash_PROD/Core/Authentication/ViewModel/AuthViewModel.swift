@@ -17,6 +17,7 @@ class AuthViewModel: ObservableObject {
     //@Published var coat_id: Int
     
     private let service = UserService()
+    private let checkInService = FeedService()
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -83,6 +84,7 @@ class AuthViewModel: ObservableObject {
     func checkIn() {
         print("DEBUG: checkIn function called")
         
+        
         Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
             .getDocuments { [self] qsnapshot, error in
                 if let qsnapshot = qsnapshot {
@@ -98,9 +100,9 @@ class AuthViewModel: ObservableObject {
                     print("currentUser.coat_id: \(currentUser?.coat_id)")
                     
 //
-                    
+                    guard let coat_id = self.currentUser?.coat_id else {return}
                     Firestore.firestore().collection("TAKEN_COAT_IDS")
-                        .document(String(self.currentUser!.coat_id)).setData(data) { _ in
+                        .document(String(coat_id)).setData(data) { _ in
                             print("DEBUG: Did check coat id back into taken coat ids")
                         }
                     
@@ -124,6 +126,15 @@ class AuthViewModel: ObservableObject {
         //Firestore.firestore().collection("AVAILABLE_COAT_IDS").document().delete()
         isCheckedIn.toggle()
         isCheckedOut.toggle()
+        guard let fullname = currentUser?.fullname else {return}
+        checkInService.uploadFeed(fullname: fullname, checkingIn: true) { success in
+            if success {
+                // great
+            }
+            else {
+                // let user know it failed
+            }
+        }
     }
     
     func checkOut() {
@@ -153,6 +164,16 @@ class AuthViewModel: ObservableObject {
         }
         isCheckedOut.toggle()
         isCheckedIn.toggle()
+        
+        guard let fullname = currentUser?.fullname else {return}
+        checkInService.uploadFeed(fullname: fullname, checkingIn: false) { success in
+            if success {
+                //great
+            } else {
+                //let user know they had an error
+            }
+        }
+        
     }
     
     func fetchUser() {
