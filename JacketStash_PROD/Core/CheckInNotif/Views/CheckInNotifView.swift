@@ -10,32 +10,44 @@ import SwiftUI
 import SwiftUI
 
 struct CheckInNotifView: View {
+    let feed: Feed
+    
     var body: some View {
         VStack (alignment: .leading) {
             // profile picture + Name + Tweet
-            HStack (alignment: .top , spacing: 12)  {
-                Circle()
-                    .frame(width: 56, height: 56)
-                    .foregroundColor(Color(.systemBlue))
-                
-                VStack (alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("Bruce Wayne")
-                            .font(.subheadline).bold()
+            if let user = feed.user {
+                HStack (alignment: .top , spacing: 12)  {
+                    Circle()
+                        .frame(width: 56, height: 56)
+                        .foregroundColor(Color(.systemBlue))
+                    
+                    VStack (alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text(user.fullname)
+                                .font(.subheadline).bold()
+                            
+                            Text("@\(user.username)")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                            
+                            Text("2w")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                        }
                         
-                        Text("@batman")
-                            .foregroundColor(.gray)
-                            .font(.caption)
+                        if feed.checkingIn {
+                            
+                            Text("\(feed.fullname) checked in.")
+                                .font(.subheadline)
+                                .multilineTextAlignment(.leading)
+                        }
+                        else {
+                            Text("\(feed.fullname) headed out")
+                                .font(.subheadline)
+                                .multilineTextAlignment(.leading)
+                        }
                         
-                        Text("2w")
-                            .foregroundColor(.gray)
-                            .font(.caption)
                     }
-                    
-                    Text("I believe in Harvey Dent")
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
-                    
                 }
             }
             // action buttons for tweet
@@ -82,9 +94,9 @@ struct CheckInNotifView: View {
     }
 }
 
-struct CheckInNotifView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckInNotifView()
-    }
-}
+//struct CheckInNotifView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckInNotifView()
+//    }
+//}
 

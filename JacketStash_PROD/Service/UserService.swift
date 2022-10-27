@@ -21,9 +21,7 @@ struct UserService {
                 print("DEBUG: username is \(user.username)")
                 print("DEBUG: email is \(user.email)")
                 
-                completion(user)
-                
-                
+                completion(user) 
             }
     }
 }

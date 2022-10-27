@@ -39,6 +39,9 @@
 		646F2FBE2900868E00EAF837 /* CheckInOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F2FBD2900868E00EAF837 /* CheckInOutViewModel.swift */; };
 		646F2FC02900878600EAF837 /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F2FBF2900878600EAF837 /* RoundedShape.swift */; };
 		648894D82908B9F900870DF2 /* CheckInNotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648894D72908B9F900870DF2 /* CheckInNotifView.swift */; };
+		64A2FF33290B1657000E4DA5 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A2FF32290B1657000E4DA5 /* FeedService.swift */; };
+		64A2FF36290B17DF000E4DA5 /* CheckInNotifViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A2FF35290B17DF000E4DA5 /* CheckInNotifViewModel.swift */; };
+		64A2FF38290B1D53000E4DA5 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A2FF37290B1D53000E4DA5 /* Feed.swift */; };
 		64B6114829036BF500396586 /* ButtonPressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6114729036BF500396586 /* ButtonPressActions.swift */; };
 		64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B61149290399B300396586 /* CheckInOutButton.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +73,9 @@
 		646F2FBD2900868E00EAF837 /* CheckInOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInOutViewModel.swift; sourceTree = "<group>"; };
 		646F2FBF2900878600EAF837 /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
 		648894D72908B9F900870DF2 /* CheckInNotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInNotifView.swift; sourceTree = "<group>"; };
+		64A2FF32290B1657000E4DA5 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		64A2FF35290B17DF000E4DA5 /* CheckInNotifViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInNotifViewModel.swift; sourceTree = "<group>"; };
+		64A2FF37290B1D53000E4DA5 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		64B6114729036BF500396586 /* ButtonPressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPressActions.swift; sourceTree = "<group>"; };
 		64B61149290399B300396586 /* CheckInOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInOutButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				6433E41F28FFADE900952950 /* UserService.swift */,
+				64A2FF32290B1657000E4DA5 /* FeedService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -151,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				646F2FBB29007D1000EAF837 /* User.swift */,
+				64A2FF37290B1D53000E4DA5 /* Feed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,8 +166,8 @@
 		6433E40B28FFA7BB00952950 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				648894D22908B9AF00870DF2 /* CheckInNotif */,
 				6433E40C28FFAA8C00952950 /* Components */,
+				648894D22908B9AF00870DF2 /* CheckInNotif */,
 				646F2FB629007CBD00EAF837 /* Profile */,
 				646F2FAA29007BF700EAF837 /* CheckOut */,
 				646F2FA829007BEA00EAF837 /* CheckIn */,
@@ -378,6 +386,7 @@
 		648894D62908B9E500870DF2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				64A2FF35290B17DF000E4DA5 /* CheckInNotifViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -476,6 +485,7 @@
 				6433E42A28FFAEFD00952950 /* MainTabView.swift in Sources */,
 				646F2FA1290078CF00EAF837 /* SideMenuViewModel.swift in Sources */,
 				646F2FB529007C9E00EAF837 /* UserStatsView.swift in Sources */,
+				64A2FF36290B17DF000E4DA5 /* CheckInNotifViewModel.swift in Sources */,
 				6433E42028FFADE900952950 /* UserService.swift in Sources */,
 				646F2FBA29007CE600EAF837 /* ProfileView.swift in Sources */,
 				6433E3FD28FFA61000952950 /* ContentView.swift in Sources */,
@@ -483,7 +493,9 @@
 				6433E42428FFAE5E00952950 /* CustomInputField.swift in Sources */,
 				646F2F9F290078A700EAF837 /* SideMenuOptionRowView.swift in Sources */,
 				648894D82908B9F900870DF2 /* CheckInNotifView.swift in Sources */,
+				64A2FF38290B1D53000E4DA5 /* Feed.swift in Sources */,
 				646F2FC02900878600EAF837 /* RoundedShape.swift in Sources */,
+				64A2FF33290B1657000E4DA5 /* FeedService.swift in Sources */,
 				646F2FBC29007D1000EAF837 /* User.swift in Sources */,
 				64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */,
 				6433E42728FFAEA800952950 /* AuthHeaderView.swift in Sources */,
