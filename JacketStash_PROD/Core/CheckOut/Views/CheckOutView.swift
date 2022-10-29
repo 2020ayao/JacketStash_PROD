@@ -30,12 +30,12 @@ struct CheckOutView: View {
                     }
                     
                     
-                    CheckInOutButton(checkingIn: false, title: "Check Out")
-                    
-                        .sheet(isPresented: $authViewModel.isCheckedOut) { // 3
-                            
-                            
-                        }
+//                    CheckInOutButton(checkIn: false, title: "Check Out")
+//
+//                        .sheet(isPresented: $authViewModel.isCheckedOut) { // 3
+//
+//
+//                        }
                 }
                 else {
                     AuthHeaderView(title1: "Oops...", title2: "looks like nothing has been checked in")

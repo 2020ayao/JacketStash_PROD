@@ -12,6 +12,7 @@ import SwiftUI
 struct MainTabView: View {
     @State private var selectedIndex = 0
     @EnvironmentObject var authViewModel: AuthViewModel
+    //@State var checkedIn = false
     var body: some View {
         CheckInView()
         

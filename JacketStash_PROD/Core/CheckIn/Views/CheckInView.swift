@@ -14,10 +14,12 @@ struct CheckInView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @ObservedObject var viewModel = CheckedInViewModel()
     
+    @State var checkedIn = false
+    
     var body: some View {
         if let user = authViewModel.currentUser {
             ZStack(alignment: .bottom){
-                let _ = print(user.fullname)
+                //let _ = print(user.fullname)
                 ScrollView {
                     LazyVStack {
                         ForEach(viewModel.feed) { feed in
@@ -26,15 +28,16 @@ struct CheckInView: View {
                         }
                     }
                 }
-                if authViewModel.isCheckedIn == false {
-                    CheckInOutButton(checkingIn: true, title: "Check In")
+                if checkedIn == false {
+                    CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         .popover(isPresented: $authViewModel.isCheckedOut, content: {
                             checkOutConfirmation
                         })
                         .offset(y:100)
+        
                 }
                 else {
-                    CheckInOutButton(checkingIn: false, title: "Check Out")
+                    CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
                         .popover(isPresented: $authViewModel.isCheckedOut, content: {
                             
                             checkInConfirmation
@@ -53,6 +56,10 @@ struct CheckInView: View {
             }
         }
 
+    }
+    
+    func toggleStatus() {
+        checkedIn.toggle()
     }
 }
 

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CheckInOutButton: View {
-    @State var checkingIn: Bool
+    //@State var checkingIn: Bool
+    @Binding var checkIn: Bool
     @State private var isPressed = false
     @GestureState var isDetectingLongPress = false
     @State var isCheckedIn = false
@@ -64,11 +65,11 @@ struct CheckInOutButton: View {
         }
 }
 
-struct CheckInOutButton_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckInOutButton(checkingIn: true, title: "Check In")
-    }
-}
+//struct CheckInOutButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckInOutButton(checkingIn: true, title: "Check In")
+//    }
+//}
 
 extension CheckInOutButton {
     var longPress: some Gesture {
@@ -87,11 +88,13 @@ extension CheckInOutButton {
 //                    authViewModel.checkOut()
 //                    print("DEBUG: Check out")
 //                }
-                if checkingIn {
+                if checkIn == false {
                     authViewModel.checkIn()
+                    checkIn.toggle()
                 }
                 else {
                     authViewModel.checkOut()
+                    checkIn.toggle()
                 }
             }
     }

@@ -28,7 +28,7 @@ class CheckedInViewModel: ObservableObject {
                     self.feed[i].user = user
                 }
             }
-            print("DEBUG: \(self.feed)")
+            //print("DEBUG: \(self.feed)")
         }
     }
 }

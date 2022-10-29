@@ -50,44 +50,6 @@ struct CheckInNotifView: View {
                     }
                 }
             }
-            // action buttons for tweet
-            HStack {
-                Button {
-                    //action click
-                } label: {
-                    Image(systemName: "bubble.left")
-                        .font(.subheadline)
-                }
-                Spacer()
-                
-                Button {
-                    //action click
-                } label: {
-                    Image(systemName: "arrow.2.squarepath")
-                        .font(.subheadline)
-                }
-        
-                Spacer()
-                
-                Button {
-                    //action click
-                } label: {
-                    Image(systemName: "heart")
-                        .font(.subheadline)
-                }
-                
-                Spacer()
-                
-                Button {
-                    //action click
-                } label: {
-                    Image(systemName: "bookmark")
-                        .font(.subheadline)
-                }
-
-            }
-            .padding()
-            .foregroundColor(.gray)
             
             Divider()
         }
