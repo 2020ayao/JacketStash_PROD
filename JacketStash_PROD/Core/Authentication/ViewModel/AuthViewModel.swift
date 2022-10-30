@@ -40,7 +40,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool) {
-        print("DEBUG: Register with email \(email)")
+        print("DEBUG: Regixxster with email \(email)")
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -135,6 +135,23 @@ class AuthViewModel: ObservableObject {
                 // let user know it failed
             }
         }
+    }
+    
+    
+    func updateCheckInStatus(update: Bool, withUid uid: String) {
+        Firestore.firestore().collection("users").document(uid).updateData(["isCheckedIn": update])
+    }
+    
+    func getCheckInStatus(withUid uid: String, completion: @escaping([Feed]) -> Void){
+        Firestore.firestore().collection("users").document(uid)
+            .getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                } else {
+                    print("Document does not exist")
+                }
+            }
     }
     
     func checkOut() {

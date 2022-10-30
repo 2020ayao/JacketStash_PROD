@@ -14,6 +14,7 @@ struct CheckInOutButton: View {
     @GestureState var isDetectingLongPress = false
     @State var isCheckedIn = false
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var viewModel: CheckedInViewModel
     let title: String
     
     var body: some View {
@@ -88,13 +89,19 @@ extension CheckInOutButton {
 //                    authViewModel.checkOut()
 //                    print("DEBUG: Check out")
 //                }
+                guard let uid = authViewModel.userSession?.uid else {return}
                 if checkIn == false {
                     authViewModel.checkIn()
                     checkIn.toggle()
+                    viewModel.updateCheckInStatus(withUid: uid)
+                    authViewModel.updateCheckInStatus(update: true, withUid: uid)
+                    
                 }
                 else {
                     authViewModel.checkOut()
                     checkIn.toggle()
+                    viewModel.updateCheckInStatus(withUid: uid)
+                    authViewModel.updateCheckInStatus(update: false, withUid: uid)
                 }
             }
     }

@@ -18,7 +18,7 @@ struct CheckInNotifView: View {
             if let user = feed.user {
                 HStack (alignment: .top , spacing: 12)  {
                     Circle()
-                        .frame(width: 56, height: 56)
+                        .frame(width: 35, height: 35)
                         .foregroundColor(Color(.systemBlue))
                     
                     VStack (alignment: .leading, spacing: 4) {

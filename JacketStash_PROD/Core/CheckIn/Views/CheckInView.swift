@@ -28,23 +28,29 @@ struct CheckInView: View {
                         }
                     }
                 }
-                if checkedIn == false {
-                    CheckInOutButton(checkIn: $checkedIn, title: "Check In")
-                        .popover(isPresented: $authViewModel.isCheckedOut, content: {
-                            checkOutConfirmation
-                        })
-                        .offset(y:100)
-        
-                }
+//                let _ = print(authViewModel.userSession?.uid)
+//                if let uid = authViewModel.userSession?.uid {
+//                    if viewModel.fetchCheckInStatus(withUid: uid) == false {
+                if user.isCheckedIn == false {
+                        CheckInOutButton(checkIn: $checkedIn, title: "Check In")
+                            .popover(isPresented: $authViewModel.isCheckedOut, content: {
+                                checkInConfirmation
+                                
+                            })
+                            .offset(y:100)
+                        
+                        
+                    }
                 else {
                     CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
                         .popover(isPresented: $authViewModel.isCheckedOut, content: {
                             
-                            checkInConfirmation
+                            checkOutConfirmation
                         })
                         .offset(y:100)
                     
                 }
+               // }
             }
         }
         else {

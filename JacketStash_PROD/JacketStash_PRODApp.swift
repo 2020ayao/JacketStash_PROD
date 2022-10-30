@@ -11,6 +11,7 @@ import Firebase
 @main
 struct JacketStash_PRODApp: App {
     @StateObject var viewModel = AuthViewModel()
+    @StateObject var vModel = CheckedInViewModel()
     init() {
         FirebaseApp.configure()
     }
@@ -20,6 +21,7 @@ struct JacketStash_PRODApp: App {
                 ContentView()
             }
             .environmentObject(viewModel)
+            .environmentObject(vModel)
         }
     }
 }

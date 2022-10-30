@@ -10,6 +10,8 @@ import Firebase
 
 class CheckedInViewModel: ObservableObject {
     
+    @State var checkedIn = false
+    
     @Published var feed = [Feed]()
     
     let feedservice = FeedService()
@@ -30,5 +32,21 @@ class CheckedInViewModel: ObservableObject {
             }
             //print("DEBUG: \(self.feed)")
         }
+    }
+    
+    func fetchCheckInStatus(withUid uid: String) -> Bool {
+        self.userService.fetchUser(withUid: uid) { user in
+            self.checkedIn = user.isCheckedIn
+            
+        }
+        print("deBUG: \(checkedIn)")
+        return checkedIn
+    }
+    
+    func updateCheckInStatus(withUid uid: String) {
+        self.userService.fetchUser(withUid: uid) { user in
+            self.checkedIn = user.isCheckedIn
+        }
+        checkedIn.toggle()
     }
 }
