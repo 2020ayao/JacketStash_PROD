@@ -35,7 +35,7 @@ class CheckInNotifViewModel: ObservableObject {
         }
         
         if m != 0 {
-            return "\(m) m ago"
+            return "\(m)m ago"
         }
         
         else {

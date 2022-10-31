@@ -30,6 +30,9 @@ struct CheckInView: View {
                         }
                     }
                 }
+                .refreshable {
+                    viewModel.fetchFeed()
+                }
                 if user.isCheckedIn == false {
                         CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         .sheet(isPresented: $checkedIn, content: {
