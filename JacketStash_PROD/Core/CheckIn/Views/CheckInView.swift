@@ -15,6 +15,7 @@ struct CheckInView: View {
     @ObservedObject var viewModel = CheckedInViewModel()
     
     @State var checkedIn = false
+    @State var checkedOut = false
     
     var body: some View {
         if let user = authViewModel.currentUser {
@@ -28,28 +29,31 @@ struct CheckInView: View {
                         }
                     }
                 }
-//                let _ = print(authViewModel.userSession?.uid)
+                //                let _ = print(authViewModel.userSession?.uid)
 //                if let uid = authViewModel.userSession?.uid {
 //                    if viewModel.fetchCheckInStatus(withUid: uid) == false {
                 if user.isCheckedIn == false {
                         CheckInOutButton(checkIn: $checkedIn, title: "Check In")
-                            .popover(isPresented: $authViewModel.isCheckedOut, content: {
-                                checkInConfirmation
+                        .sheet(isPresented: $checkedIn, content: {
+                            checkOutConfirmation
                                 
                             })
                             .offset(y:100)
-                        
+                            .presentationDetents([.fraction(0.35)])
+
                         
                     }
                 else {
                     CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
-                        .popover(isPresented: $authViewModel.isCheckedOut, content: {
-                            
-                            checkOutConfirmation
+                        .sheet(isPresented: $checkedIn, content: {
+                            checkInConfirmation
                         })
                         .offset(y:100)
+                        .presentationDetents([.fraction(0.35)])
+
                     
                 }
+                    
                // }
             }
         }

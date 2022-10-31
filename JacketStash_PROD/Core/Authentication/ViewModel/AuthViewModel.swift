@@ -12,8 +12,8 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
     @Published var currentUser: User? = nil
-    @Published var isCheckedIn = false
-    @Published var isCheckedOut = false
+    @Published var checkedIn = false
+    @Published var checkedOut = false
     //@Published var coat_id: Int
     
     private let service = UserService()
@@ -124,8 +124,8 @@ class AuthViewModel: ObservableObject {
         
         
         //Firestore.firestore().collection("AVAILABLE_COAT_IDS").document().delete()
-        isCheckedIn.toggle()
-        isCheckedOut.toggle()
+//        self.checkedIn = true
+//        checkedOut.toggle()
         guard let fullname = currentUser?.fullname else {return}
         checkInService.uploadFeed(fullname: fullname, checkingIn: true) { success in
             if success {
@@ -179,8 +179,8 @@ class AuthViewModel: ObservableObject {
                 }
             }
         }
-        isCheckedOut.toggle()
-        isCheckedIn.toggle()
+//        checkedIn.toggle()
+//        checkedOut = true
         
         guard let fullname = currentUser?.fullname else {return}
         checkInService.uploadFeed(fullname: fullname, checkingIn: false) { success in

@@ -12,7 +12,6 @@ struct CheckInOutButton: View {
     @Binding var checkIn: Bool
     @State private var isPressed = false
     @GestureState var isDetectingLongPress = false
-    @State var isCheckedIn = false
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var viewModel: CheckedInViewModel
     let title: String
@@ -90,18 +89,27 @@ extension CheckInOutButton {
 //                    print("DEBUG: Check out")
 //                }
                 guard let uid = authViewModel.userSession?.uid else {return}
-                if checkIn == false {
-                    authViewModel.checkIn()
-                    checkIn.toggle()
-                    viewModel.updateCheckInStatus(withUid: uid)
-                    authViewModel.updateCheckInStatus(update: true, withUid: uid)
+                if let user = authViewModel.currentUser {
+                    if user.isCheckedIn == false {
+                        // if ((authViewModel.currentUser?.isCheckedIn) != nil){
+                        authViewModel.checkIn()
+                        
+                        viewModel.updateCheckInStatus(withUid: uid)
+                        authViewModel.updateCheckInStatus(update: true, withUid: uid)
+                        //                        authViewModel.fetchUser()
+                        //                        CheckInView().checkedIn = true
+                        checkIn.toggle()
+                        
+                    }
+                    else {
+                        authViewModel.checkOut()
+                        viewModel.updateCheckInStatus(withUid: uid)
+                        authViewModel.updateCheckInStatus(update: false, withUid: uid)
+                        //                        CheckInView().checkedOut = true
+                        checkIn.toggle()
+                    }
+                    authViewModel.fetchUser()
                     
-                }
-                else {
-                    authViewModel.checkOut()
-                    checkIn.toggle()
-                    viewModel.updateCheckInStatus(withUid: uid)
-                    authViewModel.updateCheckInStatus(update: false, withUid: uid)
                 }
             }
     }
