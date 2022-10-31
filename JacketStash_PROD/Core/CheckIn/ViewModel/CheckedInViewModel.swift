@@ -39,7 +39,7 @@ class CheckedInViewModel: ObservableObject {
             self.checkedIn = user.isCheckedIn
             
         }
-        print("deBUG: \(checkedIn)")
+//        print("deBUG: \(checkedIn)")
         return checkedIn
     }
     
