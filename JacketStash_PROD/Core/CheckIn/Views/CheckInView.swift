@@ -13,6 +13,7 @@ struct CheckInView: View {
     //@State var showingPopup = false
     @EnvironmentObject var authViewModel: AuthViewModel
     @ObservedObject var viewModel = CheckedInViewModel()
+    @ObservedObject var vModel = CheckInNotifViewModel()
     
     @State var checkedIn = false
     @State var checkedOut = false
@@ -24,14 +25,14 @@ struct CheckInView: View {
                 ScrollView {
                     LazyVStack {
                         ForEach(viewModel.feed) { feed in
-                            CheckInNotifView(feed: feed)
+                            CheckInNotifView(feed: feed, viewModel: vModel)
                                 .padding()
                         }
                     }
                 }
-                //                let _ = print(authViewModel.userSession?.uid)
-//                if let uid = authViewModel.userSession?.uid {
-//                    if viewModel.fetchCheckInStatus(withUid: uid) == false {
+                .refreshable {
+                    viewModel.fetchFeed()
+                }
                 if user.isCheckedIn == false {
                         CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         .sheet(isPresented: $checkedIn, content: {
@@ -50,15 +51,10 @@ struct CheckInView: View {
                         })
                         .offset(y:100)
                         .presentationDetents([.fraction(0.35)])
-
-                    
                 }
-                    
-               // }
             }
         }
         else {
-            
             Button {
                 try! authViewModel.signOut()
             } label: {

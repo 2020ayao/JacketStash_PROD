@@ -80,23 +80,12 @@ extension CheckInOutButton {
                 transaction.animation = Animation.easeIn(duration: 2.0)
             }
             .onEnded { finished in
-//                if checkingIn {
-//                    authViewModel.checkIn()
-//                    print("DEBUG: Check in")
-//                }
-//                else {
-//                    authViewModel.checkOut()
-//                    print("DEBUG: Check out")
-//                }
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
                     if user.isCheckedIn == false {
                         // if ((authViewModel.currentUser?.isCheckedIn) != nil){
                         authViewModel.checkIn()
-                        
-//                        viewModel.updateCheckInStatus(withUid: uid)
-                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)                        //                        authViewModel.fetchUser()
-                        //                        CheckInView().checkedIn = true
+                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)                      
                         checkIn.toggle()
                         
                     }
