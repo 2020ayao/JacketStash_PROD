@@ -94,17 +94,16 @@ extension CheckInOutButton {
                         // if ((authViewModel.currentUser?.isCheckedIn) != nil){
                         authViewModel.checkIn()
                         
-                        viewModel.updateCheckInStatus(withUid: uid)
-                        authViewModel.updateCheckInStatus(update: true, withUid: uid)
-                        //                        authViewModel.fetchUser()
+//                        viewModel.updateCheckInStatus(withUid: uid)
+                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)                        //                        authViewModel.fetchUser()
                         //                        CheckInView().checkedIn = true
                         checkIn.toggle()
                         
                     }
                     else {
                         authViewModel.checkOut()
-                        viewModel.updateCheckInStatus(withUid: uid)
-                        authViewModel.updateCheckInStatus(update: false, withUid: uid)
+//                        viewModel.updateCheckInStatus(withUid: uid)
+                        authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
                         //                        CheckInView().checkedOut = true
                         checkIn.toggle()
                     }

@@ -13,7 +13,7 @@ struct SideMenuView: View {
     var body: some View {
         
         if let user = authViewModel.currentUser {
-            let _ = print(user.fullname)
+//            let _ = print(user.fullname)
             VStack(alignment: .leading, spacing: 32) {
                 VStack(alignment: .leading){
                     Circle()
