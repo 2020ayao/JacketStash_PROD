@@ -43,7 +43,7 @@ struct CheckInNotifView: View {
 //                                .foregroundColor(.gray)
 //                                .font(.caption)
                             
-                            Text("\(viewModel.formatTime(withFeed: feed)) ago")
+                            Text(viewModel.formatTime(withFeed: feed))
                                 .foregroundColor(.gray)
                                 .font(.caption)
                             
