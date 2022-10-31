@@ -11,8 +11,13 @@ import SwiftUI
 
 struct CheckInNotifView: View {
     let feed: Feed
+    let viewModel: CheckInNotifViewModel
+    
+    
     
     var body: some View {
+        
+        
         VStack (alignment: .leading) {
             // profile picture + Name + Tweet
             if let user = feed.user {
@@ -30,9 +35,19 @@ struct CheckInNotifView: View {
                                 .foregroundColor(.gray)
                                 .font(.caption)
                             
-                            Text("2w")
+//                            Text("\(feed.timestamp.dateValue().formatted(.dateTime.minute(.twoDigits)))")
+//                                .foregroundColor(.gray)
+//                                .font(.caption)
+                            
+//                            Text(computeNewDate(from: feed.timestamp.dateValue(), to:Date.now))
+//                                .foregroundColor(.gray)
+//                                .font(.caption)
+                            
+                            Text("\(viewModel.formatTime(withFeed: feed)) ago")
                                 .foregroundColor(.gray)
                                 .font(.caption)
+                            
+                            
                         }
                         
                         if feed.checkingIn {
@@ -54,6 +69,28 @@ struct CheckInNotifView: View {
             Divider()
         }
     }
+    
+    
+    func computeNewDate(from fromDate: Date, to toDate: Date) -> Date {
+         let delta = toDate - fromDate // `Date` - `Date` = `TimeInterval`
+         let today = Date()
+         if delta < 0 {
+             return today
+         } else {
+             return today + delta // `Date` + `TimeInterval` = `Date`
+         }
+    }
+    
+}
+
+
+
+extension Date {
+
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+
 }
 
 //struct CheckInNotifView_Previews: PreviewProvider {

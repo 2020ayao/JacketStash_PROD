@@ -42,7 +42,7 @@ struct FeedService {
                 
                 guard let documents = snapshot?.documents else {return}
                 let feed = documents.compactMap({try? $0.data(as: Feed.self) })
-                //print(feed)
+                print(feed)
                 completion(feed)
             }
     }

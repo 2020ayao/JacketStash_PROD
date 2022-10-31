@@ -8,5 +8,16 @@
 import Foundation
 
 class CheckInNotifViewModel: ObservableObject {
+    let formatter = DateComponentsFormatter()
     
+    
+    func formatTime(withFeed feed: Feed) -> String {
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.day, .hour, .minute]
+        
+        
+        return String(formatter.string(from: feed.timestamp.dateValue().timeIntervalSinceNow)!.dropFirst())
+        
+
+    }
 }
