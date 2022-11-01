@@ -24,12 +24,13 @@ struct CheckInOutButton: View {
                     .frame(width: 100, height: 100)
                     .scaleEffect(isPressed ? 2 : 0.99)
                     .animation(.easeIn(duration: 1.5), value: isPressed)
+
                 Circle()
                     .fill(Color(.white))
                     .frame(width: 100, height: 100)
                     .scaleEffect(isPressed ? 1.99 : 0.5)
                     .animation(.easeOut(duration: 3), value: isPressed)
-                    
+
                 
                 
                 Button {
@@ -42,24 +43,18 @@ struct CheckInOutButton: View {
                 .frame(width: 100, height: 100)
                 .background(Color(.systemBlue))
                 .mask(Circle())
-                .gesture(longPress)
                 
-                
-                .pressEvents {
-                    withAnimation(.easeIn(duration: 2.75)) {
-                        isPressed = true
-                    }
-                
-                } onRelease: {
-                    withAnimation(.easeOut(duration: 0.5)) {
-                        isPressed = false
-                    }
-                }
                 
                 Text(title)
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
                     .font(.headline)
+                    .gesture(longPress)
+                    .pressEvents(onPress: {
+                        isPressed = true
+                    }, onRelease: {
+                        isPressed = false
+                    })
                 
             }
             
@@ -75,7 +70,7 @@ struct CheckInOutButton: View {
 
 extension CheckInOutButton {
     var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 3, maximumDistance: 50)
+        LongPressGesture(minimumDuration: 2.9, maximumDistance: .infinity)
             .updating($isDetectingLongPress) { currentState, gestureState,
                 transaction in
                 gestureState = currentState
