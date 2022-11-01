@@ -44,6 +44,7 @@ struct CheckInOutButton: View {
                 .mask(Circle())
                 .gesture(longPress)
                 
+                
                 .pressEvents {
                     withAnimation(.easeIn(duration: 2.75)) {
                         isPressed = true
@@ -74,7 +75,7 @@ struct CheckInOutButton: View {
 
 extension CheckInOutButton {
     var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 3)
+        LongPressGesture(minimumDuration: 3, maximumDistance: 50)
             .updating($isDetectingLongPress) { currentState, gestureState,
                 transaction in
                 gestureState = currentState
