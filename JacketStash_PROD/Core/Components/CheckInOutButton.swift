@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct CheckInOutButton: View {
     //@State var checkingIn: Bool
@@ -80,6 +81,7 @@ extension CheckInOutButton {
                 transaction.animation = Animation.easeIn(duration: 2.0)
             }
             .onEnded { finished in
+                AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
                     if user.isCheckedIn == false {
