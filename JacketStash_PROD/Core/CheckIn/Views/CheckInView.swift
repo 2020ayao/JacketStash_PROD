@@ -54,13 +54,13 @@ struct CheckInView: View {
                 }
             }
         }
-        else {
-            Button {
-                try! authViewModel.signOut()
-            } label: {
-                Text("Sign Out")
-            }
-        }
+//        else {
+//            Button {
+//                authViewModel.signOut()
+//            } label: {
+//                Text("Sign Out")
+//            }
+//        }
 
     }
     

@@ -11,7 +11,7 @@ struct CheckOutView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State var isCheckedIn = true
     var body: some View {
-        if let user = authViewModel.currentUser {
+        if let _ = authViewModel.currentUser {
             VStack {
                 if isCheckedIn {
                     AuthHeaderView(title1: "Sucess!", title2: "Check out when you're ready...")
