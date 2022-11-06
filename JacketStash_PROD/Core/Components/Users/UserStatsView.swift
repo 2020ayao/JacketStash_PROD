@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserStatsView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
         HStack(spacing:24){
             HStack(spacing:4) {

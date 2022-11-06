@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6421E8B32904BC9E00324553 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6421E8B22904BC9E00324553 /* GoogleService-Info.plist */; };
 		6421E8B52904E4B500324553 /* CheckedInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6421E8B42904E4B500324553 /* CheckedInViewModel.swift */; };
+		642FF4C22918293F001BE789 /* UserCoatIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642FF4C12918293F001BE789 /* UserCoatIDView.swift */; };
 		64334A312903C324000306E9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 64334A302903C324000306E9 /* FirebaseAnalytics */; };
 		64334A332903C324000306E9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 64334A322903C324000306E9 /* FirebaseAuth */; };
 		64334A352903C324000306E9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 64334A342903C324000306E9 /* FirebaseDatabase */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		6421E8B22904BC9E00324553 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "JacketStash_PROD/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6421E8B42904E4B500324553 /* CheckedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInViewModel.swift; sourceTree = "<group>"; };
+		642FF4C12918293F001BE789 /* UserCoatIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoatIDView.swift; sourceTree = "<group>"; };
 		6433E3F728FFA61000952950 /* JacketStash_PROD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JacketStash_PROD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6433E3FA28FFA61000952950 /* JacketStash_PRODApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacketStash_PRODApp.swift; sourceTree = "<group>"; };
 		6433E3FC28FFA61000952950 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				646F2FB429007C9E00EAF837 /* UserStatsView.swift */,
+				642FF4C12918293F001BE789 /* UserCoatIDView.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				646F2FB529007C9E00EAF837 /* UserStatsView.swift in Sources */,
 				64A2FF36290B17DF000E4DA5 /* CheckInNotifViewModel.swift in Sources */,
 				6433E42028FFADE900952950 /* UserService.swift in Sources */,
+				642FF4C22918293F001BE789 /* UserCoatIDView.swift in Sources */,
 				646F2FBA29007CE600EAF837 /* ProfileView.swift in Sources */,
 				6433E3FD28FFA61000952950 /* ContentView.swift in Sources */,
 				646F2FB029007C1600EAF837 /* CheckInView.swift in Sources */,

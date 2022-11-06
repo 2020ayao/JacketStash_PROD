@@ -12,9 +12,6 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
     @Published var currentUser: User? = nil
-    @Published var checkedIn = false
-    @Published var checkedOut = false
-    //@Published var coat_id: Int
     
     private let service = UserService()
     private let checkInService = FeedService()
@@ -25,7 +22,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func login(withEmail email: String, password: String) {
-//        print("DEBUG: Login with email \(email)")
+        print("DEBUG: Login with email \(email)")
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("DEBUG: Failed to signin with error \(error.localizedDescription)")
@@ -34,13 +31,13 @@ class AuthViewModel: ObservableObject {
             guard let user = result?.user else {return}
             self.userSession = user
             self.fetchUser()
-//            print("DEBUG: Logged User in successfully")
-//            print("DEBUG: User is \(String(describing: self.userSession?.uid))")
+            print("DEBUG: Logged User in successfully")
+            
         }
     }
     
     func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool) {
-        print("DEBUG: Regixxster with email \(email)")
+        print("DEBUG: Register with email \(email)")
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -54,7 +51,7 @@ class AuthViewModel: ObservableObject {
             
             
             print("DEBUG: Registered User successfully")
-            print("DEBUG: User is \(self.userSession?.uid)")
+            print("DEBUG: User is \(String(describing: self.userSession?.uid))")
             
             let data = [
                 "email": email,
@@ -69,10 +66,9 @@ class AuthViewModel: ObservableObject {
                 .document(user.uid).setData(data) { _ in
                     self.didAuthenticateUser = true
                     
-                    //self.currentUser = user
+                    //                    self.currentUser = user
                     print("DEBUG: Did upload user data...")
                 }
-            
         }
     }
     
@@ -84,7 +80,6 @@ class AuthViewModel: ObservableObject {
     func checkIn() {
         print("DEBUG: checkIn function called")
         
-        
         Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
             .getDocuments { [self] qsnapshot, error in
                 if let qsnapshot = qsnapshot {
@@ -93,11 +88,11 @@ class AuthViewModel: ObservableObject {
                     self.currentUser?.coat_id = Int(qsnapshot.documents[0].documentID) ?? -1
                     
                     let data: [String:Any] = [
-                        "coat_id": self.currentUser?.coat_id,
-                        "fullname": self.currentUser?.fullname
+                        "coat_id": self.currentUser?.coat_id as Any,
+                        "fullname": self.currentUser?.fullname as Any
                     ]
                     
-                    print("currentUser.coat_id: \(currentUser?.coat_id)")
+                    print("currentUser.coat_id: \(String(describing: currentUser?.coat_id))")
                     
 //
                     guard let coat_id = self.currentUser?.coat_id else {return}
@@ -106,7 +101,7 @@ class AuthViewModel: ObservableObject {
                             print("DEBUG: Did check coat id back into taken coat ids")
                         }
                     
-                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
+                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document(String(coat_id)).delete() { err in
                         if let err = err {
                             print("Error removing document: \(err)")
                         } else {
@@ -138,7 +133,7 @@ class AuthViewModel: ObservableObject {
         Firestore.firestore().collection("users").document(uid)
             .getDocument { (document, error) in
                 if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    _ = document.data().map(String.init(describing:)) ?? "nil"
 //                    print("Document data: \(dataDescription)")
                 } else {
 //                    print("Document does not exist")
@@ -150,32 +145,27 @@ class AuthViewModel: ObservableObject {
         print("DEBUG: checkOut function called")
         
         
-        if let user = Auth.auth().currentUser {
             
             let data: [String:Any] = [
-                "coat_id": currentUser?.coat_id
+                "coat_id": currentUser?.coat_id as Any
             ]
             
-            print("CURRENT USER COAT ID PUSHED INTO AVAILABLE: \(currentUser?.coat_id)")
-//            self.currentUser?.coat_id = Int(qsnapshot.documents[0].documentID) ?? -1
-
+        print("CURRENT USER COAT ID PUSHED INTO AVAILABLE: \(String(describing: currentUser?.coat_id))")
+            guard let coat_id = self.currentUser?.coat_id else {return}
             Firestore.firestore().collection("AVAILABLE_COAT_IDS")
-                .document(String(currentUser!.coat_id)).setData(data) { _ in
+                .document(String(coat_id)).setData(data) { _ in
                     print("DEBUG: Check coat back into available ids")
                 }
             
-            Firestore.firestore().collection("TAKEN_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
-                if let err = err {
-                    print("Error removing document: \(err)")
-                } else {
-                    print("Document successfully removed!")
-                }
+        Firestore.firestore().collection("TAKEN_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
             }
         }
-//        checkedIn.toggle()
-//        checkedOut = true
         
-        print("user_coat_id \(currentUser?.coat_id) ")
+        print("user_coat_id \(String(describing: currentUser?.coat_id)) ")
         guard let fullname = currentUser?.fullname else {return}
         checkInService.uploadFeed(fullname: fullname, checkingIn: false) { success in
             if success {

@@ -81,7 +81,6 @@ extension CheckInOutButton {
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
                     if user.isCheckedIn == false {
-                        // if ((authViewModel.currentUser?.isCheckedIn) != nil){
                         authViewModel.checkIn()
                         authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)                      
                         checkIn.toggle()

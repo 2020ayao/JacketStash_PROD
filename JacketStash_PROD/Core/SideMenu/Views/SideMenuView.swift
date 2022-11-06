@@ -29,11 +29,16 @@ struct SideMenuView: View {
                             .foregroundColor(.gray)
                     }
                     
-                    UserStatsView()
-                        .padding(.vertical)
+//                    UserStatsView()
+//                        .padding(.vertical)
                     
                 }
+                
                 .padding(.leading)
+                
+                UserCoatIDView()
+                    .padding(.leading)
+                
                 ForEach(SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
                     if viewModel == .profile {
                         NavigationLink {
