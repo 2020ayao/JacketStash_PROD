@@ -19,7 +19,6 @@ struct JacketStash_PRODApp: App {
         WindowGroup {
             NavigationView {
                 ContentView()
-//                ProfileSelectorView()
             }
             .environmentObject(viewModel)
             .environmentObject(vModel)

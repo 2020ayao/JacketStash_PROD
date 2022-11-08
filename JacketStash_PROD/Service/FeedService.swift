@@ -32,8 +32,7 @@ struct FeedService {
             }
         
     }
-    
-    
+
     
     func fetchFeed(completion: @escaping([Feed]) -> Void) {
         Firestore.firestore().collection("feed")

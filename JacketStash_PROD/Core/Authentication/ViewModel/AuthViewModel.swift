@@ -85,9 +85,26 @@ class AuthViewModel: ObservableObject {
         Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
             .getDocuments { [self] qsnapshot, error in
                 if let qsnapshot = qsnapshot {
+                    
+                    let coat_id = qsnapshot.documents[0].documentID
+
+                    
+                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document(coat_id).delete() { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                        }
+                    }
+                    
+                    
                     print("qsnapshot: ")
                     print(qsnapshot.documents[0].documentID)
-                    self.currentUser?.coat_id = Int(qsnapshot.documents[0].documentID) ?? -1
+                    self.currentUser?.coat_id = Int(coat_id) ?? -1
+                    
+//                    guard let coat_id = currentUser?.coat_id else {return}
+                    
+                    
                     
                     let data: [String:Any] = [
                         "coat_id": self.currentUser?.coat_id as Any,
@@ -100,16 +117,10 @@ class AuthViewModel: ObservableObject {
                     guard let coat_id = self.currentUser?.coat_id else {return}
                     Firestore.firestore().collection("TAKEN_COAT_IDS")
                         .document(String(coat_id)).setData(data) { _ in
-                            print("DEBUG: Did check coat id back into taken coat ids")
+                            print("DEBUG: Checked \(String(describing: currentUser?.coat_id)) into TAKEN_RACK")
                         }
                     
-                    Firestore.firestore().collection("AVAILABLE_COAT_IDS").document(String(coat_id)).delete() { err in
-                        if let err = err {
-                            print("Error removing document: \(err)")
-                        } else {
-                            print("Document successfully removed!")
-                        }
-                    }
+                   
                     
                     
                 }
