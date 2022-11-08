@@ -7,6 +7,9 @@
 
 import SwiftUI
 import Firebase
+import Kingfisher
+
+
 
 struct SideMenuView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -16,7 +19,10 @@ struct SideMenuView: View {
 //            let _ = print(user.fullname)
             VStack(alignment: .leading, spacing: 32) {
                 VStack(alignment: .leading){
-                    Circle()
+                    KFImage(URL(string: user.profileImageUrl))
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
                         .frame(width: 48, height: 48)
                     
                     
@@ -63,10 +69,10 @@ struct SideMenuView: View {
     }
 }
 
-struct SideMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        SideMenuView()
-    }
-}
+//struct SideMenuView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SideMenuView()
+//    }
+//}
 
 

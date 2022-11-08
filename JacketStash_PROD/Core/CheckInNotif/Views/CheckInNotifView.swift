@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-import SwiftUI
+import Kingfisher
 
 struct CheckInNotifView: View {
     let feed: Feed
@@ -22,7 +22,11 @@ struct CheckInNotifView: View {
             // profile picture + Name + Tweet
             if let user = feed.user {
                 HStack (alignment: .top , spacing: 12)  {
-                    Circle()
+                    KFImage(URL(string: user.profileImageUrl))
+//                    Circle()
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
                         .frame(width: 35, height: 35)
                         .foregroundColor(Color(.systemBlue))
                     
@@ -95,7 +99,7 @@ extension Date {
 
 //struct CheckInNotifView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        CheckInNotifView()
+//        CheckInNotifView(feed: feed, viewModel: viewMod)
 //    }
 //}
 

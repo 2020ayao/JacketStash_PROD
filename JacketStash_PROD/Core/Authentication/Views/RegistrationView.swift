@@ -16,9 +16,15 @@ struct RegistrationView: View {
     @State private var fullname = ""
     @State private var password = ""
     
+    @State private var path = NavigationPath()
+    
     var body: some View {
-            
+        NavigationStack(path: $path) {
             VStack {
+                //                NavigationLink(destination: ProfileSelectorView(), isActive: $viewModel.didAuthenticateUser, label: {})
+                
+                
+                
                 AuthHeaderView(title1: "Get Started.", title2: "Create your account")
                 
                 VStack(spacing:40){
@@ -55,6 +61,8 @@ struct RegistrationView: View {
                                        username: username,
                                        isCheckedIn: false)
                     isPresentedImageView.toggle()
+                    path.append("ProfileSelectorView")
+                    
                 } label: {
                     Text("Sign Up")
                         .font(.headline)
@@ -65,6 +73,11 @@ struct RegistrationView: View {
                         .padding()
                 }
                 .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
+                .navigationDestination(for: String.self) { view in
+                    if view == "ProfileSelectorView" {
+                        ProfileSelectorView()
+                    }
+                }
                 
                 Spacer()
                 
@@ -86,10 +99,12 @@ struct RegistrationView: View {
             }
             .ignoresSafeArea()
         }
-//        .navigationDestination(isPresented: $isPresentedImageView) {
-//            ProfilePhotoSelectorView()
-//        }
-    //}
+
+        //        .navigationDestination(isPresented: $isPresentedImageView) {
+        //            ProfilePhotoSelectorView()
+        //        }
+        //}
+    }
 }
 
 struct RegistrationView_Previews: PreviewProvider {
