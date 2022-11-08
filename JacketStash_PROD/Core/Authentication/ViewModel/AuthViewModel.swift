@@ -12,6 +12,7 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
     @Published var currentUser: User? = nil
+    private var tempUserSession: FirebaseAuth.User?
     
     private let service = UserService()
     private let checkInService = FeedService()
@@ -46,7 +47,8 @@ class AuthViewModel: ObservableObject {
                 return
             }
             guard let user  = result?.user else {return}
-            self.userSession = user
+            self.tempUserSession = user
+            //            self.userSession = user
             self.fetchUser()
             
             
@@ -181,6 +183,20 @@ class AuthViewModel: ObservableObject {
         guard let uid = self.userSession?.uid else {return}
         service.fetchUser(withUid: uid) { user in
             self.currentUser = user
+        }
+    }
+    
+    func uploadProfileImage(_ image: UIImage)
+    {
+        guard let uid = tempUserSession?.uid else {return}
+        
+        ImageUploader.uploadImage(image: image) { profileImageUrl in
+            Firestore.firestore().collection("users")
+                .document(uid)
+                .updateData(["profileImageUrl": profileImageUrl]) { _ in
+                    self.userSession = self.tempUserSession
+                    self.fetchUser()
+                }
         }
     }
     
