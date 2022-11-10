@@ -81,30 +81,30 @@ class AuthViewModel: ObservableObject {
     
     func checkIn() {
         print("DEBUG: checkIn function called")
-        
+
         let db = Firestore.firestore()
         let qRef = Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id")
-        
+
         qRef.getDocuments { snapshot, error in
-            
+
             if let snapshot = snapshot {
-                let rand = Int.random(in: 0...4)
-                let iD = snapshot.documents[rand].documentID
+                let rand = Int.random(in: 1...5)
+                let iD = snapshot.documents[rand-1].documentID
                 print(iD)
                 db.collection("AVAILABLE_COAT_IDS").document(iD).delete()
                 self.currentUser?.coat_id = Int(iD) ?? -1
-                
+
                 let data: [String:Any] = [
                     "coat_id": self.currentUser?.coat_id as Any,
                     "fullname": self.currentUser?.fullname as Any
                 ]
-                
+
                 db.collection("TAKEN_COAT_IDS").document(iD).setData(data)
-                
+
             }
         }
-        
-        
+
+
         guard let fullname = currentUser?.fullname else {return}
         checkInService.uploadFeed(fullname: fullname, checkingIn: true) { success in
             if success {
@@ -115,8 +115,8 @@ class AuthViewModel: ObservableObject {
             }
         }
 
-        
-        
+
+
     }
     
 //    func checkIn() {
