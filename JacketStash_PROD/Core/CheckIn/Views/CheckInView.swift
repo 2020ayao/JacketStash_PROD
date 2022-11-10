@@ -37,7 +37,6 @@ struct CheckInView: View {
                         CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         .sheet(isPresented: $checkedIn, content: {
                             checkOutConfirmation
-                                
                             })
                             .offset(y:100)
                             .presentationDetents([.fraction(0.35)])

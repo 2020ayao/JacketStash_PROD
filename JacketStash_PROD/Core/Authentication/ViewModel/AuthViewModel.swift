@@ -79,12 +79,54 @@ class AuthViewModel: ObservableObject {
         try? Auth.auth().signOut()
     }
     
+    func checkIn() {
+        print("DEBUG: checkIn function called")
+        
+        let db = Firestore.firestore()
+        let qRef = Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id")
+        
+        qRef.getDocuments { snapshot, error in
+            
+            if let snapshot = snapshot {
+                let rand = Int.random(in: 0...4)
+                let iD = snapshot.documents[rand].documentID
+                print(iD)
+                db.collection("AVAILABLE_COAT_IDS").document(iD).delete()
+                self.currentUser?.coat_id = Int(iD) ?? -1
+                
+                let data: [String:Any] = [
+                    "coat_id": self.currentUser?.coat_id as Any,
+                    "fullname": self.currentUser?.fullname as Any
+                ]
+                
+                db.collection("TAKEN_COAT_IDS").document(iD).setData(data)
+                
+            }
+        }
+        
+        
+        guard let fullname = currentUser?.fullname else {return}
+        checkInService.uploadFeed(fullname: fullname, checkingIn: true) { success in
+            if success {
+                // great
+            }
+            else {
+                // let user know it failed
+            }
+        }
+
+        
+        
+    }
+    
 //    func checkIn() {
 //        print("DEBUG: checkIn function called")
 //
 //        Firestore.firestore().collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false)
 //            .getDocuments { [self] qsnapshot, error in
 //                if let qsnapshot = qsnapshot {
+//
+//
 //
 //                    let coat_id = qsnapshot.documents[0].documentID
 //
@@ -136,80 +178,7 @@ class AuthViewModel: ObservableObject {
 //        }
 //    }
     
-    func checkIn() {
-        
-        let db = Firestore.firestore()
-        db.collection("AVAILABLE_COAT_IDS").order(by: "coat_id", descending: false).getDocuments { [self] qsnapshot, error in
-            if let qsnapshot = qsnapshot {
-                
-                let coat_id = qsnapshot.documents[0].documentID
-                
-                let ref = db.collection("AVAILABLE_COAT_IDS").document(coat_id)
-                
-                
-                db.runTransaction( { transaction, errorPointer in
-                    let trDocument: DocumentSnapshot
-                    
-                    do {
-                        try trDocument = transaction.getDocument(ref)
-                    } catch let err {
-                        print(err.localizedDescription)
-                        return
-                    }
-                    
-                    guard let coatID = trDocument.data()?["coat_id"] as? String else {
-                        
-                        let error = NSError(
-                                    domain: "AppErrorDomain",
-                                    code: -1,
-                                    userInfo: [
-                                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(trDocument)"
-                                    ]
-                                )
-                                errorPointer?.pointee = error
-                                return
-                            }
-                    
-                    self.currentUser?.coat_id = Int(coatID) ?? -1
-                    
-//                    let newName = oldName + "Plus"
-//                    transaction.updateData(["coat_id": newName], forDocument: ref)
-                    transaction.deleteDocument(ref)
-                    
-                    
-                    let data: [String:Any] = [
-                        "coat_id": self.currentUser?.coat_id as Any,
-                        "fullname": self.currentUser?.fullname as Any
-                    ]
-                    
-                    
-                    
-                    db.collection("TAKEN_COAT_IDS").document(coatID).setData(data) { err in
-                        if let err = err {
-                            print("DEBUG: Failed with error: \(err.localizedDescription)")
-                        }
-                        else {
-                            print("DEBUG: Checked into taken")
-                        }
-                    }
-                    
-                    return coatID
-                    }) { obj, error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        
-                    }
-                    print("Success on transaction with object: \(String(describing: obj))")
-                    
-                }
-                
-                
-                
-            }
-            
-        }
 
-    }
     
     
     func updateCheckInStatus(update: Bool, withUid uid: String, coat_id: Int) {
@@ -231,8 +200,6 @@ class AuthViewModel: ObservableObject {
     
     func checkOut() {
         print("DEBUG: checkOut function called")
-        
-        
             
             let data: [String:Any] = [
                 "coat_id": currentUser?.coat_id as Any
@@ -244,14 +211,14 @@ class AuthViewModel: ObservableObject {
                 .document(String(coat_id)).setData(data) { _ in
                     print("DEBUG: Check coat back into available ids")
                 }
-            
-        Firestore.firestore().collection("TAKEN_COAT_IDS").document(String(self.currentUser!.coat_id)).delete() { err in
+        Firestore.firestore().collection("TAKEN_COAT_IDS").document(String(coat_id)).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
             }
         }
+        
         
         print("user_coat_id \(String(describing: currentUser?.coat_id)) ")
         guard let fullname = currentUser?.fullname else {return}

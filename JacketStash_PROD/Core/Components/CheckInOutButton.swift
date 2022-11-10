@@ -88,9 +88,7 @@ extension CheckInOutButton {
                     }
                     else {
                         authViewModel.checkOut()
-//                        viewModel.updateCheckInStatus(withUid: uid)
                         authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
-                        //                        CheckInView().checkedOut = true
                         checkIn.toggle()
                     }
                     authViewModel.fetchUser()
@@ -98,5 +96,4 @@ extension CheckInOutButton {
                 }
             }
     }
-    
 }
