@@ -143,7 +143,6 @@ class AuthViewModel: ObservableObject {
                 errorPointer?.pointee = error
                 return nil
             }
-
             // Note: this could be done without a transaction
             //       by updating the population using FieldValue.increment()
             let newPopulation = oldPopulation + 1
@@ -196,7 +195,7 @@ class AuthViewModel: ObservableObject {
             // Note: this could be done without a transaction
             //       by updating the population using FieldValue.increment()
             let newPopulation = oldPopulation - 1
-            guard newPopulation >= 0 else {
+            guard newPopulation >= 1 else {
                 let error = NSError(
                     domain: "AppErrorDomain",
                     code: -2,
@@ -222,24 +221,33 @@ class AuthViewModel: ObservableObject {
         let db = Firestore.firestore()
 
         db.collection("counter").document("counter").getDocument { qsnapshot, error in
-            
-            let docData: [String: Any] = [
-                "number": qsnapshot?.data()!["count"] as! Int + 1,
-                "fullname" : self.currentUser?.fullname
+            if let qsnapshot = qsnapshot {
+                let number = qsnapshot.data()!["count"] as! Int
+                let docData: [String: Any] = [
+                    "number": number,
+                    "fullname" : self.currentUser?.fullname as Any
                 ]
-            self.currentUser?.coat_id = qsnapshot?.data()!["count"] as! Int + 1
-            db.collection("coat_ids").document(self.userSession!.uid).setData(docData) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
+                self.currentUser?.coat_id = number
+                db.collection("coat_ids").document(self.userSession!.uid).setData(docData) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
                 }
             }
         }
-        
-        updateCounter()
+        guard let fullname = currentUser?.fullname else {return}
+        checkInService.uploadFeed(fullname: fullname, checkingIn: true) { success in
+            if success {
+                // great
+            }
+            else {
+                // let user know it failed
+            }
+        }
 
-        
+        updateCounter()
     }
     
     func checkOut4() {
@@ -247,8 +255,17 @@ class AuthViewModel: ObservableObject {
         if let uid = self.userSession?.uid {
             db.collection("coat_ids").document(uid).delete()
         }
+        guard let fullname = currentUser?.fullname else {return}
+        checkInService.uploadFeed(fullname: fullname, checkingIn: false) { success in
+            if success {
+                // great
+            }
+            else {
+                // let user know it failed
+            }
+        }
         decrementCounter()
-        
+
     }
     
     func checkIn3() {
