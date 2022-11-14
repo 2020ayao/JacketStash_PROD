@@ -81,13 +81,13 @@ extension CheckInOutButton {
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
                     if user.isCheckedIn == false {
-                        authViewModel.checkIn()
+                        authViewModel.checkIn4()
                         authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)                      
                         checkIn.toggle()
                         
                     }
                     else {
-                        authViewModel.checkOut()
+                        authViewModel.checkOut4()
                         authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
                         checkIn.toggle()
                     }
