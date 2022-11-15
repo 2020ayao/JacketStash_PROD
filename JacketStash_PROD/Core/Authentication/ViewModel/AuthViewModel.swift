@@ -130,7 +130,8 @@ class AuthViewModel: ObservableObject {
                 print("Error updating population: \(error)")
             } else {
                 print("Population increased to \(object!)")
-                self.currentUser?.coat_id = object as! Int-1
+//                self.currentUser?.coat_id = object as! Int-1
+                self.updateCheckInStatus(update: true, withUid: self.userSession!.uid, coat_id: object as! Int - 1)
                 
             }
         }
@@ -180,7 +181,9 @@ class AuthViewModel: ObservableObject {
             if let error = error {
                 print("Error updating population: \(error)")
             } else {
-                print("Population increased to \(object!)")
+                print("Population decreased to \(object!)")
+                self.updateCheckInStatus(update: false, withUid: self.userSession!.uid, coat_id: 0)
+
             }
         }
     }
@@ -277,8 +280,8 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func updateProfileInformation(withUid uid: String, withEmail email: String, withName fullname: String, withUserName username: String) {
-        Firestore.firestore().collection("users").document(uid).updateData(["email" : email,
+    func updateProfileInformation(withUid uid: String, withName fullname: String, withUserName username: String) {
+        Firestore.firestore().collection("users").document(uid).updateData([
                                                                             "fullname" : fullname,
                                                                             "username" : username
                                                                            ])

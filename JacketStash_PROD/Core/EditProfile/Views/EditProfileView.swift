@@ -50,7 +50,7 @@ struct EditProfileView: View {
                 
                 
                 VStack(spacing: 10) {
-                    CustomTextBox(placeholderText: "Email", text: $email , disabled: $disabled)
+//                    CustomTextBox(placeholderText: "Email", text: $email , disabled: $disabled)
                     CustomTextBox(placeholderText: "Username", text: $username, disabled: $disabled)
                     CustomTextBox(placeholderText: "Full Name", text: $fullname, disabled: $disabled)
                 }
@@ -69,7 +69,7 @@ struct EditProfileView: View {
                     //                viewModel.login(withEmail: email, password: password)
                     //should go and update the information
                     
-                    viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withEmail: email, withName: fullname, withUserName: username)
+                    viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username)
                     print(user.fullname)
                     presentationMode.wrappedValue.dismiss()
 
