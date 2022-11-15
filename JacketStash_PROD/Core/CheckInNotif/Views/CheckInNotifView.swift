@@ -23,12 +23,10 @@ struct CheckInNotifView: View {
             if let user = feed.user {
                 HStack (alignment: .top , spacing: 12)  {
                     KFImage(URL(string: user.profileImageUrl))
-//                    Circle()
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())
-                        .frame(width: 35, height: 35)
-                        .foregroundColor(Color(.systemBlue))
+                        .frame(width: 50, height: 50)
                     
                     VStack (alignment: .leading, spacing: 4) {
                         HStack {
@@ -38,14 +36,6 @@ struct CheckInNotifView: View {
                             Text("@\(user.username)")
                                 .foregroundColor(.gray)
                                 .font(.caption)
-                            
-//                            Text("\(feed.timestamp.dateValue().formatted(.dateTime.minute(.twoDigits)))")
-//                                .foregroundColor(.gray)
-//                                .font(.caption)
-                            
-//                            Text(computeNewDate(from: feed.timestamp.dateValue(), to:Date.now))
-//                                .foregroundColor(.gray)
-//                                .font(.caption)
                             
                             Text(viewModel.formatTime(withFeed: feed))
                                 .foregroundColor(.gray)
@@ -96,10 +86,3 @@ extension Date {
     }
 
 }
-
-//struct CheckInNotifView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CheckInNotifView(feed: feed, viewModel: viewMod)
-//    }
-//}
-
