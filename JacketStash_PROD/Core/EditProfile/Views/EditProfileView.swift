@@ -9,6 +9,9 @@ import SwiftUI
 import Kingfisher
 
 struct EditProfileView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var email = ""
     @State private var fullname = ""
     @State private var username = ""
@@ -22,18 +25,6 @@ struct EditProfileView: View {
     var body: some View {
         if let user = viewModel.currentUser {
             VStack {
-//                Circle()
-//                    .foregroundColor(.blue)
-//                    .frame(width: 150, height: 150)
-//                    .padding(.top, 80)
-                
-//                KFImage(URL(string: user.profileImageUrl))
-//                    .resizable()
-//                    .scaledToFill()
-//                    .clipShape(Circle())
-//                    .frame(width: 120, height: 120)
-//                    .padding(.top, 60)
-                
                 
                 Button {
                     showImagePicker.toggle()
@@ -77,6 +68,11 @@ struct EditProfileView: View {
                 Button {
                     //                viewModel.login(withEmail: email, password: password)
                     //should go and update the information
+                    
+                    viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withEmail: email, withName: fullname, withUserName: username)
+                    print(user.fullname)
+                    presentationMode.wrappedValue.dismiss()
+
                 } label: {
                     Text("Save")
                         .font(.headline)
