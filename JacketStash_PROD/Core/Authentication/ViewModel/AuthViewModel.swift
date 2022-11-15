@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 import Firebase
+import FirebaseFirestoreSwift
 
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
@@ -40,6 +42,8 @@ class AuthViewModel: ObservableObject {
     
     func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool) {
         print("DEBUG: Register with email \(email)")
+        
+        
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -273,9 +277,12 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    
-    func updateProfileInformation() {
-        
+    func updateProfileInformation(withUid uid: String, withEmail email: String, withName fullname: String, withUserName username: String) {
+        Firestore.firestore().collection("users").document(uid).updateData(["email" : email,
+                                                                            "fullname" : fullname,
+                                                                            "username" : username
+                                                                           ])
+        self.fetchUser()
     }
     
 }
