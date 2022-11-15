@@ -6,24 +6,67 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct EditProfileView: View {
     @State private var email = ""
     @State private var fullname = ""
     @State private var username = ""
+    @State private var disabled = true
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    @State private var showImagePicker = false
+    @State private var selectedImage: UIImage?
+    @State private var profileImage: Image?
 
     var body: some View {
         if let user = viewModel.currentUser {
             VStack {
-                Circle()
-                    .foregroundColor(.blue)
-                    .frame(width: 150, height: 150)
-                    .padding(.top, 80)
+//                Circle()
+//                    .foregroundColor(.blue)
+//                    .frame(width: 150, height: 150)
+//                    .padding(.top, 80)
+                
+//                KFImage(URL(string: user.profileImageUrl))
+//                    .resizable()
+//                    .scaledToFill()
+//                    .clipShape(Circle())
+//                    .frame(width: 120, height: 120)
+//                    .padding(.top, 60)
+                
+                
+                Button {
+                    showImagePicker.toggle()
+                } label: {
+                    if let profileImage = profileImage {
+                        profileImage
+                            .resizable()
+                            .modifier(ProfileImageModifier())
+                        
+                    }
+                    else {
+                        KFImage(URL(string: user.profileImageUrl))
+                            .resizable()
+                            .modifier(ProfileImageModifier())
+                    }
+                    
+                }
+                .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
+                    ImagePicker(selectedImage: $selectedImage)
+                }
+                .padding(.top, 44)
+                
+                
+                
                 VStack(spacing: 10) {
-                    CustomTextBox(placeholderText: "Email", isSecureField: false, text: .constant(user.email))
-                    CustomTextBox(placeholderText: "Username", text: .constant(user.username))
-                    CustomTextBox(placeholderText: "Full Name", text: .constant(user.fullname))
+                    CustomTextBox(placeholderText: "Email", text: $email , disabled: $disabled)
+                    CustomTextBox(placeholderText: "Username", text: $username, disabled: $disabled)
+                    CustomTextBox(placeholderText: "Full Name", text: $fullname, disabled: $disabled)
+                }
+                .onAppear {
+                    self.email = user.email
+                    self.fullname = user.fullname
+                    self.username = user.username
                 }
                 
                 
@@ -33,24 +76,35 @@ struct EditProfileView: View {
                 
                 Button {
                     //                viewModel.login(withEmail: email, password: password)
+                    //should go and update the information
                 } label: {
                     Text("Save")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(width: 340, height: 50)
-                        .background(Color(.systemBlue))
+                        .background(disabled ? Color(.gray) : Color(.systemBlue))
                         .clipShape(Capsule())
                         .padding()
                 }
                 .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
+                .disabled(disabled)
             }
         }
+        
+    }
+    func loadImage() {
+        guard let selectedImage = selectedImage else {return}
+        profileImage = Image(uiImage: selectedImage)
+        disabled = false
     }
 }
 
-//struct EditProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditProfileView()
-//
-//    }
-//}
+private struct ProfileImageModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color(.systemBlue))
+            .scaledToFill()
+            .frame(width:200, height: 200)
+            .clipShape(Circle())
+    }
+}

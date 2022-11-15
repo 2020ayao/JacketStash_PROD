@@ -11,6 +11,7 @@ struct CustomTextBox: View {
     let placeholderText: String
     var isSecureField: Bool? = false
     @Binding var text: String
+    @Binding var disabled: Bool
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -26,7 +27,9 @@ struct CustomTextBox: View {
                     .padding(.bottom, 5)
 
             } else {
-                TextField(placeholderText, text: $text)
+                TextField(placeholderText, text: $text, onEditingChanged: {_ in
+                    disabled = false
+                })
                     .padding(.leading, 10)
                     .padding(.bottom, 5)
 
@@ -38,8 +41,8 @@ struct CustomTextBox: View {
     
 }
 
-struct CustomTextBox_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomTextBox(placeholderText: "Email", isSecureField: false, text: .constant("placeholder"))
-    }
-}
+//struct CustomTextBox_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CustomTextBox(placeholderText: "Email", isSecureField: false, text: .constant("placeholder"), disabled: $false)
+//    }
+//}
