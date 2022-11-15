@@ -273,4 +273,9 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    
+    func updateProfileInformation() {
+        
+    }
+    
 }
