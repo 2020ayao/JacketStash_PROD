@@ -60,7 +60,8 @@ struct RegistrationView: View {
                                        fullname: fullname,
                                        username: username,
                                        isCheckedIn: false)
-                    path.append("ProfileSelectorView")
+//                    path.append("ProfileSelectorView")
+
                     
                 } label: {
                     Text("Sign Up")

@@ -15,7 +15,7 @@ class AuthViewModel: ObservableObject {
     @Published var didAuthenticateUser = false
     @Published var currentUser: User? = nil
     @Published var err: String? = nil
-    @Published var tempUserSession: FirebaseAuth.User?
+    @Published var tempUserSession: FirebaseAuth.User? = nil
     private var tempUID: String = ""
     
     private let service = UserService()
