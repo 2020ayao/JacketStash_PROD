@@ -54,12 +54,14 @@ struct CheckInView: View {
             }
         }
         else {
+            
+            LaunchScreen()
+            
             Button {
                 authViewModel.signOut()
             } label: {
                 Text("Sign Out")
             }
-            LaunchScreen()
         }
 
     }
