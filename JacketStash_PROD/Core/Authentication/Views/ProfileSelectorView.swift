@@ -57,8 +57,11 @@ struct ProfileSelectorView: View {
             
             Spacer()
         }
+        .onAppear {
+            viewModel.err = nil
+        }
         .ignoresSafeArea()
-//        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
 
         
     }

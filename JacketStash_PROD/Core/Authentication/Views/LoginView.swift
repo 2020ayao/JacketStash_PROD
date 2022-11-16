@@ -45,6 +45,7 @@ struct LoginView: View {
                         .padding(.top)
                         .padding(.trailing, 24)
                 }
+                
             }
             
             Button {
@@ -60,13 +61,25 @@ struct LoginView: View {
             }
             .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
 
-            
+            if viewModel.err != nil {
+                HStack {
+                    Image(systemName: "exclamationmark.square.fill")
+                    Text(viewModel.err ?? "error")
+                        
+                        .foregroundColor(.red)
+                    
+                }
+                
+            }
             
             Spacer()
             
             NavigationLink  {
                 RegistrationView()
                     .navigationBarHidden(true)
+                    .onAppear {
+                        viewModel.err = nil
+                    }
             } label: {
                 HStack {
                     Text("Dont have an account?")
