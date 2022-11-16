@@ -62,14 +62,7 @@ struct LoginView: View {
             .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
 
             if viewModel.err != nil {
-                HStack {
-                    Image(systemName: "exclamationmark.square.fill")
                     Text(viewModel.err ?? "error")
-                        
-                        .foregroundColor(.red)
-                    
-                }
-                
             }
             
             Spacer()

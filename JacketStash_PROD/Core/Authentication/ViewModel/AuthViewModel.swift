@@ -43,7 +43,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool){
+    func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool, selectedImage: UIImage){
         print("DEBUG: Register with email \(email)")
         
         
@@ -81,6 +81,7 @@ class AuthViewModel: ObservableObject {
                     //                    self.currentUser = user
                     print("DEBUG: Did upload user data...")
                 }
+            self.uploadProfileImage(selectedImage)
             
         }
     }
@@ -282,6 +283,7 @@ class AuthViewModel: ObservableObject {
                 .updateData(["profileImageUrl": profileImageUrl]) { _ in
                     self.userSession = self.tempUserSession
                     self.fetchUser()
+                    self.err = nil
                 }
         }
     }

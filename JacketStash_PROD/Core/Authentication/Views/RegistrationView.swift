@@ -55,16 +55,16 @@ struct RegistrationView: View {
                 
                 
                 Button {
-                    viewModel.register(withEmail: email,
-                                       password: password,
-                                       fullname: fullname,
-                                       username: username,
-                                       isCheckedIn: false)
-//                    path.append("ProfileSelectorView")
+//                    viewModel.register(withEmail: email,
+//                                       password: password,
+//                                       fullname: fullname,
+//                                       username: username,
+//                                       isCheckedIn: false)
+                    path.append("ProfileSelectorView")
 
                     
                 } label: {
-                    Text("Sign Up")
+                    Text("Continue")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(width: 340, height: 50)
@@ -78,16 +78,11 @@ struct RegistrationView: View {
 //                }
                 .navigationDestination(for: String.self) { view in
                     if view == "ProfileSelectorView" {
-                        ProfileSelectorView()
+                        ProfileSelectorView(email: $email, username: $username, fullname: $fullname, password: $password)
                     }
                 }
                 if viewModel.err != nil {
-                    HStack {
-                        Image(systemName: "exclamationmark.square.fill")
-                        Text(viewModel.err ?? "error")
-                            .foregroundColor(.red)
-                    }
-                    
+                    Text(viewModel.err ?? "error")
                 }
                 
                 
