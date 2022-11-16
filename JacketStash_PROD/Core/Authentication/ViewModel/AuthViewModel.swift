@@ -137,7 +137,7 @@ class AuthViewModel: ObservableObject {
                 print("Error updating population: \(error)")
             } else {
                 print("Population increased to \(object!)")
-//                self.currentUser?.coat_id = object as! Int-1
+                self.currentUser?.coat_id = object as! Int-1
                 self.updateCheckInStatus(update: true, withUid: self.userSession!.uid, coat_id: object as! Int - 1)
                 
             }
