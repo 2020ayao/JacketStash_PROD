@@ -10,11 +10,12 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestoreSwift
 
-class AuthViewModel: ObservableObject {
+class AuthViewModel: ObservableObject {    
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
     @Published var currentUser: User? = nil
-    private var tempUserSession: FirebaseAuth.User?
+    @Published var err: String? = nil
+    @Published var tempUserSession: FirebaseAuth.User? = nil
     private var tempUID: String = ""
     
     private let service = UserService()
@@ -30,17 +31,19 @@ class AuthViewModel: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("DEBUG: Failed to signin with error \(error.localizedDescription)")
+                self.err = error.localizedDescription
                 return
             }
             guard let user = result?.user else {return}
             self.userSession = user
             self.fetchUser()
+            self.err = nil
             print("DEBUG: Logged User in successfully")
             
         }
     }
     
-    func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool) {
+    func register(withEmail email: String, password: String, fullname: String, username: String, isCheckedIn: Bool, selectedImage: UIImage){
         print("DEBUG: Register with email \(email)")
         
         
@@ -49,16 +52,18 @@ class AuthViewModel: ObservableObject {
             if let error = error {
                 print("DEBUG: Failed to register with error \(error.localizedDescription)")
                 print(error)
+                self.err = error.localizedDescription
                 return
             }
             guard let user  = result?.user else {return}
             self.tempUserSession = user
-            //            self.userSession = user
+            
             self.fetchUser()
             
             
             print("DEBUG: Registered User successfully")
-            print("DEBUG: User is \(String(describing: self.userSession?.uid))")
+            print("DEBUG: User is \(String(describing: self.tempUserSession?.uid))")
+            self.err = nil
             
             let data = [
                 "email": email,
@@ -76,6 +81,8 @@ class AuthViewModel: ObservableObject {
                     //                    self.currentUser = user
                     print("DEBUG: Did upload user data...")
                 }
+            self.uploadProfileImage(selectedImage)
+            
         }
     }
     
@@ -276,6 +283,7 @@ class AuthViewModel: ObservableObject {
                 .updateData(["profileImageUrl": profileImageUrl]) { _ in
                     self.userSession = self.tempUserSession
                     self.fetchUser()
+                    self.err = nil
                 }
         }
     }

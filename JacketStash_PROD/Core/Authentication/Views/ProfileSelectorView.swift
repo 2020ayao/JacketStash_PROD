@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ProfileSelectorView: View {
+    @Binding var email: String
+    @Binding var username: String
+    @Binding var fullname: String
+    @Binding var password: String
+    
+    
     @State private var showImagePicker = false
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
@@ -41,9 +47,11 @@ struct ProfileSelectorView: View {
             
             if let selectedImage = selectedImage {
                 Button {
-                    viewModel.uploadProfileImage(selectedImage)
+                    viewModel.register(withEmail: email, password: password, fullname: fullname, username: username, isCheckedIn: false, selectedImage: selectedImage)
+//                    viewModel.uploadProfileImage(selectedImage)
+                    
                 } label: {
-                    Text("Continue")
+                    Text("Sign Up")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(width: 340, height: 50)
@@ -53,9 +61,16 @@ struct ProfileSelectorView: View {
                 }
                 .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
             }
+            
+            if let err = viewModel.err {
+                Text(err)
+            }
 
             
             Spacer()
+        }
+        .onAppear {
+            viewModel.err = nil
         }
         .ignoresSafeArea()
 //        .navigationBarBackButtonHidden(true)
@@ -79,10 +94,10 @@ private struct ProfileImageModifier: ViewModifier {
     }
 }
 
-struct ProfileSelectorView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileSelectorView()
-    }
-}
+//struct ProfileSelectorView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileSelectorView()
+//    }
+//}
 
 

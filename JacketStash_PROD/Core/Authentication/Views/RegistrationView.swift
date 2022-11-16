@@ -55,16 +55,16 @@ struct RegistrationView: View {
                 
                 
                 Button {
-                    viewModel.register(withEmail: email,
-                                       password: password,
-                                       fullname: fullname,
-                                       username: username,
-                                       isCheckedIn: false)
-                    isPresentedImageView.toggle()
+//                    viewModel.register(withEmail: email,
+//                                       password: password,
+//                                       fullname: fullname,
+//                                       username: username,
+//                                       isCheckedIn: false)
                     path.append("ProfileSelectorView")
+
                     
                 } label: {
-                    Text("Sign Up")
+                    Text("Continue")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(width: 340, height: 50)
@@ -73,16 +73,25 @@ struct RegistrationView: View {
                         .padding()
                 }
                 .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
+//                .navigationDestination(for: String.self) { view in
+//                    ProfileSelectorView()
+//                }
                 .navigationDestination(for: String.self) { view in
                     if view == "ProfileSelectorView" {
-                        ProfileSelectorView()
+                        ProfileSelectorView(email: $email, username: $username, fullname: $fullname, password: $password)
                     }
                 }
+                if viewModel.err != nil {
+                    Text(viewModel.err ?? "error")
+                }
+                
                 
                 Spacer()
-                
+
                 Button {
+                    viewModel.err = nil
                     presentationMode.wrappedValue.dismiss()
+                    
                 } label: {
                     HStack {
                         Text("Already have an account?")
@@ -93,12 +102,21 @@ struct RegistrationView: View {
                             .fontWeight(.semibold)
                     }
                 }
-                .padding(.bottom, 40)
+                .padding(.bottom, 10)
                 .foregroundColor(Color(.systemBlue))
+                
+                
                 
             }
             .ignoresSafeArea()
         }
+//        .onAppear {
+//            if viewModel.tempUserSession != nil {
+////                        isPresentedImageView.toggle()
+//                path.append("ProfileSelectorView")
+//                isPresentedImageView.toggle()
+//            }
+//        }
 
         //        .navigationDestination(isPresented: $isPresentedImageView) {
         //            ProfilePhotoSelectorView()
