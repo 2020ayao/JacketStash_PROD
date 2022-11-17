@@ -64,14 +64,22 @@ struct EditProfileView: View {
                 .padding(.horizontal,15)
                 .padding(.top, 44)
                 Spacer()
-                if let selectedImage = selectedImage {
                     Button {
-                        //                viewModel.login(withEmail: email, password: password)
-                        //should go and update the information
+                        if let selectedImage = selectedImage {
+                            
+                            //                viewModel.login(withEmail: email, password: password)
+                            //should go and update the information
+                            
+                            viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username, withSelectedImage: selectedImage)
+                            print(user.fullname)
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        else {
+                            viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username)
+                            print(user.fullname)
+                            presentationMode.wrappedValue.dismiss()
+                        }
                         
-                        viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username, withSelectedImage: selectedImage)
-                        print(user.fullname)
-                        presentationMode.wrappedValue.dismiss()
                         
                     } label: {
                         Text("Save")
@@ -84,7 +92,7 @@ struct EditProfileView: View {
                     }
                     .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
                     .disabled(disabled)
-                }
+                
             }
         }
         

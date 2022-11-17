@@ -288,6 +288,14 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func updateProfileInformation(withUid uid: String, withName fullname: String, withUserName username: String) {
+        Firestore.firestore().collection("users").document(uid).updateData([
+            "fullname" : fullname,
+            "username" : username
+        ])
+        self.fetchUser()
+    }
+    
     func updateProfileInformation(withUid uid: String, withName fullname: String, withUserName username: String, withSelectedImage selectedImage: UIImage) {
         Firestore.firestore().collection("users").document(uid).updateData([
                                                                             "fullname" : fullname,

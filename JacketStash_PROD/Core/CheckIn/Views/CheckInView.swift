@@ -39,7 +39,6 @@ struct CheckInView: View {
                 if user.isCheckedIn == false {
                     CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
-                        .presentationDetents([.fraction(0.35)])
                         .offset(y:100)
                     //                        .sheet(isPresented: $checkedIn, content: {
                     //                            checkOutConfirmation
@@ -49,11 +48,8 @@ struct CheckInView: View {
                 }
                 else {
                     CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
-                        .sheet(isPresented: $checkedIn, content: {
-                            checkInConfirmation
-                        })
+                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
                         .offset(y:100)
-                        .presentationDetents([.fraction(0.35)])
                 }
             }
         }

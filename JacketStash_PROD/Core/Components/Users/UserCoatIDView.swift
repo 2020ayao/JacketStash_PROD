@@ -10,34 +10,28 @@ import SwiftUI
 struct UserCoatIDView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
-        ZStack(alignment: .top){
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .frame(width: 200, height: 150)
-                .foregroundColor(Color(.systemBlue))
-                .shadow(radius: 10)
-            
-            if let user = authViewModel.currentUser {
-                VStack(spacing: 20) {
-                    Text("Your Coat ID:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                    
-                    Text(user.isCheckedIn ? String(user.coat_id) : "N/A")
-                        .font(user.isCheckedIn ? .largeTitle : .headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        
-                }
-                .padding()
+        if let user = authViewModel.currentUser {
+            VStack(alignment: .center, spacing: 20) {
+                Text("Your Coat ID:")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                
+                Text(user.isCheckedIn ? String(user.coat_id) : "Not Checked In")
+                    .font(user.isCheckedIn ? .largeTitle : .headline)
+                    .fontWeight(.bold)
             }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(.blue, lineWidth: 2)
+            )
+            
         }
-        
     }
 }
 
-//struct UserCoatIDView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UserCoatIDView()
-//    }
-//}
+struct UserCoatIDView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserCoatIDView()
+    }
+}

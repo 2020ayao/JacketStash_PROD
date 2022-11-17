@@ -56,6 +56,7 @@
 		64B6114829036BF500396586 /* ButtonPressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6114729036BF500396586 /* ButtonPressActions.swift */; };
 		64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B61149290399B300396586 /* CheckInOutButton.swift */; };
 		64D12E842925C8DA00742C16 /* CheckOutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D12E832925C8DA00742C16 /* CheckOutConfirmationView.swift */; };
+		64D12E862925DE7E00742C16 /* CheckInConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D12E852925DE7E00742C16 /* CheckInConfirmationSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		64B6114729036BF500396586 /* ButtonPressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPressActions.swift; sourceTree = "<group>"; };
 		64B61149290399B300396586 /* CheckInOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInOutButton.swift; sourceTree = "<group>"; };
 		64D12E832925C8DA00742C16 /* CheckOutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutConfirmationView.swift; sourceTree = "<group>"; };
+		64D12E852925DE7E00742C16 /* CheckInConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInConfirmationSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,6 +414,7 @@
 			children = (
 				646F2FAF29007C1600EAF837 /* CheckInView.swift */,
 				64D12E832925C8DA00742C16 /* CheckOutConfirmationView.swift */,
+				64D12E852925DE7E00742C16 /* CheckInConfirmationSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				6433E42428FFAE5E00952950 /* CustomInputField.swift in Sources */,
 				646F2F9F290078A700EAF837 /* SideMenuOptionRowView.swift in Sources */,
 				648894D82908B9F900870DF2 /* CheckInNotifView.swift in Sources */,
+				64D12E862925DE7E00742C16 /* CheckInConfirmationSheet.swift in Sources */,
 				64A2FF38290B1D53000E4DA5 /* Feed.swift in Sources */,
 				646F2FC02900878600EAF837 /* RoundedShape.swift in Sources */,
 				64AF16A62919F39C00266AFE /* ImagePicker.swift in Sources */,
