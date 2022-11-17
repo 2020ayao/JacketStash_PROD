@@ -243,7 +243,7 @@ class AuthViewModel: ObservableObject {
                 // let user know it failed
             }
         }
-        decrementCounter()
+//        decrementCounter()
 
     }
 
