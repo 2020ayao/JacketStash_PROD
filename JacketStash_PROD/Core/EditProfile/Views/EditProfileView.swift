@@ -50,7 +50,6 @@ struct EditProfileView: View {
                 
                 
                 VStack(spacing: 10) {
-//                    CustomTextBox(placeholderText: "Email", text: $email , disabled: $disabled)
                     CustomTextBox(placeholderText: "Username", text: $username, disabled: $disabled)
                     CustomTextBox(placeholderText: "Full Name", text: $fullname, disabled: $disabled)
                 }

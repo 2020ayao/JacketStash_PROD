@@ -30,7 +30,7 @@ struct CheckInConfirmationSheet: View {
                         .fontWeight(.bold)
                         .padding(.bottom, 10)
                     Text("Show this to the checkout station.")
-                        .font(.title3)
+                        .font(.callout)
                     Toggle("I've checked in my coat", isOn: $termsAccepted)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 30)
