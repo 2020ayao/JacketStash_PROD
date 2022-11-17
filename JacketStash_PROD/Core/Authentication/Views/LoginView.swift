@@ -32,21 +32,24 @@ struct LoginView: View {
             .padding(.horizontal,32)
             .padding(.top, 44)
             
-            HStack {
-                Spacer()
-                
-                NavigationLink {
-                    Text("Reset password view...")
-                } label: {
-                    Text("Forgot Password?")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color(.systemBlue))
-                        .padding(.top)
-                        .padding(.trailing, 24)
-                }
-                
-            }
+            //--------------RESET PASSWORD------------------
+            
+//            HStack {
+//                Spacer()
+//
+//                NavigationLink {
+//                    Text("Reset password view...")
+//                } label: {
+//                    Text("Forgot Password?")
+//                        .font(.caption)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(Color(.systemBlue))
+//                        .padding(.top)
+//                        .padding(.trailing, 24)
+//                }
+//
+//            }
+            //------------------------------------
             
             Button {
                 viewModel.login(withEmail: email, password: password)

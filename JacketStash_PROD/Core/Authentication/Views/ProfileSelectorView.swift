@@ -18,6 +18,9 @@ struct ProfileSelectorView: View {
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     
+    
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         VStack {
@@ -73,6 +76,13 @@ struct ProfileSelectorView: View {
             viewModel.err = nil
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: Button(action : {
+                        self.mode.wrappedValue.dismiss()
+                    }){
+                        Image(systemName: "arrow.left")
+                            .foregroundColor(.white)
+                    })
 //        .navigationBarBackButtonHidden(true)
 
         
