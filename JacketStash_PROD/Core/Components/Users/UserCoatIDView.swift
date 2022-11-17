@@ -13,16 +13,21 @@ struct UserCoatIDView: View {
         ZStack(alignment: .top){
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .frame(width: 200, height: 150)
-                .foregroundColor(.teal)
+                .foregroundColor(Color(.systemBlue))
                 .shadow(radius: 10)
             
             if let user = authViewModel.currentUser {
                 VStack(spacing: 20) {
                     Text("Your Coat ID:")
                         .font(.headline)
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
                     
                     Text(user.isCheckedIn ? String(user.coat_id) : "N/A")
-                        .font(user.isCheckedIn ? .largeTitle : .none)
+                        .font(user.isCheckedIn ? .largeTitle : .headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        
                 }
                 .padding()
             }

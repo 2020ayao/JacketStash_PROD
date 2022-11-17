@@ -18,6 +18,9 @@ struct CheckInView: View {
     @State var checkedIn = false
     @State var checkedOut = false
     
+    @State private var showingSheet = false
+
+    
     var body: some View {
         if let user = authViewModel.currentUser {
             ZStack(alignment: .bottom){
@@ -34,15 +37,16 @@ struct CheckInView: View {
                     viewModel.fetchFeed()
                 }
                 if user.isCheckedIn == false {
-                        CheckInOutButton(checkIn: $checkedIn, title: "Check In")
-                        .sheet(isPresented: $checkedIn, content: {
-                            checkOutConfirmation
-                            })
-                            .offset(y:100)
-                            .presentationDetents([.fraction(0.35)])
-
-                        
-                    }
+                    CheckInOutButton(checkIn: $checkedIn, title: "Check In")
+                        .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+                        .presentationDetents([.fraction(0.35)])
+                        .offset(y:100)
+                    //                        .sheet(isPresented: $checkedIn, content: {
+                    //                            checkOutConfirmation
+                    //                            })
+                    
+                    
+                }
                 else {
                     CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
                         .sheet(isPresented: $checkedIn, content: {
@@ -107,10 +111,16 @@ extension CheckInView {
                         .offset(y:20)
                     if let user = authViewModel.currentUser {
 //                        let _ = print("The current coat_id is:  ")
-                        Text("Coat ID: # \(user.coat_id)")
-                            .fontWeight(.semibold)
-                            .font(.headline)
-                            .offset(y:20)
+                        VStack {
+//                            Text("Show this to the checkout station")
+                            Text("Coat ID:")
+                                .fontWeight(.semibold)
+                                .font(.headline)
+                                .offset(y:20)
+                            Text(String(user.coat_id))
+                                .font(.title)
+                                .fontWeight(.bold)
+                        }
                     }
                 }
                 Spacer()
