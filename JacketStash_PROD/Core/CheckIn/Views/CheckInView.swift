@@ -19,6 +19,9 @@ struct CheckInView: View {
     @State var checkedOut = false
     
     @State private var showingSheet = false
+    
+    let paymentHandler = PaymentHandler()
+
 
     
     var body: some View {
@@ -36,6 +39,21 @@ struct CheckInView: View {
                 .refreshable {
                     viewModel.fetchFeed()
                 }
+                
+                Button(action: {
+                            self.paymentHandler.startPayment { (success) in
+                                if success {
+                                    print("Success")
+                                } else {
+                                    print("Failed")
+                                }
+                            }
+                        }, label: {
+                            Text("PAY WITH  APPLE")
+                            .font(Font.custom("HelveticaNeue-Bold", size: 16))
+                            .padding(10)
+                            .foregroundColor(.white)
+                    }
                 if user.isCheckedIn == false {
                     CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
