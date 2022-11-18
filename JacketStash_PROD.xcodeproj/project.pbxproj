@@ -78,6 +78,7 @@
 		6433E42F28FFAF4900952950 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		643D0D952922116D00D659FA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		643D0D9C29221B3200D659FA /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		6457E34D29280B5500240D6A /* JacketStash_PROD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JacketStash_PROD.entitlements; sourceTree = "<group>"; };
 		64621D822918BA7B00B41F02 /* ProfileSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectorView.swift; sourceTree = "<group>"; };
 		646F2F9E290078A700EAF837 /* SideMenuOptionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionRowView.swift; sourceTree = "<group>"; };
 		646F2FA0290078CF00EAF837 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		6433E3F928FFA61000952950 /* JacketStash_PROD */ = {
 			isa = PBXGroup;
 			children = (
+				6457E34D29280B5500240D6A /* JacketStash_PROD.entitlements */,
 				64AF16A42919F39300266AFE /* Utils */,
 				6433E40A28FFA7B600952950 /* Model */,
 				6433E40928FFA7AC00952950 /* Service */,
@@ -735,6 +737,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = JacketStash_PROD/JacketStash_PROD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JacketStash_PROD/Preview Content\"";
@@ -772,6 +775,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = JacketStash_PROD/JacketStash_PROD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JacketStash_PROD/Preview Content\"";
