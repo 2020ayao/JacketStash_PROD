@@ -57,11 +57,7 @@ struct CheckInView: View {
             
             LaunchScreen()
             
-//            Button {
-//                authViewModel.signOut()
-//            } label: {
-//                Text("Sign Out")
-//            }
+            
         }
 
     }
