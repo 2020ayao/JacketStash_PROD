@@ -20,67 +20,65 @@ struct CheckInView: View {
     
     @State private var showingSheet = false
     
-    let paymentHandler = PaymentHandler()
 
 
     
     var body: some View {
-        if let user = authViewModel.currentUser {
-            ZStack(alignment: .bottom){
-                //let _ = print(user.fullname)
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewModel.feed) { feed in
-                            CheckInNotifView(feed: feed, viewModel: vModel)
-                                .padding()
+            if let user = authViewModel.currentUser {
+                ZStack(alignment: .bottom){
+                    //let _ = print(user.fullname)
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(viewModel.feed) { feed in
+                                CheckInNotifView(feed: feed, viewModel: vModel)
+                                    .padding()
+                            }
                         }
                     }
-                }
-                .refreshable {
-                    viewModel.fetchFeed()
-                }
-                
-                Button(action: {
-                            self.paymentHandler.startPayment { (success) in
-                                if success {
-                                    print("Success")
-                                } else {
-                                    print("Failed")
-                                }
-                            }
-                        }, label: {
-                            Text("PAY WITH  APPLE")
-                            .font(Font.custom("HelveticaNeue-Bold", size: 16))
-                            .padding(10)
-                            .foregroundColor(.white)
+                    .refreshable {
+                        viewModel.fetchFeed()
                     }
-                if user.isCheckedIn == false {
-                    CheckInOutButton(checkIn: $checkedIn, title: "Check In")
-                        .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
-                        .offset(y:100)
-                    //                        .sheet(isPresented: $checkedIn, content: {
-                    //                            checkOutConfirmation
-                    //                            })
+                    
+                    NavigationLink  {
+                        CheckoutView()
+//                            .navigationBarHidden(true)
+                            
+                    } label: {
+                        Text("CheckoutView")
+
+                    }
                     
                     
-                }
-                else {
-                    CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
-                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
-                        .offset(y:100)
+                    if user.isCheckedIn == false {
+                        CheckInOutButton(checkIn: $checkedIn, title: "Check In")
+                        
+                            .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+                        
+                            .offset(y:100)
+                        
+                        
+                    }
+                    else {
+                        CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
+                        
+                            .sheet(isPresented: $checkedIn, content: {
+                                CheckoutView().environmentObject(authViewModel)
+                            })
+                        //                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+                            .offset(y:100)
+                    }
                 }
             }
-        }
-        else {
-            
-            LaunchScreen()
-            
-//            Button {
-//                authViewModel.signOut()
-//            } label: {
-//                Text("Sign Out")
-//            }
-        }
+            else {
+                
+                LaunchScreen()
+                
+                //            Button {
+                //                authViewModel.signOut()
+                //            } label: {
+                //                Text("Sign Out")
+                //            }
+            }
 
     }
     

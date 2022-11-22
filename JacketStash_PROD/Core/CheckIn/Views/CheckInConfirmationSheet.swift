@@ -14,7 +14,7 @@ struct CheckInConfirmationSheet: View {
     @State private var termsAccepted = false
     var body: some View {
         VStack {
-            Text("Thank you checking in!")
+            Text("Thank you for checking in!")
                 .font(.title)
                 .offset(y:10)
                 .padding(.top, 15)

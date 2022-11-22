@@ -81,8 +81,15 @@ extension CheckInOutButton {
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
                     if user.isCheckedIn == false {
+//                        NavigationLink {
+//                            CheckOutView()
+//                        } label: {
+//                            Text("Check out view payment")
+//                        }
+
+
                         authViewModel.checkIn()
-                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)                      
+                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)
                         checkIn.toggle()
                         
                     }
