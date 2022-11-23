@@ -40,7 +40,7 @@ struct CheckInView: View {
                     }
                     
                     NavigationLink  {
-                        CheckoutView()
+                        CheckoutView(IDTxt: authViewModel.userSession!.uid)
 //                            .navigationBarHidden(true)
                             
                     } label: {
@@ -61,10 +61,10 @@ struct CheckInView: View {
                     else {
                         CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
                         
-                            .sheet(isPresented: $checkedIn, content: {
-                                CheckoutView().environmentObject(authViewModel)
-                            })
-                        //                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+//                            .sheet(isPresented: $checkedIn, content: {
+//                                CheckoutView()
+//                            })
+                            .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
                             .offset(y:100)
                     }
                 }

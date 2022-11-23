@@ -21,45 +21,91 @@ class MyBackendModel: ObservableObject {
   @Published var paymentResult: PaymentSheetResult?
     let publishableKey: String = "pk_test_51Lun2zA917ZeeiFb9OcWW7b0hI7mdSH6qFMaB6BpQobXdoPJchzwUK99QNYIOc3AewxzWwGVOBwaDC5eDr3Dg89D00t2h3CPrA"
     
-//    var IDTxt: String
+    let IDTxt: String
     
-//    init(id: String){
-//            self.IDTxt = id
-//        }
+    var customerId:String? = nil
+    var customerEphemeralKeySecret:String? = nil
+    var paymentIntentClientSecret:String? = nil
+    
+    
+    init(id: String){
+            self.IDTxt = id
+        }
     
 
   func preparePaymentSheet() {
     // MARK: Fetch the PaymentIntent and Customer information from the backend
       
-//      Firestore.firestore().collection("customers").document(<#T##documentPath: String##String#>)
-        
-        
-      let customerId = "cus_MpNUnzgZkxNa4H"
-      let customerEphemeralKeySecret = "ek_test_YWNjdF8xTHVuMnpBOTE3WmVlaUZiLGwzbnhvcG43djBXbGVkeThjN0Qzb1B4dU84Q0hGS3I_00o2YTVwVi"
-      let paymentIntentClientSecret = "pi_3M73GUA917ZeeiFb1opV9Qbw_secret_CIWNNxrUSDEhZCY4yAV6GqrUJ"
-        STPAPIClient.shared.publishableKey = self.publishableKey
-      // MARK: Create a PaymentSheet instance
-//      var configuration = PaymentSheet.Configuration()
-      
-      var configuration = PaymentSheet.Configuration()
-      configuration.applePay = .init(
-        merchantId: "merchant.com.jacketstash",
-        merchantCountryCode: "US"
-      )
-      
-      
-      configuration.merchantDisplayName = "JacketStash, Inc."
-      configuration.customer = .init(id: customerId, ephemeralKeySecret: customerEphemeralKeySecret)
-      // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
-      // methods that complete payment after a delay, like SEPA Debit and Sofort.
-      configuration.allowsDelayedPaymentMethods = false
-      
-
-      DispatchQueue.main.async {
-        self.paymentSheet = PaymentSheet(paymentIntentClientSecret: paymentIntentClientSecret, configuration: configuration)
+      let listener = Firestore.firestore().collection("customers").document(IDTxt).collection("checkout_sessions").addSnapshotListener { querySnapshot, error in
+          guard let snapshot = querySnapshot else {
+              print("Error fetching snapshots: \(error!)")
+              return
+          }
+          snapshot.documentChanges.forEach { diff in
+              if (diff.type == .added) || (diff.type == .modified) {
+                  print("New data: \(diff.document.data())")
+                  
+                  //                  let customerId = "cus_MpNUnzgZkxNa4H"
+                  //                  let customerEphemeralKeySecret = "ek_test_YWNjdF8xTHVuMnpBOTE3WmVlaUZiLGwzbnhvcG43djBXbGVkeThjN0Qzb1B4dU84Q0hGS3I_00o2YTVwVi"
+                  //                  let paymentIntentClientSecret = "pi_3M73GUA917ZeeiFb1opV9Qbw_secret_CIWNNxrUSDEhZCY4yAV6GqrUJ"
+                  
+                  //                  print("DEBUG CUSTOMER: \(diff.document.data()["customer"])")
+                  
+                  
+                  self.customerId = diff.document.data()["customer"] as? String
+                  self.customerEphemeralKeySecret = diff.document.data()["ephemeralKeySecret"] as? String
+                  self.paymentIntentClientSecret = diff.document.data()["paymentIntentClientSecret"] as? String
+                  
+                  print("DEBUG: \(self.customerId)")
+                  print("DEBUG: \(self.customerEphemeralKeySecret)")
+                  print("DEBUG: \(self.paymentIntentClientSecret)")
+                  
+                  
+                  //                  print("DEBUG: \(customerId)")
+                  //                  print("DEBUG: \(customerEphemeralKeySecret)")
+                  //                  print("DEBUG: \(paymentIntentClientSecret)")
+                  
+                  
+                  STPAPIClient.shared.publishableKey = self.publishableKey
+                  // MARK: Create a PaymentSheet instance
+                  //      var configuration = PaymentSheet.Configuration()
+                  
+                  var configuration = PaymentSheet.Configuration()
+                  configuration.applePay = .init(
+                    merchantId: "merchant.com.jacketstash",
+                    merchantCountryCode: "US"
+                  )
+                  
+                  if let customerId = self.customerId{
+                      
+                      if let customerEphemeralKeySecret = self.customerEphemeralKeySecret {
+                          configuration.merchantDisplayName = "JacketStash, Inc."
+                          configuration.customer = .init(id: customerId, ephemeralKeySecret: customerEphemeralKeySecret)
+                          // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
+                          // methods that complete payment after a delay, like SEPA Debit and Sofort.
+                          configuration.allowsDelayedPaymentMethods = false
+                      }
+                  }
+                  
+                  if let paymentIntentClientSecret = self.paymentIntentClientSecret {
+                      DispatchQueue.main.async {
+                          self.paymentSheet = PaymentSheet(paymentIntentClientSecret: paymentIntentClientSecret, configuration: configuration)
+                      }
+                  }
+              }
+              
+//              if (diff.type == .modified) {
+//                  print("modified data: \(diff.document.data())")
+//
+//              }
+              //    })
+              //    task.resume()
+          }
+          
+          
       }
-//    })
-//    task.resume()
+//      listener.remove()
+
   }
     func onPaymentCompletion(result: PaymentSheetResult) {
         self.paymentResult = result
@@ -67,16 +113,23 @@ class MyBackendModel: ObservableObject {
 }
 
 struct CheckoutView: View {
-//    @EnvironmentObject var authViewModel: AuthViewModel
-//    @Binding var IDTxt: String
-    @ObservedObject var model = MyBackendModel()
+    let IDTxt: String
+    @ObservedObject var model: MyBackendModel
+    @EnvironmentObject var checkoutViewModel: CheckoutViewModel
+    
 
-//    init(IDTxt: Binding<String>) {
-//            self._IDTxt = IDTxt
-//            self.model = MyBackendModel(id: IDTxt.wrappedValue)
-//        }
+    init(IDTxt: String) {
+        self.IDTxt = IDTxt
+        self.model = MyBackendModel(id: self.IDTxt)
+        }
   var body: some View {
     VStack {
+        Button {
+            checkoutViewModel.initiatePayment(withUid: IDTxt)
+        } label: {
+            Text("I want to check in")
+        }
+
       if let paymentSheet = model.paymentSheet {
         PaymentSheet.PaymentButton(
           paymentSheet: paymentSheet,
@@ -102,8 +155,8 @@ struct CheckoutView: View {
 }
 
 
-struct CheckoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckoutView().environmentObject(AuthViewModel())
-    }
-}
+//struct CheckoutView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckoutView().environmentObject(AuthViewModel())
+//    }
+//}
