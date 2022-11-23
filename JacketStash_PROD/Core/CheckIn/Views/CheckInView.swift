@@ -20,11 +20,15 @@ struct CheckInView: View {
     
     @State private var showingSheet = false
     
+    
+    @State private var path = NavigationPath()
 
 
     
     var body: some View {
+        NavigationStack {
             if let user = authViewModel.currentUser {
+                
                 ZStack(alignment: .bottom){
                     //let _ = print(user.fullname)
                     ScrollView {
@@ -39,38 +43,67 @@ struct CheckInView: View {
                         viewModel.fetchFeed()
                     }
                     
-                    NavigationLink  {
-                        CheckoutView(IDTxt: authViewModel.userSession!.uid)
-//                            .navigationBarHidden(true)
-                            
-                    } label: {
-                        Text("CheckoutView")
-
-                    }
+                    //                    NavigationLink  {
+                    //                        CheckoutView(IDTxt: authViewModel.userSession!.uid)
+                    ////                            .navigationBarHidden(true)
+                    //
+                    //                    } label: {
+                    //                        Text("CheckoutView")
+                    //
+                    //                    }
                     
+                    
+                    
+
                     
                     if user.isCheckedIn == false {
-                        CheckInOutButton(checkIn: $checkedIn, title: "Check In")
                         
-                            .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+//                        NavigationLink {
+//                            CheckoutView(IDTxt: authViewModel.userSession!.uid)
+//                        } label: {
+//                            Text("Check In")
+//
+////                                .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+////                                .offset(y:100)
+//                        }
                         
-                            .offset(y:100)
-                        
-                        
+                        Button(action: {
+                            checkedIn.toggle()
+                        }, label: {
+                            ZStack {
+                                Circle()
+                                    .fill(Color(.systemBlue))
+                                    .frame(width: 100, height: 100)
+
+                                Text("Check In")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.semibold)
+                                    .font(.headline)
+                            }
+                                    
+                        })
+//                            .sheet(isPresented: $checkedIn) {
+//                                CheckoutView(IDTxt: authViewModel.userSession!.uid)
+//                            }
+//                            .offset(y:100)
+//                            .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+                            .sheet(isPresented: $checkedIn, content: {
+                                CheckoutView(IDTxt: authViewModel.userSession!.uid)
+                            })
+                            .offset(y:-20)
                     }
                     else {
-                        CheckInOutButton(checkIn: $checkedIn, title: "Check Out")
+                        CheckInOutButton(checkIn: $checkedIn, title: "Check Out", path: $path)
                         
-//                            .sheet(isPresented: $checkedIn, content: {
-//                                CheckoutView()
-//                            })
+                        //                            .sheet(isPresented: $checkedIn, content: {
+                        //                                CheckoutView()
+                        //                            })
                             .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
                             .offset(y:100)
                     }
                 }
             }
             else {
-                
                 LaunchScreen()
                 
                 //            Button {
@@ -79,7 +112,7 @@ struct CheckInView: View {
                 //                Text("Sign Out")
                 //            }
             }
-
+        }
     }
     
     func toggleStatus() {

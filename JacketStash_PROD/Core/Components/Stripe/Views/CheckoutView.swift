@@ -42,7 +42,7 @@ class MyBackendModel: ObservableObject {
               return
           }
           snapshot.documentChanges.forEach { diff in
-              if (diff.type == .added) || (diff.type == .modified) {
+              if (diff.type == .modified) {
                   print("New data: \(diff.document.data())")
                   
                   //                  let customerId = "cus_MpNUnzgZkxNa4H"

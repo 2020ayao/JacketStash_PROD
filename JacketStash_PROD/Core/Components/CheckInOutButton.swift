@@ -17,6 +17,9 @@ struct CheckInOutButton: View {
     @EnvironmentObject var viewModel: CheckedInViewModel
     let title: String
     
+    @Binding var path: NavigationPath
+    
+    
     var body: some View {
             ZStack {
                 Circle()
@@ -37,6 +40,7 @@ struct CheckInOutButton: View {
     //                if self.checkedIn {
     //                    print("DEBUG: CHECKED IN")
     //                }
+//                    checkIn.toggle()
                 } label: {
                     Text("")
                 }
@@ -46,6 +50,9 @@ struct CheckInOutButton: View {
                 
                 
                 Text(title)
+//                    .onTapGesture {
+//                        checkIn.toggle()
+//                    }
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
                     .font(.headline)
@@ -81,18 +88,19 @@ extension CheckInOutButton {
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
                     if user.isCheckedIn == false {
-//                        NavigationLink {
-//                            CheckOutView()
-//                        } label: {
-//                            Text("Check out view payment")
+//                        NavigationLink("") {
+//                            CheckoutView()
 //                        }
+                        
+                        
 
 
-                        authViewModel.checkIn()
-                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)
-                        checkIn.toggle()
+//                        authViewModel.checkIn()
+//                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)
+//                        checkIn.toggle()
                         
                     }
+                        
                     else {
                         authViewModel.checkOut()
                         authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
@@ -102,5 +110,6 @@ extension CheckInOutButton {
                     
                 }
             }
+        
     }
 }
