@@ -315,4 +315,15 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    
+    func sendResetPasswordEmail(withEmail email: String) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                print("DEBUG: Failed to signin with error \(error.localizedDescription)")
+                self.err = error.localizedDescription
+                return
+            }
+        }
+    }
+    
 }
