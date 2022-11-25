@@ -82,7 +82,7 @@ struct LoginView: View {
                     }
             } label: {
                 HStack {
-                    Text("Dont have an account?")
+                    Text("Don't have an account?")
                         .font(.footnote)
                     
                     Text("Sign Up")

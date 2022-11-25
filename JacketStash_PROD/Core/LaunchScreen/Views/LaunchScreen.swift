@@ -21,14 +21,14 @@ struct LaunchScreen: View {
                 .scaledToFill()
                 .frame(width: 120, height: 120)
                 .clipShape(Circle())
-                .onAppear(perform: pulsateText)
+//                .onAppear(perform: pulsateText)
                 .shadow(radius: 5)
             Spacer()
-            Button {
-                authViewModel.signOut()
-            } label: {
-                Text("Sign Out")
-            }
+//            Button {
+//                authViewModel.signOut()
+//            } label: {
+//                Text("Sign Out")
+//            }
             Text("Powered by JacketStash")
                 .padding()
             
