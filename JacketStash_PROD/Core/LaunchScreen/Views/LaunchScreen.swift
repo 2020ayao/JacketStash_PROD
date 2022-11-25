@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LaunchScreen: View {
     @State private var visible = true
+    @EnvironmentObject var authViewModel: AuthViewModel
+
     var body: some View {
         VStack {
             Spacer()
@@ -22,8 +24,14 @@ struct LaunchScreen: View {
                 .onAppear(perform: pulsateText)
                 .shadow(radius: 5)
             Spacer()
+            Button {
+                authViewModel.signOut()
+            } label: {
+                Text("Sign Out")
+            }
             Text("Powered by JacketStash")
                 .padding()
+            
         }
     }
     private func pulsateText() {
