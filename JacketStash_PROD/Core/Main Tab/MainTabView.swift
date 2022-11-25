@@ -15,8 +15,7 @@ struct MainTabView: View {
     //@State var checkedIn = false
     var body: some View {
         //        if let user = authViewModel.currentUser {
-//        if authViewModel.userSession != nil {
-        if let user = authViewModel.currentUser {
+        if authViewModel.userSession != nil {
             CheckInView(IDTxt: authViewModel.userSession!.uid)
         }
 //        else {

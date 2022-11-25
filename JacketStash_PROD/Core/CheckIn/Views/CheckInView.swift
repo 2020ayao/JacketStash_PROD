@@ -15,6 +15,8 @@ struct CheckInView: View {
     
     @State var checkedIn = false
     @State var checkedOut = false
+    
+    @State var clicked = false
 
     let IDTxt: String
     @ObservedObject var model: MyBackendModel
@@ -48,23 +50,25 @@ struct CheckInView: View {
                         Text("Payment completed").onAppear {
                             checkedIn.toggle()
                             authViewModel.checkIn()
+                            clicked.toggle()
                         }
                     case .failed(let error):
                         Text("Error with: \(error.localizedDescription)")
+                            .onAppear {
+                                clicked.toggle()
+                            }
                             
                     case .canceled:
                         Text("Payment canceled")
                             .onAppear {
                                 model.preparePaymentSheet()
+                                clicked.toggle()
                             }
-                        
-                        
                     }
                 }
                 
                 if user.isCheckedIn {
                     CheckInOutButton(checkIn: $checkedIn, checkOut: $checkedOut, title: "Check Out")
-//                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
                         .popover(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
 
                         .offset(y:100)
@@ -73,8 +77,32 @@ struct CheckInView: View {
                         }
                 }
                 else {
-                    paymentSheet
-                        .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
+                    //                    paymentSheet
+                    if clicked == false {
+                        ZStack {
+                            Circle()
+                                .fill(Color(.systemBlue))
+                                .frame(width: 100, height: 100)
+                            Button(action: {
+                                checkoutViewModel.initiatePayment(withUid: IDTxt)
+                                model.preparePaymentSheet()
+                                clicked.toggle()
+                            }, label: {
+                                Text("Check In")
+                            })
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                            .font(.headline)
+                        }.offset(y:-20)
+                            .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
+                    }
+                    
+                    else {
+                        paymentSheet
+                            .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
+                    }
+                    
+                        
                 }
                 
             }
@@ -112,7 +140,7 @@ extension CheckInView {
                             .fill(Color(.systemBlue))
                             .frame(width: 100, height: 100)
                         
-                        Text("Check In")
+                        Text("Confirm")
                             .foregroundColor(.white)
                             .fontWeight(.semibold)
                             .font(.headline)
