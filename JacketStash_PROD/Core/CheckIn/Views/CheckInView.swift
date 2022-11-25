@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import StripePaymentSheet
 
 struct CheckInView: View {
     //    var cb: CheckInOutButton
-//    @State private var isPressed = false
+    //    @State private var isPressed = false
     //@State var showingPopup = false
     @EnvironmentObject var authViewModel: AuthViewModel
     @ObservedObject var viewModel = CheckedInViewModel()
@@ -22,113 +23,171 @@ struct CheckInView: View {
     
     
     @State private var path = NavigationPath()
-
-
+    
+    @State private var triggerPayment = false
+    
+    
+    let IDTxt: String
+    @ObservedObject var model: MyBackendModel
+    @EnvironmentObject var checkoutViewModel: CheckoutViewModel
+    
+    
+    init(IDTxt: String) {
+        self.IDTxt = IDTxt
+        self.model = MyBackendModel(id: self.IDTxt)
+    }
+    
     
     var body: some View {
-        NavigationStack {
-            if let user = authViewModel.currentUser {
-                
-                ZStack(alignment: .bottom){
-                    //let _ = print(user.fullname)
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(viewModel.feed) { feed in
-                                CheckInNotifView(feed: feed, viewModel: vModel)
-                                    .padding()
-                            }
+        if let user = authViewModel.currentUser {
+            ZStack(alignment: .bottom){
+                ScrollView {
+                    LazyVStack {
+                        ForEach(viewModel.feed) { feed in
+                            CheckInNotifView(feed: feed, viewModel: vModel)
+                                .padding()
                         }
                     }
-                    .refreshable {
-                        viewModel.fetchFeed()
-                    }
-                    
-                    //                    NavigationLink  {
-                    //                        CheckoutView(IDTxt: authViewModel.userSession!.uid)
-                    ////                            .navigationBarHidden(true)
-                    //
-                    //                    } label: {
-                    //                        Text("CheckoutView")
-                    //
-                    //                    }
-                    
-                    
-                    
-
-                    
-                    if user.isCheckedIn == false {
-                        
-//                        NavigationLink {
-//                            CheckoutView(IDTxt: authViewModel.userSession!.uid)
-//                        } label: {
-//                            Text("Check In")
-//
-////                                .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
-////                                .offset(y:100)
-//                        }
-                        
-                        Button(action: {
+                }
+                .refreshable {
+                    viewModel.fetchFeed()
+                }
+                
+                if let result = model.paymentResult {
+                    switch result {
+                    case .completed:
+                        Text("Payment completed").onAppear {
                             checkedIn.toggle()
-                        }, label: {
-                            ZStack {
-                                Circle()
-                                    .fill(Color(.systemBlue))
-                                    .frame(width: 100, height: 100)
-
-                                Text("Check In")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.semibold)
-                                    .font(.headline)
-                            }
-                                    
-                        })
-//                            .sheet(isPresented: $checkedIn) {
-//                                CheckoutView(IDTxt: authViewModel.userSession!.uid)
-//                            }
-//                            .offset(y:100)
-//                            .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
-                            .sheet(isPresented: $checkedIn, content: {
-                                CheckoutView(IDTxt: authViewModel.userSession!.uid)
-                            })
-                            .offset(y:-20)
-                    }
-                    else {
-                        CheckInOutButton(checkIn: $checkedIn, title: "Check Out", path: $path)
+                            authViewModel.checkIn()
+                            
+//                            authViewModel.fetchUser()
+                        }
+                    case .failed(let error):
+                        Text("Error with: \(error.localizedDescription)")
+                    case .canceled:
+                        Text("Payment canceled")
+                            
                         
-                        //                            .sheet(isPresented: $checkedIn, content: {
-                        //                                CheckoutView()
-                        //                            })
-                            .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
-                            .offset(y:100)
                     }
                 }
-            }
-            else {
-                LaunchScreen()
                 
-                //            Button {
-                //                authViewModel.signOut()
-                //            } label: {
-                //                Text("Sign Out")
-                //            }
+                if user.isCheckedIn {
+                    CheckInOutButton(checkIn: $checkedIn, checkOut: $checkedOut, title: "Check Out", path: $path)
+                    
+                    //                            .sheet(isPresented: $checkedIn, content: {
+                    //                                CheckoutView()
+                    //                            })
+                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+                        .offset(y:100)
+                        .onAppear {
+                            print("checkedIn: \(checkedIn)")
+                        }
+                }
+                else {
+                    paymentSheet
+                        .sheet(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
+
+                        .onAppear {
+                            checkoutViewModel.initiatePayment(withUid: IDTxt)
+                            model.preparePaymentSheet()
+                        }
+                        .onChange(of: checkedOut) { newValue in
+                            checkoutViewModel.initiatePayment(withUid: IDTxt)
+                            model.preparePaymentSheet()
+                        }
+//                        .onAppear {
+//                            model.preparePaymentSheet()
+//                            checkoutViewModel.initiatePayment(withUid: IDTxt)
+//                            authViewModel.fetchUser()
+//                        }
+                        
+                }
+                //                if user.isCheckedIn == false {
+                
+                //                        NavigationLink {
+                //                            CheckoutView(IDTxt: authViewModel.userSession!.uid)
+                //                        } label: {
+                //                            Text("Check In")
+                //
+                ////                                .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+                ////                                .offset(y:100)
+                //                        }
+                
+                //                            .sheet(isPresented: $checkedIn) {
+                //                                CheckoutView(IDTxt: authViewModel.userSession!.uid)
+                //                            }
+                //                            .offset(y:100)
+                //                            .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
+                //                    .sheet(isPresented: $checkedIn, content: {
+                //                        CheckoutView(IDTxt: authViewModel.userSession!.uid)
+                //                    })
+                
+                //                }
+                
+                //                else {
+                //                    CheckInOutButton(checkIn: $checkedIn, title: "Check Out", path: $path)
+                //
+                //                    //                            .sheet(isPresented: $checkedIn, content: {
+                //                    //                                CheckoutView()
+                //                    //                            })
+                //                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+                //                        .offset(y:100)
+                //                }
+            }
+            
+            .onAppear {
+                checkoutViewModel.initiatePayment(withUid: IDTxt)
+                model.preparePaymentSheet()
+            }
+            .onChange(of: checkedOut) { newValue in
+                checkoutViewModel.initiatePayment(withUid: IDTxt)
+                model.preparePaymentSheet()
             }
         }
     }
-    
     func toggleStatus() {
         checkedIn.toggle()
     }
 }
 
 
-struct CheckInView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckInView()
-            .environmentObject(AuthViewModel())
-    }
-}
+//struct CheckInView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckInView()
+//            .environmentObject(AuthViewModel())
+//    }
+//}
 
 extension CheckInView {
+    
+    
+    var paymentSheet : some View {
+        VStack {
+            if let paymentSheet = model.paymentSheet {
+                PaymentSheet.PaymentButton(
+                    paymentSheet: paymentSheet,
+                    onCompletion: model.onPaymentCompletion
+                ) {
+                    ZStack {
+                        Circle()
+                            .fill(Color(.systemBlue))
+                            .frame(width: 100, height: 100)
+                        
+                        Text("Check In")
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                            .font(.headline)
+                    }.offset(y:-20)
+                    
+                }
+            } else {
+                Text("Loading…")
+            }
+        }.onAppear {
+            checkoutViewModel.initiatePayment(withUid: IDTxt)
+            model.preparePaymentSheet()
+        }
+    }
     
     var checkOutConfirmation : some View {
         ZStack {

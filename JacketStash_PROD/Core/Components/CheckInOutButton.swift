@@ -11,6 +11,8 @@ import AudioToolbox
 struct CheckInOutButton: View {
     //@State var checkingIn: Bool
     @Binding var checkIn: Bool
+    @Binding var checkOut: Bool
+//    @Binding var triggerPayment: Bool
     @State private var isPressed = false
     @GestureState var isDetectingLongPress = false
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -18,6 +20,10 @@ struct CheckInOutButton: View {
     let title: String
     
     @Binding var path: NavigationPath
+    
+    
+//    @ObservedObject var model: MyBackendModel
+//    @EnvironmentObject var checkoutViewModel: CheckoutViewModel
     
     
     var body: some View {
@@ -87,26 +93,34 @@ extension CheckInOutButton {
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
-                    if user.isCheckedIn == false {
-//                        NavigationLink("") {
-//                            CheckoutView()
-//                        }
-                        
-                        
-
-
-//                        authViewModel.checkIn()
-//                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)
-//                        checkIn.toggle()
-                        
-                    }
-                        
-                    else {
-                        authViewModel.checkOut()
-                        authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
-                        checkIn.toggle()
-                    }
+                    //                    if user.isCheckedIn == true {
+                    //                        NavigationLink("") {
+                    //                            CheckoutView()
+                    //                        }
+                    
+                    
+                    
+                    
+                    //                        authViewModel.checkIn()
+                    //                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)
+                    //                        checkIn.toggle()
+                    
+                    //                    }
+                    
+                    //                    else {
+                    authViewModel.checkOut()
+                    authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
+//                    checkIn.toggle()
+                    checkOut.toggle()
+                    //                    }
+                    
+//                    checkoutViewModel.initiatePayment(withUid: authViewModel.userSession!.uid)
+//                    model.preparePaymentSheet()
+                    
                     authViewModel.fetchUser()
+                    
+                    
+                    
                     
                 }
             }
