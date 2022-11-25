@@ -9,8 +9,7 @@ import StripePaymentSheet
 import SwiftUI
 import Firebase
 import Stripe
-
-
+import StripeApplePay
 
 import StripePaymentSheet
 import SwiftUI
@@ -19,7 +18,11 @@ class MyBackendModel: ObservableObject {
 //  let backendCheckoutUrl = URL(string: "https://firestore.googleapis.com/v1/projects/jacketstash-bb91d/databases/(default)/documents/customers/6EdvcCFsdcc1iO93Tgxs3yoApUF2/checkout_sessions/6EdvcCFsdcc1iO93Tgxs3yoApUF2")! // Your backend endpoint
   @Published var paymentSheet: PaymentSheet?
   @Published var paymentResult: PaymentSheetResult?
+    //----------------TESTING PK------------
     let publishableKey: String = "pk_test_51Lun2zA917ZeeiFb9OcWW7b0hI7mdSH6qFMaB6BpQobXdoPJchzwUK99QNYIOc3AewxzWwGVOBwaDC5eDr3Dg89D00t2h3CPrA"
+    
+    //----------------LIVE PK---------------
+//    let publishableKey: String = "pk_live_51Lun2zA917ZeeiFbCECGBVpOeyNl0VVqzvwCnjpksQZuIdrhqiyfTEJZLW0fHSsClrdVG77KggHAGXGmXxxZDYFA00aTTxVh68"
     
     let IDTxt: String
     
@@ -27,11 +30,9 @@ class MyBackendModel: ObservableObject {
     var customerEphemeralKeySecret:String? = nil
     var paymentIntentClientSecret:String? = nil
     
-    
     init(id: String){
             self.IDTxt = id
         }
-    
 
   func preparePaymentSheet() {
     // MARK: Fetch the PaymentIntent and Customer information from the backend
@@ -72,7 +73,7 @@ class MyBackendModel: ObservableObject {
                   
                   var configuration = PaymentSheet.Configuration()
                   configuration.applePay = .init(
-                    merchantId: "merchant.com.jacketstash",
+                    merchantId: "merchant.jacketstash",
                     merchantCountryCode: "US"
                   )
                   
@@ -83,7 +84,7 @@ class MyBackendModel: ObservableObject {
                           configuration.customer = .init(id: customerId, ephemeralKeySecret: customerEphemeralKeySecret)
                           // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
                           // methods that complete payment after a delay, like SEPA Debit and Sofort.
-                          configuration.allowsDelayedPaymentMethods = false
+                          configuration.allowsDelayedPaymentMethods = true
                       }
                   }
                   

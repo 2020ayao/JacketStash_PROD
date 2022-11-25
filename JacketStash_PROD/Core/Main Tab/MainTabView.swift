@@ -15,16 +15,21 @@ struct MainTabView: View {
     //@State var checkedIn = false
     var body: some View {
         if let user = authViewModel.currentUser {
-            CheckInView(IDTxt: authViewModel.userSession!.uid)
+            if authViewModel.userSession != nil {
+                CheckInView(IDTxt: authViewModel.userSession!.uid)
+            }
+            else {
+                LoginView()
+            }
         }
         else {
             LaunchScreen()
             
-            //            Button {
-            //                authViewModel.signOut()
-            //            } label: {
-            //                Text("Sign Out")
-            //            }
+//                        Button {
+//                            authViewModel.signOut()
+//                        } label: {
+//                            Text("Sign Out")
+//                        }
         }
         
     }

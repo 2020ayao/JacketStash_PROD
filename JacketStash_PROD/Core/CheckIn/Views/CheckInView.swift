@@ -9,24 +9,13 @@ import SwiftUI
 import StripePaymentSheet
 
 struct CheckInView: View {
-    //    var cb: CheckInOutButton
-    //    @State private var isPressed = false
-    //@State var showingPopup = false
     @EnvironmentObject var authViewModel: AuthViewModel
     @ObservedObject var viewModel = CheckedInViewModel()
     @ObservedObject var vModel = CheckInNotifViewModel()
     
     @State var checkedIn = false
     @State var checkedOut = false
-    
-    @State private var showingSheet = false
-    
-    
-    @State private var path = NavigationPath()
-    
-    @State private var triggerPayment = false
-    
-    
+
     let IDTxt: String
     @ObservedObject var model: MyBackendModel
     @EnvironmentObject var checkoutViewModel: CheckoutViewModel
@@ -59,25 +48,25 @@ struct CheckInView: View {
                         Text("Payment completed").onAppear {
                             checkedIn.toggle()
                             authViewModel.checkIn()
-                            
-//                            authViewModel.fetchUser()
                         }
                     case .failed(let error):
                         Text("Error with: \(error.localizedDescription)")
+                            
                     case .canceled:
                         Text("Payment canceled")
-                            
+                            .onAppear {
+                                model.preparePaymentSheet()
+                            }
+                        
                         
                     }
                 }
                 
                 if user.isCheckedIn {
-                    CheckInOutButton(checkIn: $checkedIn, checkOut: $checkedOut, title: "Check Out", path: $path)
-                    
-                    //                            .sheet(isPresented: $checkedIn, content: {
-                    //                                CheckoutView()
-                    //                            })
-                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+                    CheckInOutButton(checkIn: $checkedIn, checkOut: $checkedOut, title: "Check Out")
+//                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+                        .popover(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
+
                         .offset(y:100)
                         .onAppear {
                             print("checkedIn: \(checkedIn)")
@@ -85,54 +74,9 @@ struct CheckInView: View {
                 }
                 else {
                     paymentSheet
-                        .sheet(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
-
-                        .onAppear {
-                            checkoutViewModel.initiatePayment(withUid: IDTxt)
-                            model.preparePaymentSheet()
-                        }
-                        .onChange(of: checkedOut) { newValue in
-                            checkoutViewModel.initiatePayment(withUid: IDTxt)
-                            model.preparePaymentSheet()
-                        }
-//                        .onAppear {
-//                            model.preparePaymentSheet()
-//                            checkoutViewModel.initiatePayment(withUid: IDTxt)
-//                            authViewModel.fetchUser()
-//                        }
-                        
+                        .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
                 }
-                //                if user.isCheckedIn == false {
                 
-                //                        NavigationLink {
-                //                            CheckoutView(IDTxt: authViewModel.userSession!.uid)
-                //                        } label: {
-                //                            Text("Check In")
-                //
-                ////                                .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
-                ////                                .offset(y:100)
-                //                        }
-                
-                //                            .sheet(isPresented: $checkedIn) {
-                //                                CheckoutView(IDTxt: authViewModel.userSession!.uid)
-                //                            }
-                //                            .offset(y:100)
-                //                            .sheet(isPresented: $checkedIn, content: CheckOutConfirmationView.init)
-                //                    .sheet(isPresented: $checkedIn, content: {
-                //                        CheckoutView(IDTxt: authViewModel.userSession!.uid)
-                //                    })
-                
-                //                }
-                
-                //                else {
-                //                    CheckInOutButton(checkIn: $checkedIn, title: "Check Out", path: $path)
-                //
-                //                    //                            .sheet(isPresented: $checkedIn, content: {
-                //                    //                                CheckoutView()
-                //                    //                            })
-                //                        .sheet(isPresented: $checkedIn, content: CheckInConfirmationSheet.init)
-                //                        .offset(y:100)
-                //                }
             }
             
             .onAppear {
@@ -149,14 +93,6 @@ struct CheckInView: View {
         checkedIn.toggle()
     }
 }
-
-
-//struct CheckInView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CheckInView()
-//            .environmentObject(AuthViewModel())
-//    }
-//}
 
 extension CheckInView {
     
@@ -183,10 +119,11 @@ extension CheckInView {
             } else {
                 Text("Loading…")
             }
-        }.onAppear {
-            checkoutViewModel.initiatePayment(withUid: IDTxt)
-            model.preparePaymentSheet()
         }
+//        }.onAppear {
+//            checkoutViewModel.initiatePayment(withUid: IDTxt)
+//            model.preparePaymentSheet()
+//        }
     }
     
     var checkOutConfirmation : some View {

@@ -39,7 +39,6 @@ class AuthViewModel: ObservableObject {
             self.fetchUser()
             self.err = nil
             print("DEBUG: Logged User in successfully")
-            
         }
     }
     

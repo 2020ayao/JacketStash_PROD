@@ -19,13 +19,6 @@ struct CheckInOutButton: View {
     @EnvironmentObject var viewModel: CheckedInViewModel
     let title: String
     
-    @Binding var path: NavigationPath
-    
-    
-//    @ObservedObject var model: MyBackendModel
-//    @EnvironmentObject var checkoutViewModel: CheckoutViewModel
-    
-    
     var body: some View {
             ZStack {
                 Circle()
@@ -75,12 +68,6 @@ struct CheckInOutButton: View {
         }
 }
 
-//struct CheckInOutButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CheckInOutButton(checkingIn: true, title: "Check In")
-//    }
-//}
-
 extension CheckInOutButton {
     var longPress: some Gesture {
         LongPressGesture(minimumDuration: 2.9, maximumDistance: .infinity)
@@ -93,29 +80,9 @@ extension CheckInOutButton {
                 AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
                 guard let uid = authViewModel.userSession?.uid else {return}
                 if let user = authViewModel.currentUser {
-                    //                    if user.isCheckedIn == true {
-                    //                        NavigationLink("") {
-                    //                            CheckoutView()
-                    //                        }
-                    
-                    
-                    
-                    
-                    //                        authViewModel.checkIn()
-                    //                        authViewModel.updateCheckInStatus(update: true, withUid: uid, coat_id: user.coat_id)
-                    //                        checkIn.toggle()
-                    
-                    //                    }
-                    
-                    //                    else {
                     authViewModel.checkOut()
                     authViewModel.updateCheckInStatus(update: false, withUid: uid, coat_id: user.coat_id)
-//                    checkIn.toggle()
                     checkOut.toggle()
-                    //                    }
-                    
-//                    checkoutViewModel.initiatePayment(withUid: authViewModel.userSession!.uid)
-//                    model.preparePaymentSheet()
                     
                     authViewModel.fetchUser()
                     
