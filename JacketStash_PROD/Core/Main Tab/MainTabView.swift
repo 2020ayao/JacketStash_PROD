@@ -14,25 +14,21 @@ struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     //@State var checkedIn = false
     var body: some View {
+        //        if let user = authViewModel.currentUser {
+//        if authViewModel.userSession != nil {
         if let user = authViewModel.currentUser {
-            if authViewModel.userSession != nil {
-                CheckInView(IDTxt: authViewModel.userSession!.uid)
-            }
-            else {
-                LoginView()
-            }
+            CheckInView(IDTxt: authViewModel.userSession!.uid)
         }
-        else {
-            LaunchScreen()
-            
-//                        Button {
-//                            authViewModel.signOut()
-//                        } label: {
-//                            Text("Sign Out")
-//                        }
-        }
-        
+//        else {
+//            LoginView()
+//        }
     }
+    
+    //                        Button {
+    //                            authViewModel.signOut()
+    //                        } label: {
+    //                            Text("Sign Out")
+    //                        }
 }
 
 struct MainTabView_Previews: PreviewProvider {

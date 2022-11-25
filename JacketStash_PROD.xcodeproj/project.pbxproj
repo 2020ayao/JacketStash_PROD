@@ -62,7 +62,6 @@
 		64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B61149290399B300396586 /* CheckInOutButton.swift */; };
 		64D12E842925C8DA00742C16 /* CheckOutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D12E832925C8DA00742C16 /* CheckOutConfirmationView.swift */; };
 		64D12E862925DE7E00742C16 /* CheckInConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D12E852925DE7E00742C16 /* CheckInConfirmationSheet.swift */; };
-		64D58CAA292C995D0036A33B /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D58CA9292C995D0036A33B /* Payment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,7 +111,6 @@
 		64B61149290399B300396586 /* CheckInOutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInOutButton.swift; sourceTree = "<group>"; };
 		64D12E832925C8DA00742C16 /* CheckOutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutConfirmationView.swift; sourceTree = "<group>"; };
 		64D12E852925DE7E00742C16 /* CheckInConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInConfirmationSheet.swift; sourceTree = "<group>"; };
-		64D58CA9292C995D0036A33B /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +199,6 @@
 			children = (
 				646F2FBB29007D1000EAF837 /* User.swift */,
 				64A2FF37290B1D53000E4DA5 /* Feed.swift */,
-				64D58CA9292C995D0036A33B /* Payment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -632,7 +629,6 @@
 				646F2FB529007C9E00EAF837 /* UserStatsView.swift in Sources */,
 				64A2FF36290B17DF000E4DA5 /* CheckInNotifViewModel.swift in Sources */,
 				64D12E842925C8DA00742C16 /* CheckOutConfirmationView.swift in Sources */,
-				64D58CAA292C995D0036A33B /* Payment.swift in Sources */,
 				6433E42028FFADE900952950 /* UserService.swift in Sources */,
 				64AF16A82919FEE400266AFE /* ImageUploader.swift in Sources */,
 				642FF4C22918293F001BE789 /* UserCoatIDView.swift in Sources */,

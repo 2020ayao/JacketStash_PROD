@@ -16,7 +16,7 @@ struct ContentView: View {
             if viewModel.userSession == nil { // user not logged in
                 LoginView()
             } else {
-                //user not logged in
+                //user logged in
                 mainInterfaceView
             }
             

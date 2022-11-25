@@ -88,6 +88,9 @@ struct CheckInView: View {
                 model.preparePaymentSheet()
             }
         }
+        else {
+            LaunchScreen()
+        }
     }
     func toggleStatus() {
         checkedIn.toggle()
