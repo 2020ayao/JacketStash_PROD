@@ -39,7 +39,6 @@ class AuthViewModel: ObservableObject {
             self.fetchUser()
             self.err = nil
             print("DEBUG: Logged User in successfully")
-            
         }
     }
     
@@ -139,6 +138,7 @@ class AuthViewModel: ObservableObject {
                 print("Population increased to \(object!)")
                 self.currentUser?.coat_id = object as! Int-1
                 self.updateCheckInStatus(update: true, withUid: self.userSession!.uid, coat_id: object as! Int - 1)
+                self.fetchUser()
                 
             }
         }
@@ -189,7 +189,8 @@ class AuthViewModel: ObservableObject {
                 print("Error updating population: \(error)")
             } else {
                 print("Population decreased to \(object!)")
-                self.updateCheckInStatus(update: false, withUid: self.userSession!.uid, coat_id: 0)
+                self.updateCheckInStatus(update: false, withUid: self.userSession!.uid, coat_id: self.currentUser!.coat_id)
+//                self.updateCheckInStatus(update: false, withUid: self.userSession!.uid, coat_id: 0)
 
             }
         }
@@ -244,6 +245,9 @@ class AuthViewModel: ObservableObject {
             }
         }
 //        decrementCounter()
+        self.updateCheckInStatus(update: false, withUid: self.userSession!.uid, coat_id: 0)
+        
+        self.fetchUser()
 
     }
 

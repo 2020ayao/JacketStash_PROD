@@ -10,14 +10,13 @@ import Kingfisher
 
 struct ContentView: View {
     @State private var showMenu = false
-    @EnvironmentObject var viewModel: AuthViewModel
-    
+    @EnvironmentObject var viewModel: AuthViewModel    
     var body: some View {
         Group {
-            if viewModel.userSession == nil { // user logged in
+            if viewModel.userSession == nil { // user not logged in
                 LoginView()
             } else {
-                //user not logged in
+                //user logged in
                 mainInterfaceView
             }
             

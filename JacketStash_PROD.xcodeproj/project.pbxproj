@@ -31,7 +31,12 @@
 		6433E43028FFAF4900952950 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42F28FFAF4900952950 /* SideMenuView.swift */; };
 		643D0D962922116D00D659FA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643D0D952922116D00D659FA /* EditProfileView.swift */; };
 		643D0D9D29221B3200D659FA /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643D0D9C29221B3200D659FA /* LaunchScreen.swift */; };
+		6457E3522928799500240D6A /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 6457E3512928799500240D6A /* Stripe */; };
+		6457E3542928799500240D6A /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 6457E3532928799500240D6A /* StripeApplePay */; };
+		6457E3562928799500240D6A /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 6457E3552928799500240D6A /* StripePaymentSheet */; };
+		6457E3622928903400240D6A /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457E3612928903400240D6A /* CheckoutView.swift */; };
 		64621D832918BA7B00B41F02 /* ProfileSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64621D822918BA7B00B41F02 /* ProfileSelectorView.swift */; };
+		64627094292D80EE00C79054 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64627093292D80EE00C79054 /* CheckoutViewModel.swift */; };
 		646F2F9F290078A700EAF837 /* SideMenuOptionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F2F9E290078A700EAF837 /* SideMenuOptionRowView.swift */; };
 		646F2FA1290078CF00EAF837 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F2FA0290078CF00EAF837 /* SideMenuViewModel.swift */; };
 		646F2FA729007BB400EAF837 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646F2FA629007BB400EAF837 /* HomeView.swift */; };
@@ -78,7 +83,10 @@
 		6433E42F28FFAF4900952950 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		643D0D952922116D00D659FA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		643D0D9C29221B3200D659FA /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		6457E34D29280B5500240D6A /* JacketStash_PROD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JacketStash_PROD.entitlements; sourceTree = "<group>"; };
+		6457E3612928903400240D6A /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 		64621D822918BA7B00B41F02 /* ProfileSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectorView.swift; sourceTree = "<group>"; };
+		64627093292D80EE00C79054 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		646F2F9E290078A700EAF837 /* SideMenuOptionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionRowView.swift; sourceTree = "<group>"; };
 		646F2FA0290078CF00EAF837 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		646F2FA629007BB400EAF837 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -115,9 +123,12 @@
 				64334A312903C324000306E9 /* FirebaseAnalytics in Frameworks */,
 				64334A392903C324000306E9 /* FirebaseFirestore in Frameworks */,
 				64AF16AB291A05BD00266AFE /* Kingfisher in Frameworks */,
+				6457E3542928799500240D6A /* StripeApplePay in Frameworks */,
 				64334A3D2903C324000306E9 /* FirebaseStorage in Frameworks */,
 				64334A332903C324000306E9 /* FirebaseAuth in Frameworks */,
 				64334A3B2903C324000306E9 /* FirebaseFirestoreSwift in Frameworks */,
+				6457E3562928799500240D6A /* StripePaymentSheet in Frameworks */,
+				6457E3522928799500240D6A /* Stripe in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +155,7 @@
 		6433E3F928FFA61000952950 /* JacketStash_PROD */ = {
 			isa = PBXGroup;
 			children = (
+				6457E34D29280B5500240D6A /* JacketStash_PROD.entitlements */,
 				64AF16A42919F39300266AFE /* Utils */,
 				6433E40A28FFA7B600952950 /* Model */,
 				6433E40928FFA7AC00952950 /* Service */,
@@ -212,6 +224,7 @@
 		6433E40C28FFAA8C00952950 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6457E35729287ADA00240D6A /* Stripe */,
 				646F2FB329007C8E00EAF837 /* Users */,
 				6433E42528FFAE9700952950 /* Authentication */,
 				6433E42328FFAE5E00952950 /* CustomInputField.swift */,
@@ -341,6 +354,31 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6457E35729287ADA00240D6A /* Stripe */ = {
+			isa = PBXGroup;
+			children = (
+				6457E35C29287D8A00240D6A /* Views */,
+				6457E35929287AF200240D6A /* ViewModel */,
+			);
+			path = Stripe;
+			sourceTree = "<group>";
+		};
+		6457E35929287AF200240D6A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				64627093292D80EE00C79054 /* CheckoutViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6457E35C29287D8A00240D6A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6457E3612928903400240D6A /* CheckoutView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		646F2FA229007B8A00EAF837 /* Home */ = {
@@ -510,6 +548,9 @@
 				64334A3A2903C324000306E9 /* FirebaseFirestoreSwift */,
 				64334A3C2903C324000306E9 /* FirebaseStorage */,
 				64AF16AA291A05BD00266AFE /* Kingfisher */,
+				6457E3512928799500240D6A /* Stripe */,
+				6457E3532928799500240D6A /* StripeApplePay */,
+				6457E3552928799500240D6A /* StripePaymentSheet */,
 			);
 			productName = JacketStash_PROD;
 			productReference = 6433E3F728FFA61000952950 /* JacketStash_PROD.app */;
@@ -542,6 +583,7 @@
 			packageReferences = (
 				64334A2F2903C324000306E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				64AF16A9291A05BD00266AFE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				6457E3502928799500240D6A /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 			);
 			productRefGroup = 6433E3F828FFA61000952950 /* Products */;
 			projectDirPath = "";
@@ -570,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64627094292D80EE00C79054 /* CheckoutViewModel.swift in Sources */,
 				6433E41528FFABBC00952950 /* AuthViewModel.swift in Sources */,
 				646F2FB229007C2E00EAF837 /* CheckOutView.swift in Sources */,
 				6433E41128FFAB9500952950 /* LoginView.swift in Sources */,
@@ -599,6 +642,7 @@
 				646F2F9F290078A700EAF837 /* SideMenuOptionRowView.swift in Sources */,
 				648894D82908B9F900870DF2 /* CheckInNotifView.swift in Sources */,
 				64D12E862925DE7E00742C16 /* CheckInConfirmationSheet.swift in Sources */,
+				6457E3622928903400240D6A /* CheckoutView.swift in Sources */,
 				64A2FF38290B1D53000E4DA5 /* Feed.swift in Sources */,
 				646F2FC02900878600EAF837 /* RoundedShape.swift in Sources */,
 				64AF16A62919F39C00266AFE /* ImagePicker.swift in Sources */,
@@ -735,6 +779,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = JacketStash_PROD/JacketStash_PROD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JacketStash_PROD/Preview Content\"";
@@ -772,6 +817,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = JacketStash_PROD/JacketStash_PROD.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JacketStash_PROD/Preview Content\"";
@@ -835,6 +881,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		6457E3502928799500240D6A /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 23.0.0;
+			};
+		};
 		64AF16A9291A05BD00266AFE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -880,6 +934,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 64334A2F2903C324000306E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		6457E3512928799500240D6A /* Stripe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6457E3502928799500240D6A /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = Stripe;
+		};
+		6457E3532928799500240D6A /* StripeApplePay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6457E3502928799500240D6A /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeApplePay;
+		};
+		6457E3552928799500240D6A /* StripePaymentSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6457E3502928799500240D6A /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentSheet;
 		};
 		64AF16AA291A05BD00266AFE /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

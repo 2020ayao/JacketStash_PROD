@@ -12,6 +12,8 @@ import Firebase
 struct JacketStash_PRODApp: App {
     @StateObject var viewModel = AuthViewModel()
     @StateObject var vModel = CheckedInViewModel()
+    @StateObject var paymentModel = CheckoutViewModel()
+//    @StateObject var backendModel = MyBackendModel()
     init() {
         FirebaseApp.configure()
     }
@@ -19,9 +21,15 @@ struct JacketStash_PRODApp: App {
         WindowGroup {
             NavigationView {
                 ContentView()
+//                CheckoutView()
+//                .environmentObject(viewModel)
+//                .environmentObject(backendModel)
+                
             }
             .environmentObject(viewModel)
             .environmentObject(vModel)
+            .environmentObject(paymentModel)
+            
         }
     }
 }
