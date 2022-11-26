@@ -156,7 +156,7 @@ extension CheckInView {
                     paymentSheet: paymentSheet,
                     onCompletion: model.onPaymentCompletion
                 ) {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 25)
                         .fill(Color.blue)
                         .frame(width: 150, height: 50)
                         .overlay(
@@ -164,12 +164,12 @@ extension CheckInView {
                                 .font(.title3)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                        ).offset(y:-20)
+                        )
                         
                     
-                }
+                }.offset(y:-30)
             } else {
-                Text("Loading…")
+                ProgressView()
             }
         }
 //        }.onAppear {
