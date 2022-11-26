@@ -76,6 +76,7 @@ struct ProfileSelectorView: View {
             
             if let err = viewModel.err {
                 Text(err)
+                    .padding()
                     .onAppear {
                         disabled = false
                     }

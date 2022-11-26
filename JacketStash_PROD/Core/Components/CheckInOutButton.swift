@@ -29,8 +29,11 @@ struct CheckInOutButton: View {
                 Circle()
                     .fill(Color(.white))
                     .frame(width: 100, height: 100)
-                    .scaleEffect(isPressed ? 1.99 : 0.5)
+//                    .scaleEffect(isPressed ? 1.99 : 0.5)
+                    .scaleEffect(isPressed ? 1.99 : 0.6)
                     .animation(.easeOut(duration: 3), value: isPressed)
+//                    .animation(.easeIn(duration: 3), value: isPressed)
+
 
                 
                 
