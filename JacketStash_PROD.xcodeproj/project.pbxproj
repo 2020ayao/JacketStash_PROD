@@ -31,6 +31,7 @@
 		6433E43028FFAF4900952950 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6433E42F28FFAF4900952950 /* SideMenuView.swift */; };
 		643D0D962922116D00D659FA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643D0D952922116D00D659FA /* EditProfileView.swift */; };
 		643D0D9D29221B3200D659FA /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643D0D9C29221B3200D659FA /* LaunchScreen.swift */; };
+		643D88B729313FA5001AE38F /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643D88B629313FA5001AE38F /* ForgotPasswordView.swift */; };
 		6457E3522928799500240D6A /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 6457E3512928799500240D6A /* Stripe */; };
 		6457E3542928799500240D6A /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 6457E3532928799500240D6A /* StripeApplePay */; };
 		6457E3562928799500240D6A /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 6457E3552928799500240D6A /* StripePaymentSheet */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		6421E8B22904BC9E00324553 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "JacketStash_PROD/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6421E8B42904E4B500324553 /* CheckedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInViewModel.swift; sourceTree = "<group>"; };
+		642FDF7E2930A3A60049E1D0 /* JacketStash-PROD-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JacketStash-PROD-Info.plist"; sourceTree = SOURCE_ROOT; };
 		642FF4C12918293F001BE789 /* UserCoatIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoatIDView.swift; sourceTree = "<group>"; };
 		6433E3F728FFA61000952950 /* JacketStash_PROD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JacketStash_PROD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6433E3FA28FFA61000952950 /* JacketStash_PRODApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacketStash_PRODApp.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		6433E42F28FFAF4900952950 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		643D0D952922116D00D659FA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		643D0D9C29221B3200D659FA /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		643D88B629313FA5001AE38F /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		6457E34D29280B5500240D6A /* JacketStash_PROD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JacketStash_PROD.entitlements; sourceTree = "<group>"; };
 		6457E3612928903400240D6A /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 		64621D822918BA7B00B41F02 /* ProfileSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectorView.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		6433E3F928FFA61000952950 /* JacketStash_PROD */ = {
 			isa = PBXGroup;
 			children = (
+				642FDF7E2930A3A60049E1D0 /* JacketStash-PROD-Info.plist */,
 				6457E34D29280B5500240D6A /* JacketStash_PROD.entitlements */,
 				64AF16A42919F39300266AFE /* Utils */,
 				6433E40A28FFA7B600952950 /* Model */,
@@ -253,6 +257,7 @@
 				6433E41028FFAB9500952950 /* LoginView.swift */,
 				6433E41228FFABA100952950 /* RegistrationView.swift */,
 				64621D822918BA7B00B41F02 /* ProfileSelectorView.swift */,
+				643D88B629313FA5001AE38F /* ForgotPasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				642FF4C22918293F001BE789 /* UserCoatIDView.swift in Sources */,
 				646F2FBA29007CE600EAF837 /* ProfileView.swift in Sources */,
 				6433E3FD28FFA61000952950 /* ContentView.swift in Sources */,
+				643D88B729313FA5001AE38F /* ForgotPasswordView.swift in Sources */,
 				643D0D9D29221B3200D659FA /* LaunchScreen.swift in Sources */,
 				64621D832918BA7B00B41F02 /* ProfileSelectorView.swift in Sources */,
 				647E2E562924476F00D430DE /* EditProfileViewModel.swift in Sources */,
@@ -786,8 +792,10 @@
 				DEVELOPMENT_TEAM = 4CAV49JU76;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JacketStash-PROD-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = JacketStash;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSCameraUsageDescription = "JacketStash requires the camera to scan a card.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -824,8 +832,10 @@
 				DEVELOPMENT_TEAM = 4CAV49JU76;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JacketStash-PROD-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = JacketStash;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSCameraUsageDescription = "JacketStash requires the camera to scan a card.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

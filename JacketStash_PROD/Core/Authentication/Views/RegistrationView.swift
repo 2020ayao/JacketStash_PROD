@@ -102,7 +102,7 @@ struct RegistrationView: View {
                             .fontWeight(.semibold)
                     }
                 }
-                .padding(.bottom, 40)
+                .padding(.bottom, 10)
                 .foregroundColor(Color(.systemBlue))
                 
                 

@@ -17,7 +17,6 @@ struct CheckInOutButton: View {
     @GestureState var isDetectingLongPress = false
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var viewModel: CheckedInViewModel
-    let title: String
     
     var body: some View {
             ZStack {
@@ -48,13 +47,16 @@ struct CheckInOutButton: View {
                 .mask(Circle())
                 
                 
-                Text(title)
+                VStack {
+                    Text("Check")
+                    Text("Out")
+                }
 //                    .onTapGesture {
 //                        checkIn.toggle()
 //                    }
                     .foregroundColor(.white)
-                    .fontWeight(.semibold)
-                    .font(.headline)
+                    .fontWeight(.bold)
+                    .font(.title3)
                     .gesture(longPress)
                     .pressEvents(onPress: {
                         isPressed = true

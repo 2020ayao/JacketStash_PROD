@@ -11,6 +11,8 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    @State var showForgotPassword = false
     var body: some View {
         VStack {
             AuthHeaderView(title1: "Hello.", title2: "Welcome Back")
@@ -34,21 +36,23 @@ struct LoginView: View {
             
             //--------------RESET PASSWORD------------------
             
-//            HStack {
-//                Spacer()
-//
-//                NavigationLink {
-//                    Text("Reset password view...")
-//                } label: {
-//                    Text("Forgot Password?")
-//                        .font(.caption)
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(Color(.systemBlue))
-//                        .padding(.top)
-//                        .padding(.trailing, 24)
-//                }
-//
-//            }
+            HStack {
+                Spacer()
+                
+                Button {
+                    showForgotPassword.toggle()
+                } label: {
+                    Text("Forgot Password?")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(.systemBlue))
+                        .padding(.top)
+                        .padding(.trailing, 24)
+                }.sheet(isPresented: $showForgotPassword) {
+                    ForgotPasswordView()
+                }
+
+            }
             //------------------------------------
             
             Button {
@@ -78,7 +82,7 @@ struct LoginView: View {
                     }
             } label: {
                 HStack {
-                    Text("Dont have an account?")
+                    Text("Don't have an account?")
                         .font(.footnote)
                     
                     Text("Sign Up")
