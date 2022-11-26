@@ -119,10 +119,9 @@ private struct ProfileImageModifier: ViewModifier {
     }
 }
 
-//struct ProfileSelectorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileSelectorView()
-//    }
-//}
+struct ProfileSelectorView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileSelectorView(email: .constant("email"), username: .constant("username"), fullname: .constant("Adam Yao"), password: .constant("password")).environmentObject(AuthViewModel())    }
+}
 
 
