@@ -18,6 +18,7 @@ struct ProfileSelectorView: View {
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     
+    @State private var disabled = false
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -49,31 +50,44 @@ struct ProfileSelectorView: View {
 
             
             if let selectedImage = selectedImage {
+                
                 Button {
                     viewModel.register(withEmail: email, password: password, fullname: fullname, username: username, isCheckedIn: false, selectedImage: selectedImage)
-//                    viewModel.uploadProfileImage(selectedImage)
+                    //                    viewModel.uploadProfileImage(selectedImage)
+                    disabled = true
                     
-                } label: {
-                    Text("Sign Up")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(width: 340, height: 50)
-                        .background(Color(.systemBlue))
-                        .clipShape(Capsule())
-                        .padding()
                 }
-                .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
+            label: {
+                Text("Sign Up")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(width: 340, height: 50)
+                    .background(disabled ? Color(.gray) : Color(.systemBlue))
+                    .clipShape(Capsule())
+                    .padding()
+                    
+                
             }
+            .disabled(disabled)
+            .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
+            
+            }
+                
             
             if let err = viewModel.err {
                 Text(err)
+                    .onAppear {
+                        disabled = false
+                    }
             }
-
+            
+                
             
             Spacer()
         }
         .onAppear {
             viewModel.err = nil
+            disabled = false
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)

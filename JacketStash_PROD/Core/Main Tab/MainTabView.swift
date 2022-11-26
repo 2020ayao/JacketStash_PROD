@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct MainTabView: View {
     @State private var selectedIndex = 0
     @EnvironmentObject var authViewModel: AuthViewModel
