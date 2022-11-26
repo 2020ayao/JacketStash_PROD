@@ -19,55 +19,54 @@ struct CheckInOutButton: View {
     @EnvironmentObject var viewModel: CheckedInViewModel
     
     var body: some View {
-            ZStack {
-                Circle()
-                    .fill(Color(.systemBlue))
-                    .frame(width: 100, height: 100)
-                    .scaleEffect(isPressed ? 2 : 0.99)
-                    .animation(.easeIn(duration: 1.5), value: isPressed)
-
-                Circle()
-                    .fill(Color(.white))
-                    .frame(width: 100, height: 100)
-//                    .scaleEffect(isPressed ? 1.99 : 0.5)
-                    .scaleEffect(isPressed ? 1.99 : 0.6)
-                    .animation(.easeOut(duration: 3), value: isPressed)
-//                    .animation(.easeIn(duration: 3), value: isPressed)
-
-
-                
-                
-                Button {
-    //                if self.checkedIn {
-    //                    print("DEBUG: CHECKED IN")
-    //                }
-//                    checkIn.toggle()
-                } label: {
-                    Text("")
-                }
+        ZStack {
+            Circle()
+                .fill(Color(.systemBlue))
                 .frame(width: 100, height: 100)
-                .background(Color(.systemBlue))
-                .mask(Circle())
-                
-                
-                VStack {
-                    Text("Check")
-                    Text("Out")
-                }
-//                    .onTapGesture {
-//                        checkIn.toggle()
-//                    }
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .gesture(longPress)
-                    .pressEvents(onPress: {
-                        isPressed = true
-                    }, onRelease: {
-                        isPressed = false
-                    })
+                .scaleEffect(isPressed ? 2 : 0.99)
+                .animation(.easeIn(duration: 1.5), value: isPressed)
+            
+            Circle()
+                .fill(Color(.white))
+                .frame(width: 100, height: 100)
+                .scaleEffect(isPressed ? 1.99 : 0.6)
+                .animation(.easeOut(duration: 3), value: isPressed)
+            
+            
+            
+            Button {
+                //                if self.checkedIn {
+                //                    print("DEBUG: CHECKED IN")
+                //                }
+                //                    checkIn.toggle()
+            } label: {
                 
             }
+            VStack {
+                Text("Check")
+                Text("Out")
+
+                
+            }
+            .opacity(isPressed ? 0.5 : 1)
+            .foregroundColor(.white)
+            .fontWeight(.bold)
+            .font(.title3)
+            .frame(width: 100, height: 100)
+            .background(Color(.systemBlue))
+            .mask(Circle())
+            
+            //                    .onTapGesture {
+            //                        checkIn.toggle()
+            //                    }
+            .gesture(longPress)
+            .pressEvents(onPress: {
+                isPressed = true
+            }, onRelease: {
+                isPressed = false
+            })
+            
+        }
             
             .padding(.bottom, 150)
         }

@@ -107,22 +107,12 @@ struct CheckInView: View {
                         }
                         .offset(y:-20)
                         .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
-//                        .scaleEffect(isPressed ? 0.5 : 1)
-//                        .animation(.easeIn(duration: 1), value: isPressed)
-//                        .pressEvents {
-//                            withAnimation(.easeIn(duration: 1.0)) {
-//                                isPressed = true
-//                            }
-//                        } onRelease: {
-//                            withAnimation {
-//                                isPressed = false
-//                            }
-//                        }
                     }
                     
                     else {
                         paymentSheet
                             .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
+                            .offset(y:-20)
                     }
                     
                         
@@ -156,7 +146,7 @@ extension CheckInView {
                     paymentSheet: paymentSheet,
                     onCompletion: model.onPaymentCompletion
                 ) {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 25)
                         .fill(Color.blue)
                         .frame(width: 150, height: 50)
                         .overlay(
@@ -164,12 +154,12 @@ extension CheckInView {
                                 .font(.title3)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                        ).offset(y:-20)
+                        )
                         
                     
-                }
+                }.offset(y:-20)
             } else {
-                Text("Loading…")
+                ProgressView()
             }
         }
 //        }.onAppear {
