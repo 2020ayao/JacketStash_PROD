@@ -102,13 +102,13 @@ struct RegistrationView: View {
                             .fontWeight(.semibold)
                     }
                 }
-                .padding(.bottom, 10)
                 .foregroundColor(Color(.systemBlue))
-                
-                
+                .padding(.bottom, 40)
                 
             }
             .ignoresSafeArea()
+            .navigationBarHidden(true)
+
         }
 //        .onAppear {
 //            if viewModel.tempUserSession != nil {

@@ -69,7 +69,7 @@ struct LoginView: View {
             .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
 
             if viewModel.err != nil {
-                    Text(viewModel.err ?? "error")
+                Text(viewModel.err ?? "error").padding()
             }
             
             Spacer()
