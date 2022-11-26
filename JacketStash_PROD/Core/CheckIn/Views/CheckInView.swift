@@ -167,7 +167,7 @@ extension CheckInView {
                         )
                         
                     
-                }.offset(y:-30)
+                }.offset(y:-60)
             } else {
                 ProgressView()
             }
