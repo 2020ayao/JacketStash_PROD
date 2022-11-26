@@ -107,22 +107,12 @@ struct CheckInView: View {
                         }
                         .offset(y:-20)
                         .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
-//                        .scaleEffect(isPressed ? 0.5 : 1)
-//                        .animation(.easeIn(duration: 1), value: isPressed)
-//                        .pressEvents {
-//                            withAnimation(.easeIn(duration: 1.0)) {
-//                                isPressed = true
-//                            }
-//                        } onRelease: {
-//                            withAnimation {
-//                                isPressed = false
-//                            }
-//                        }
                     }
                     
                     else {
                         paymentSheet
                             .popover(isPresented: $checkedOut, content: CheckOutConfirmationView.init)
+                            .offset(y:-20)
                     }
                     
                         
@@ -167,7 +157,7 @@ extension CheckInView {
                         )
                         
                     
-                }.offset(y:-60)
+                }.offset(y:-20)
             } else {
                 ProgressView()
             }
