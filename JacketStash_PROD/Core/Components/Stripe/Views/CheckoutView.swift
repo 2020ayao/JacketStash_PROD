@@ -127,6 +127,7 @@ struct CheckoutView: View {
     VStack {
         Button {
             checkoutViewModel.initiatePayment(withUid: IDTxt)
+            model.preparePaymentSheet()
         } label: {
             Text("I want to check in")
         }
@@ -151,7 +152,8 @@ struct CheckoutView: View {
           Text("Payment canceled.")
         }
       }
-    }.onAppear { model.preparePaymentSheet() }
+    }
+//            .onAppear { model.preparePaymentSheet() }
   }
 }
 

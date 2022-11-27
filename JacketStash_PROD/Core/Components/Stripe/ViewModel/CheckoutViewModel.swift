@@ -17,7 +17,8 @@ class CheckoutViewModel : ObservableObject {
         let data = ["client": "mobile",
                     "mode": "payment",
                     "amount": "200",
-                    "currency": "usd"]
+                    "currency": "usd",
+                    "allow_promotion_codes": true] as [String : Any]
         Firestore.firestore().collection("customers").document(uid).collection("checkout_sessions").addDocument(data: data)
     }
 }
