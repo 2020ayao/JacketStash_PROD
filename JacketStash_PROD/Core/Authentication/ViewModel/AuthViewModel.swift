@@ -141,6 +141,10 @@ class AuthViewModel: ObservableObject {
                 self.updateCheckInStatus(update: true, withUid: self.userSession!.uid, coat_id: object as! Int - 1)
                 self.fetchUser()
                 
+                self.sendCheckInEmail()
+                
+                
+                
             }
         }
     }
@@ -201,23 +205,7 @@ class AuthViewModel: ObservableObject {
 //        First step: check in your own unique coat ID.
         let db = Firestore.firestore()
 
-        db.collection("counter").document("counter").getDocument { qsnapshot, error in
-            if let qsnapshot = qsnapshot {
-                let number = qsnapshot.data()!["count"] as! Int
-                let docData: [String: Any] = [
-                    "number": number,
-                    "fullname" : self.currentUser?.fullname as Any
-                ]
-//                self.currentUser?.coat_id = number
-                db.collection("coat_ids").document(self.userSession!.uid).setData(docData) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document successfully written!")
-                    }
-                }
-            }
-        }
+        
         guard let fullname = currentUser?.fullname else {return}
         checkInService.uploadFeed(fullname: fullname, checkingIn: true) { success in
             if success {
@@ -229,13 +217,51 @@ class AuthViewModel: ObservableObject {
         }
 
         updateCounter()
+        
+    }
+    
+    func sendCheckInEmail() {
+        let db = Firestore.firestore()
+        
+        let time = self.getTime()
+        guard let fullname = self.currentUser?.fullname else {return}
+        guard let coat_id = self.currentUser?.coat_id else {return}
+        
+        db.collection("mail").document().setData([
+            "to": self.currentUser!.email,
+            "message": [
+                "subject": "Check In Confirmation from JacketStash",
+                "text": "Hey \(fullname), \nThanks for using JacketStash! You're holding number \(String(coat_id)) and checked in at \(time). Have a great night!"
+            ]
+        ])
+    }
+    
+    func sendCheckOutEmail() {
+        let db = Firestore.firestore()
+        
+        let time = self.getTime()
+        guard let fullname = self.currentUser?.fullname else {return}
+        guard let coat_id = self.currentUser?.coat_id else {return}
+        
+        db.collection("mail").document().setData([
+            "to": self.currentUser!.email,
+            "message": [
+                "subject": "Check Out Confirmation from JacketStash",
+                "text": "Hey \(fullname), \nThanks for using JacketStash! You had number \(String(coat_id)) and checked out at \(time)."
+            ]
+        ])
+    }
+    
+    func getTime() -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        let dateString = formatter.string(from: Date())
+        return dateString
     }
     
     func checkOut() {
         let db = Firestore.firestore()
-        if let uid = self.userSession?.uid {
-            db.collection("coat_ids").document(uid).delete()
-        }
+        
         guard let fullname = currentUser?.fullname else {return}
         checkInService.uploadFeed(fullname: fullname, checkingIn: false) { success in
             if success {
@@ -247,7 +273,7 @@ class AuthViewModel: ObservableObject {
         }
 //        decrementCounter()
         self.updateCheckInStatus(update: false, withUid: self.userSession!.uid, coat_id: 0)
-        
+        self.sendCheckOutEmail()
         self.fetchUser()
 
     }
