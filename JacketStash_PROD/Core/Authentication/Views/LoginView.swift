@@ -93,8 +93,20 @@ struct LoginView: View {
             .padding(.bottom, 40)
             .foregroundColor(Color(.systemBlue))
         }
+        .onTapGesture {
+            hideKeyboard()
+            
+        }
         .ignoresSafeArea()
         .navigationBarHidden(true)
+    }
+        
+}
+
+extension LoginView {
+    func hideKeyboard() {
+        let resign = #selector(UIResponder.resignFirstResponder)
+        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
 }
 

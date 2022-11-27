@@ -21,6 +21,8 @@ struct JacketStash_PRODApp: App {
         WindowGroup {
             NavigationView {
                 ContentView()
+//                    .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+
 //                CheckoutView()
 //                .environmentObject(viewModel)
 //                .environmentObject(backendModel)
@@ -33,3 +35,4 @@ struct JacketStash_PRODApp: App {
         }
     }
 }
+

@@ -60,6 +60,7 @@ struct EditProfileView: View {
                 }
                 
                 
+                
                 .padding(.horizontal,15)
                 .padding(.top, 44)
                 Spacer()
@@ -93,13 +94,25 @@ struct EditProfileView: View {
                     .disabled(disabled)
                 
             }
+            .onTapGesture {
+                hideKeyboard()
+            }
+            
         }
+            
         
     }
     func loadImage() {
         guard let selectedImage = selectedImage else {return}
         profileImage = Image(uiImage: selectedImage)
         disabled = false
+    }
+}
+
+extension EditProfileView {
+    func hideKeyboard() {
+        let resign = #selector(UIResponder.resignFirstResponder)
+        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
 }
 
