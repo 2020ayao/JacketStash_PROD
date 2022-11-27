@@ -106,6 +106,9 @@ struct RegistrationView: View {
                 .padding(.bottom, 40)
                 
             }
+            .onTapGesture(perform: {
+                hideKeyboard()
+            })
             .ignoresSafeArea()
             .navigationBarHidden(true)
 
@@ -122,6 +125,12 @@ struct RegistrationView: View {
         //            ProfilePhotoSelectorView()
         //        }
         //}
+    }
+}
+extension RegistrationView {
+    func hideKeyboard() {
+        let resign = #selector(UIResponder.resignFirstResponder)
+        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
 }
 
