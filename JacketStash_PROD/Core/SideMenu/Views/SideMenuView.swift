@@ -35,9 +35,6 @@ struct SideMenuView: View {
                             .foregroundColor(.gray)
                     }
                     
-//                    UserStatsView()
-//                        .padding(.vertical)
-                    
                 }
                 
                 .padding(.leading)
