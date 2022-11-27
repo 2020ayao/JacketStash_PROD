@@ -231,7 +231,7 @@ class AuthViewModel: ObservableObject {
             "to": self.currentUser!.email,
             "message": [
                 "subject": "Check In Confirmation from JacketStash",
-                "text": "Hey \(fullname), \nThanks for using JacketStash! You're holding number \(String(coat_id)) and checked in at \(time). Have a great night!"
+                "text": "Hey \(fullname), \n\nThanks for using JacketStash! You're holding number \(String(coat_id)) and checked in at \(time). Have a great night!"
             ]
         ])
     }
@@ -247,7 +247,7 @@ class AuthViewModel: ObservableObject {
             "to": self.currentUser!.email,
             "message": [
                 "subject": "Check Out Confirmation from JacketStash",
-                "text": "Hey \(fullname), \nThanks for using JacketStash! You had number \(String(coat_id)) and checked out at \(time)."
+                "text": "Hey \(fullname), \n\nThanks for using JacketStash! You had number \(String(coat_id)) and checked out at \(time)."
             ]
         ])
     }
