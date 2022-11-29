@@ -25,7 +25,6 @@ struct EditProfileView: View {
     var body: some View {
         if let user = viewModel.currentUser {
             VStack {
-                
                 Button {
                     showImagePicker.toggle()
                 } label: {
@@ -45,7 +44,12 @@ struct EditProfileView: View {
                 .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
                     ImagePicker(selectedImage: $selectedImage)
                 }
+//                .overlay(alignment: .bottomTrailing, content: {
+//                    Image(systemName: "photo").foregroundColor(Color(.systemBlue)).frame(alignment: .bottomTrailing).offset(x:-20)
+//                })
                 .padding(.top, 44)
+                
+                
                 
                 
                 
@@ -55,7 +59,7 @@ struct EditProfileView: View {
                     CustomTextBox(placeholderText: "Full Name", text: $fullname, disabled: $disabled)
                 }
                 .onAppear {
-//                    self.email = user.email
+                    //                    self.email = user.email
                     self.fullname = user.fullname
                     self.username = user.username
                 }
@@ -65,34 +69,34 @@ struct EditProfileView: View {
                 .padding(.horizontal,15)
                 .padding(.top, 44)
                 Spacer()
-                    Button {
-                        if let selectedImage = selectedImage {
-                            
-                            //                viewModel.login(withEmail: email, password: password)
-                            //should go and update the information
-                            
-                            viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username, withSelectedImage: selectedImage)
-                            print(user.fullname)
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                        else {
-                            viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username)
-                            print(user.fullname)
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                Button {
+                    if let selectedImage = selectedImage {
                         
+                        //                viewModel.login(withEmail: email, password: password)
+                        //should go and update the information
                         
-                    } label: {
-                        Text("Save")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(width: 340, height: 50)
-                            .background(disabled ? Color(.gray) : Color(.systemBlue))
-                            .clipShape(Capsule())
-                            .padding()
+                        viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username, withSelectedImage: selectedImage)
+                        print(user.fullname)
+                        presentationMode.wrappedValue.dismiss()
                     }
-                    .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
-                    .disabled(disabled)
+                    else {
+                        viewModel.updateProfileInformation(withUid: viewModel.userSession!.uid, withName: fullname, withUserName: username)
+                        print(user.fullname)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                    
+                } label: {
+                    Text("Save")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(width: 340, height: 50)
+                        .background(disabled ? Color(.gray) : Color(.systemBlue))
+                        .clipShape(Capsule())
+                        .padding()
+                }
+                .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
+                .disabled(disabled)
                 
             }
             .onTapGesture {
