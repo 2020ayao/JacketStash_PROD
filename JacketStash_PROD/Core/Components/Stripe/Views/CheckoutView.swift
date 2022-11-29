@@ -19,10 +19,10 @@ class MyBackendModel: ObservableObject {
   @Published var paymentSheet: PaymentSheet?
   @Published var paymentResult: PaymentSheetResult?
     //----------------TESTING PK------------
-    let publishableKey: String = "pk_test_51Lun2zA917ZeeiFb9OcWW7b0hI7mdSH6qFMaB6BpQobXdoPJchzwUK99QNYIOc3AewxzWwGVOBwaDC5eDr3Dg89D00t2h3CPrA"
+//    let publishableKey: String = "pk_test_51Lun2zA917ZeeiFb9OcWW7b0hI7mdSH6qFMaB6BpQobXdoPJchzwUK99QNYIOc3AewxzWwGVOBwaDC5eDr3Dg89D00t2h3CPrA"
     
     //----------------LIVE PK---------------
-//    let publishableKey: String = "pk_live_51Lun2zA917ZeeiFbCECGBVpOeyNl0VVqzvwCnjpksQZuIdrhqiyfTEJZLW0fHSsClrdVG77KggHAGXGmXxxZDYFA00aTTxVh68"
+    let publishableKey: String = "pk_live_51Lun2zA917ZeeiFbCECGBVpOeyNl0VVqzvwCnjpksQZuIdrhqiyfTEJZLW0fHSsClrdVG77KggHAGXGmXxxZDYFA00aTTxVh68"
     
     let IDTxt: String
     
