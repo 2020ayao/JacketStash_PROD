@@ -72,6 +72,7 @@ struct ProfileSelectorView: View {
             .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
             
             }
+            
                 
             
             if let err = viewModel.err {
@@ -80,6 +81,11 @@ struct ProfileSelectorView: View {
                     .onAppear {
                         disabled = false
                     }
+            }
+            else {
+                if disabled {
+                    ProgressView()
+                }
             }
             
                 
