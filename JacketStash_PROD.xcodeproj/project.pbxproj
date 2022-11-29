@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6421E8B32904BC9E00324553 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6421E8B22904BC9E00324553 /* GoogleService-Info.plist */; };
 		6421E8B52904E4B500324553 /* CheckedInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6421E8B42904E4B500324553 /* CheckedInViewModel.swift */; };
+		642EE66C29353A8E00F486F6 /* AccountManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642EE66B29353A8E00F486F6 /* AccountManagementView.swift */; };
+		642EE66E29355A6E00F486F6 /* AccountManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642EE66D29355A6E00F486F6 /* AccountManagerViewModel.swift */; };
+		642EE67029358B6400F486F6 /* practiceview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642EE66F29358B6400F486F6 /* practiceview.swift */; };
 		642FF4C22918293F001BE789 /* UserCoatIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642FF4C12918293F001BE789 /* UserCoatIDView.swift */; };
 		64334A312903C324000306E9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 64334A302903C324000306E9 /* FirebaseAnalytics */; };
 		64334A332903C324000306E9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 64334A322903C324000306E9 /* FirebaseAuth */; };
@@ -68,6 +71,9 @@
 /* Begin PBXFileReference section */
 		6421E8B22904BC9E00324553 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "JacketStash_PROD/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6421E8B42904E4B500324553 /* CheckedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInViewModel.swift; sourceTree = "<group>"; };
+		642EE66B29353A8E00F486F6 /* AccountManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementView.swift; sourceTree = "<group>"; };
+		642EE66D29355A6E00F486F6 /* AccountManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagerViewModel.swift; sourceTree = "<group>"; };
+		642EE66F29358B6400F486F6 /* practiceview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = practiceview.swift; sourceTree = "<group>"; };
 		642FDF7E2930A3A60049E1D0 /* JacketStash-PROD-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JacketStash-PROD-Info.plist"; sourceTree = SOURCE_ROOT; };
 		642FF4C12918293F001BE789 /* UserCoatIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoatIDView.swift; sourceTree = "<group>"; };
 		6433E3F728FFA61000952950 /* JacketStash_PROD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JacketStash_PROD.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +144,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		642EE66829353A6A00F486F6 /* AccountManagement */ = {
+			isa = PBXGroup;
+			children = (
+				642EE66A29353A7500F486F6 /* Views */,
+				642EE66929353A7100F486F6 /* ViewModel */,
+			);
+			path = AccountManagement;
+			sourceTree = "<group>";
+		};
+		642EE66929353A7100F486F6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				642EE66D29355A6E00F486F6 /* AccountManagerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		642EE66A29353A7500F486F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				642EE66B29353A8E00F486F6 /* AccountManagementView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		6433E3EE28FFA61000952950 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +243,7 @@
 			children = (
 				643D0D972922184800D659FA /* LaunchScreen */,
 				6433E40C28FFAA8C00952950 /* Components */,
+				642EE66829353A6A00F486F6 /* AccountManagement */,
 				643D0D922922114D00D659FA /* EditProfile */,
 				648894D22908B9AF00870DF2 /* CheckInNotif */,
 				646F2FB629007CBD00EAF837 /* Profile */,
@@ -333,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				643D0D952922116D00D659FA /* EditProfileView.swift */,
+				642EE66F29358B6400F486F6 /* practiceview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -649,14 +682,17 @@
 				648894D82908B9F900870DF2 /* CheckInNotifView.swift in Sources */,
 				64D12E862925DE7E00742C16 /* CheckInConfirmationSheet.swift in Sources */,
 				6457E3622928903400240D6A /* CheckoutView.swift in Sources */,
+				642EE66E29355A6E00F486F6 /* AccountManagerViewModel.swift in Sources */,
 				64A2FF38290B1D53000E4DA5 /* Feed.swift in Sources */,
 				646F2FC02900878600EAF837 /* RoundedShape.swift in Sources */,
 				64AF16A62919F39C00266AFE /* ImagePicker.swift in Sources */,
 				64A2FF33290B1657000E4DA5 /* FeedService.swift in Sources */,
+				642EE66C29353A8E00F486F6 /* AccountManagementView.swift in Sources */,
 				646F2FBC29007D1000EAF837 /* User.swift in Sources */,
 				64B6114A290399B300396586 /* CheckInOutButton.swift in Sources */,
 				6433E42728FFAEA800952950 /* AuthHeaderView.swift in Sources */,
 				64AF16A32919EA6500266AFE /* AvatarViewPicker.swift in Sources */,
+				642EE67029358B6400F486F6 /* practiceview.swift in Sources */,
 				6433E3FB28FFA61000952950 /* JacketStash_PRODApp.swift in Sources */,
 				6433E41328FFABA100952950 /* RegistrationView.swift in Sources */,
 			);

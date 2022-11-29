@@ -237,6 +237,8 @@ class AuthViewModel: ObservableObject {
     }
     
     func sendCheckOutEmail() {
+        
+        Auth.auth()
         let db = Firestore.firestore()
         
         let time = self.getTime()
@@ -351,6 +353,28 @@ class AuthViewModel: ObservableObject {
                 return
             }
         }
+    }
+    
+    func deleteAccount(withEmail email: String, withPassword password: String) {
+        //        let db = Firestore.firestore()
+        //        db.collection("users").document(self.userSession!.uid).delete()
+        var credential: AuthCredential = EmailAuthProvider.credential(withEmail: email, password: password)
+        let user = Auth.auth().currentUser
+        user?.reauthenticate(with: credential, completion: { result, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                user?.delete(completion: { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        self.userSession = nil
+                    }
+                })
+            }
+        })
     }
     
 }

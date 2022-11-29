@@ -50,11 +50,12 @@ struct EditProfileView: View {
                 
                 
                 VStack(spacing: 10) {
+                    CustomTextBox(placeholderText: "Email", isSecureField: false, text: .constant("adamyao3240@gmail.com"), disabled: $disabled).padding(.bottom, 20).disabled(true).opacity(0.7)
                     CustomTextBox(placeholderText: "Username", text: $username, disabled: $disabled)
                     CustomTextBox(placeholderText: "Full Name", text: $fullname, disabled: $disabled)
                 }
                 .onAppear {
-                    self.email = user.email
+//                    self.email = user.email
                     self.fullname = user.fullname
                     self.username = user.username
                 }
@@ -125,3 +126,9 @@ private struct ProfileImageModifier: ViewModifier {
             .clipShape(Circle())
     }
 }
+
+//struct EditProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditProfileView()
+//    }
+//}

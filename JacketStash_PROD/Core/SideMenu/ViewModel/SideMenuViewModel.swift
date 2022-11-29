@@ -10,10 +10,12 @@ import Foundation
 
 enum SideMenuViewModel: Int, CaseIterable {
     case profile
+    case accountManagement
     case logout
     
     var title: String {
         switch self {
+        case .accountManagement: return "Account Management"
         case .profile: return "Edit Profile"
         case .logout: return "Logout"
         }
@@ -21,6 +23,7 @@ enum SideMenuViewModel: Int, CaseIterable {
     
     var imageName: String {
         switch self {
+        case .accountManagement: return "lock.shield"
         case .profile: return "person"
         case .logout: return "arrow.left.square"
         }
