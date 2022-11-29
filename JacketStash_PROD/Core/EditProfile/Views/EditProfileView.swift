@@ -50,7 +50,7 @@ struct EditProfileView: View {
                 
                 
                 VStack(spacing: 10) {
-                    CustomTextBox(placeholderText: "Email", isSecureField: false, text: .constant("adamyao3240@gmail.com"), disabled: $disabled).padding(.bottom, 20).disabled(true).opacity(0.7)
+                    CustomTextBox(placeholderText: "Email", isSecureField: false, text: .constant(user.email), disabled: $disabled).padding(.bottom, 20).disabled(true).opacity(0.7)
                     CustomTextBox(placeholderText: "Username", text: $username, disabled: $disabled)
                     CustomTextBox(placeholderText: "Full Name", text: $fullname, disabled: $disabled)
                 }
