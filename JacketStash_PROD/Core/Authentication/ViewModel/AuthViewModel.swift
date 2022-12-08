@@ -377,4 +377,62 @@ class AuthViewModel: ObservableObject {
         })
     }
     
+    
+//    func checkIn2() {
+//        let db = Firestore.firestore()
+//        let sfReference = db.collection("available_ids").documen
+//
+//        db.runTransaction({ (transaction, errorPointer) -> Any? in
+//            let sfDocument: DocumentSnapshot
+//            do {
+//                try sfDocument = transaction.getDocument(sfReference)
+//            } catch let fetchError as NSError {
+//                errorPointer?.pointee = fetchError
+//                return nil
+//            }
+//
+//            guard let oldPopulation = sfDocument.data()?["count"] as? Int else {
+//                let error = NSError(
+//                    domain: "AppErrorDomain",
+//                    code: -1,
+//                    userInfo: [
+//                        NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+//                    ]
+//                )
+//                errorPointer?.pointee = error
+//                return nil
+//            }
+//            // Note: this could be done without a transaction
+//            //       by updating the population using FieldValue.increment()
+//            let newPopulation = oldPopulation + 1
+//            
+//            guard newPopulation <= 1000 else {
+//                let error = NSError(
+//                    domain: "AppErrorDomain",
+//                    code: -2,
+//                    userInfo: [NSLocalizedDescriptionKey: "Population \(newPopulation) too big"]
+//                )
+//                errorPointer?.pointee = error
+//                return nil
+//            }
+//
+//            transaction.updateData(["count": newPopulation], forDocument: sfReference)
+//            return newPopulation
+//        }) { (object, error) in
+//            if let error = error {
+//                print("Error updating population: \(error)")
+//            } else {
+//                print("Population increased to \(object!)")
+//                self.currentUser?.coat_id = object as! Int-1
+//                self.updateCheckInStatus(update: true, withUid: self.userSession!.uid, coat_id: object as! Int - 1)
+//                self.fetchUser()
+//                
+//                self.sendCheckInEmail()
+//                
+//                
+//                
+//            }
+//        }
+//    }
+    
 }

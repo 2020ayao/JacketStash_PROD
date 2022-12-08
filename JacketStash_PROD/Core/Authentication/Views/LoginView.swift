@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
@@ -74,12 +77,10 @@ struct LoginView: View {
             
             Spacer()
             
-            NavigationLink  {
-                RegistrationView()
-                    .navigationBarHidden(true)
-                    .onAppear {
-                        viewModel.err = nil
-                    }
+            Button {
+                viewModel.err = nil
+                presentationMode.wrappedValue.dismiss()
+                
             } label: {
                 HStack {
                     Text("Don't have an account?")
@@ -90,8 +91,29 @@ struct LoginView: View {
                         .fontWeight(.semibold)
                 }
             }
-            .padding(.bottom, 40)
             .foregroundColor(Color(.systemBlue))
+            .padding(.bottom, 40)
+            
+            
+            
+//            NavigationLink  {
+//                RegistrationView()
+//                    .navigationBarHidden(true)
+//                    .onAppear {
+//                        viewModel.err = nil
+//                    }
+//            } label: {
+//                HStack {
+//                    Text("Don't have an account?")
+//                        .font(.footnote)
+//                    
+//                    Text("Sign Up")
+//                        .font(.footnote)
+//                        .fontWeight(.semibold)
+//                }
+//            }
+//            .padding(.bottom, 40)
+//            .foregroundColor(Color(.systemBlue))
         }
         .onTapGesture {
             hideKeyboard()
