@@ -16,7 +16,7 @@ class CheckoutViewModel : ObservableObject {
     func initiatePayment(withUid uid: String) {
         let data = ["client": "mobile",
                     "mode": "payment",
-                    "amount": "200",
+                    "amount": "169",
                     "currency": "usd",
                     "allow_promotion_codes": true] as [String : Any]
         Firestore.firestore().collection("customers").document(uid).collection("checkout_sessions").addDocument(data: data)
