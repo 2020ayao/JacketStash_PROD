@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var viewModel: AuthViewModel
     @State var isPresentedImageView = false
     @State private var email = ""
@@ -55,13 +55,13 @@ struct RegistrationView: View {
                 
                 
                 Button {
-//                    viewModel.register(withEmail: email,
-//                                       password: password,
-//                                       fullname: fullname,
-//                                       username: username,
-//                                       isCheckedIn: false)
+                    //                    viewModel.register(withEmail: email,
+                    //                                       password: password,
+                    //                                       fullname: fullname,
+                    //                                       username: username,
+                    //                                       isCheckedIn: false)
                     path.append("ProfileSelectorView")
-
+                    
                     
                 } label: {
                     Text("Continue")
@@ -73,9 +73,9 @@ struct RegistrationView: View {
                         .padding()
                 }
                 .shadow(color: .gray.opacity(0.5), radius: 10, x:0, y:0)
-//                .navigationDestination(for: String.self) { view in
-//                    ProfileSelectorView()
-//                }
+                //                .navigationDestination(for: String.self) { view in
+                //                    ProfileSelectorView()
+                //                }
                 .navigationDestination(for: String.self) { view in
                     if view == "ProfileSelectorView" {
                         ProfileSelectorView(email: $email, username: $username, fullname: $fullname, password: $password)
@@ -87,11 +87,13 @@ struct RegistrationView: View {
                 
                 
                 Spacer()
-
-                Button {
-                    viewModel.err = nil
-                    presentationMode.wrappedValue.dismiss()
-                    
+                
+                NavigationLink  {
+                    LoginView()
+                        .navigationBarHidden(true)
+                        .onAppear {
+                            viewModel.err = nil
+                        }
                 } label: {
                     HStack {
                         Text("Already have an account?")
@@ -102,8 +104,10 @@ struct RegistrationView: View {
                             .fontWeight(.semibold)
                     }
                 }
-                .foregroundColor(Color(.systemBlue))
                 .padding(.bottom, 40)
+                .foregroundColor(Color(.systemBlue))
+                
+                
                 
             }
             .onTapGesture(perform: {

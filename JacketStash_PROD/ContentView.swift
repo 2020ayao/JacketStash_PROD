@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             if viewModel.userSession == nil { // user not logged in
-                LoginView()
+                RegistrationView()
             } else {
                 //user logged in
                 mainInterfaceView
